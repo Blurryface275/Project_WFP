@@ -32,6 +32,8 @@ VitaGuard enables users to access online health consultations, book appointments
 | `articles` | Health articles authored by doctors |
 | `transactions` | Consultation bookings and appointment records |
 
+Note: The `users` table includes a `role` column with three possible values: `admin`, `doctor`, and `member`.
+
 ## Setup
 ```bash
 git clone "https://github.com/Blurryface275/Project_WFP.git"
@@ -43,7 +45,3 @@ php artisan migrate
 php artisan db:seed
 php artisan serve
 ```
-
-## Author
-
-Edward — Informatics Engineering, Universitas Surabaya
