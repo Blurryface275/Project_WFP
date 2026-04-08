@@ -61,3 +61,11 @@ Route::get('admin/order', function () {
 Route::get('admin/members', function () {
     return view('members');
 });
+
+Route::get('admin/dashboard', function () {
+    return view('dashboardAdmin');
+});
+
+Route::get('admin/manageuser', function () {
+    return view('kelolaUser');
+});

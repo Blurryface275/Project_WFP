@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             // id doctor diambil dari user id
-            $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('specialization');
             $table->string('experience_years');
             $table->string('phone_number');
