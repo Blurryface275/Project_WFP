@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+//UNTUK KEPERLUAN TESTING VIEWS
+Route::redirect('/', '/admin/kelolauser');
 
 // Menampilkan halaman welcome
 Route::get('/welcome', function () {
@@ -50,6 +54,14 @@ Route::get('/dokter', function () {
 
 // ADMIN
 // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
+Route::prefix('admin')->group(function () {
+    //Menampilkan dashboard utama Admin (home for admin)
+    Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
+    //Menampilkan halaman untuk mengelola User (edit & delete)
+    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
+});
+
+//NOTES : pindah ke group function
 Route::get('admin/categories', function () {
     return view('categories');
 });
@@ -62,10 +74,3 @@ Route::get('admin/members', function () {
     return view('members');
 });
 
-Route::get('admin/dashboard', function () {
-    return view('dashboardAdmin');
-});
-
-Route::get('admin/manageuser', function () {
-    return view('kelolaUser');
-});
