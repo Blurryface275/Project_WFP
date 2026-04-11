@@ -74,3 +74,7 @@ Route::get('admin/members', function () {
     return view('members');
 });
 
+//Buat list dokter di user
+Route::resource('doctors', DoctorController::class);
+
+ 
