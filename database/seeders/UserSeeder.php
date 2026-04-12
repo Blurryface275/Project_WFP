@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Gia Pratama',
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Richard Lee',
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. tompi',
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Terawan Agus Putranto',
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Alexander',
@@ -61,7 +61,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'admin',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Benedictus',
@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Dave',
@@ -77,7 +77,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Hansen',
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Kenny',
@@ -93,13 +93,14 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
         ]);
     }
-    public function unverfied() : static {
+    public function unverfied(): static
+    {
         return $this->state(fn(array $attributes) => [
-            'email_verified_at'=>null,
+            'email_verified_at' => null,
         ]);
     }
 }
