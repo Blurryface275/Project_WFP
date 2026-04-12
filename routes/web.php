@@ -2,80 +2,74 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
-
-//UNTUK KEPERLUAN TESTING VIEWS
-Route::redirect('/', '/admin/kelolauser');
-
-// Menampilkan halaman welcome
-Route::get('/welcome', function () {
+// --- PUBLIC ROUTES (No Login Required) ---
+Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
-// MENU
-// Menampilkan halaman menu 
-Route::get('/menu', function () {
-    return view('menu');
-});
-// Menampilkan halaman konsultasi online 
-Route::get('menu/konsultasi', function () {
-    return view('konsultasi');
-});
-// Menampilkan halaman booking konsultasi
-Route::get('menu/janji', function () {
-    return view('janji');
-});
-// Menampilkan halaman riwayat konsultasi
-Route::get('menu/riwayat', function () {
-    return view('riwayat');
-});
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/artikel', function () {
-    return view('artikel');
+
+// --- PROTECTED ROUTES (Login Required) ---
+Route::middleware(['auth'])->group(function () {
+
+    // Member Dashboard
+    Route::get('/menu', function () {
+        return view('menu');
+    })->name('menu');
+
+    // Consultation Booking Feature (khusus member)
+    Route::get('menu/janji/{doctor_id}', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('menu/janji', [BookingController::class, 'store'])->name('booking.store');
+
+    // Doctor Directory
+    Route::resource('doctors', DoctorController::class);
+
+    // Placeholder Menu Pages
+    Route::get('menu/konsultasi', function () {
+        return view('konsultasi');
+    })->name('menu.konsultasi');
+    Route::get('menu/riwayat', function () {
+        return view('riwayat');
+    })->name('menu.riwayat');
+    Route::get('/artikel', function () {
+        return view('artikel');
+    })->name('artikel');
+
+    // Admin Section
+    Route::middleware(['admin'])->prefix('admin')->group(function () {
+        // Unified dashboard pointing to user management
+        Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
+
+        // Kelola User CRUD
+        Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
+        Route::post('/kelolauser', [UserController::class, 'store'])->name('admin.kelolaUser.store');
+        Route::put('/kelolauser/{id}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
+        Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
+
+        // Admin Placeholders
+        Route::get('/categories', function () {
+            return view('categories');
+        })->name('admin.categories');
+        Route::get('/order', function () {
+            return view('order');
+        })->name('admin.order');
+        Route::get('/members', function () {
+            return view('members');
+        })->name('admin.members');
+    });
 });
-
-Route::get('/dokter', function () {
-    return view('dokter');
-});
-
-// ADMIN
-// Menampilkan halaman dashboard admin (khusus hanya untuk admin)
-Route::prefix('admin')->group(function () {
-    //Menampilkan dashboard utama Admin (home for admin)
-    Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
-    //Menampilkan halaman untuk mengelola User (edit & delete)
-    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
-});
-
-//NOTES : pindah ke group function
-Route::get('admin/categories', function () {
-    return view('categories');
-});
-
-Route::get('admin/order', function () {
-    return view('order');
-});
-
-Route::get('admin/members', function () {
-    return view('members');
-});
-
-//Buat list dokter di user
-Route::resource('doctors', DoctorController::class);
-
- 

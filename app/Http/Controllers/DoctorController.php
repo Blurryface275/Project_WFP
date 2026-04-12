@@ -13,19 +13,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
         $doctors = Doctor::all();
-        // Tampilan Admin
-        if (request()->is('admin/*') || request()->is('admin')) {
-            return view('admin.listDokter', compact('doctors'));
-        }
-        else{
-            // Tampilan User
-            return view('member.listDokter', compact('doctors'));
-        }
-        
-            
-        }
+        return view('member.listDokter', compact('doctors'));
+    }
 
     /**
      * Show the form for creating a new resource.
