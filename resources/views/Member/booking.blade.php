@@ -185,7 +185,7 @@
         </div>
 
         <div class="text-center mt-4 text-muted small">
-            <p>&copy; 2026 VitaGuard Health Service. Semua data Anda terlindungi dalam enkripsi medis.</p>
+            <p>&copy; Created by Kelompok BBM 20 Hari</p>
         </div>
     </div>
 
