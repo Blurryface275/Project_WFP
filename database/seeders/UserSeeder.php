@@ -12,14 +12,18 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
+
+
     public function run(): void
     {
+        $hashedPassword = bcrypt('password');
         DB::table('users')->insert([
             [
                 'name' => 'dr. Tirta Mandira Hudhi',
                 'email' => 'tirta@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'doctor',
                 'remember_token' => '1234',
             ],
@@ -27,7 +31,7 @@ class UserSeeder extends Seeder
                 'name' => 'dr. Gia Pratama',
                 'email' => 'gia@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'doctor',
                 'remember_token' => '1234',
             ],
@@ -35,7 +39,7 @@ class UserSeeder extends Seeder
                 'name' => 'dr. Richard Lee',
                 'email' => 'richard@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'doctor',
                 'remember_token' => '1234',
             ],
@@ -43,7 +47,7 @@ class UserSeeder extends Seeder
                 'name' => 'dr. tompi',
                 'email' => 'tompi@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'doctor',
                 'remember_token' => '1234',
             ],
@@ -51,7 +55,7 @@ class UserSeeder extends Seeder
                 'name' => 'dr. Terawan Agus Putranto',
                 'email' => 'terawan@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'doctor',
                 'remember_token' => '1234',
             ],
@@ -59,7 +63,7 @@ class UserSeeder extends Seeder
                 'name' => 'Alexander',
                 'email' => 'alexander@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'admin',
                 'remember_token' => '1234',
             ],
@@ -67,7 +71,7 @@ class UserSeeder extends Seeder
                 'name' => 'Benedictus',
                 'email' => 'benedictus@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'member',
                 'remember_token' => '1234',
             ],
@@ -75,7 +79,7 @@ class UserSeeder extends Seeder
                 'name' => 'Dave',
                 'email' => 'dave@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'member',
                 'remember_token' => '1234',
             ],
@@ -83,7 +87,7 @@ class UserSeeder extends Seeder
                 'name' => 'Hansen',
                 'email' => 'hansen@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'member',
                 'remember_token' => '1234',
             ],
@@ -91,16 +95,17 @@ class UserSeeder extends Seeder
                 'name' => 'Kenny',
                 'email' => 'kenny@gmail.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('password'),
+                'password' => $hashedPassword,
                 'role' => 'member',
                 'remember_token' => '1234',
             ],
         ]);
     }
-    public function unverfied(): static
-    {
-        return $this->state(fn(array $attributes) => [
-            'email_verified_at' => null,
-        ]);
-    }
+    //-> INI KUHAPUS KARENA ERROR TERUS INI METHOD PUNYA FACTORY, JADI GA DITARUH SINI
+    // public function unverfied(): static
+    // {
+    //     return $this->state(fn(array $attributes) => [
+    //         'email_verified_at' => null,
+    //     ]);
+    // }
 }
