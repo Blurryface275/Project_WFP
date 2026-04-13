@@ -23,6 +23,10 @@
                 </li>
                 <li class="nav-item"><a href="{{ route('admin.dokter.list') }}" class="nav-link text-white">List
                         Dokter</a></li>
+                <li class="nav-item"><a href="{{ route('articles.index')}}" class="nav-link text-white">Artikel
+                        Kesehatan</a></li>
+                <li class="nav-item"><a href="{{ route('services.index')}}" class="nav-link text-white">Layanan
+                        Kesehatan</></li>
             </ul>
         </div>
     </div>

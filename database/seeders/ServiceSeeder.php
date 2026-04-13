@@ -44,7 +44,7 @@ class ServiceSeeder extends Seeder
                 'availability' => '08.00-21.00',
                 'category_id' => 4,
                 'price' => 25000,
-            ]
+            ],
 
         ]);
     }

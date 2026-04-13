@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServiceController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +31,11 @@ Route::get('/welcome', function () {
 });
 
 // MENU
-// Menampilkan halaman menu 
+// Menampilkan halaman menu
 Route::get('/menu', function () {
     return view('menu');
 });
-// Menampilkan halaman konsultasi online 
+// Menampilkan halaman konsultasi online
 Route::get('menu/konsultasi', function () {
     return view('konsultasi');
 });
@@ -56,7 +59,9 @@ Route::get('/dokter', function () {
 // ADMIN
 // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function (){return view('admin.dashboardAdmin');})->name('dashboard');  
+    Route::get('/dashboard', function () {
+        return view('admin.dashboardAdmin');
+    })->name('dashboard');
     Route::get('/manageuser', [UserController::class, 'index'])->name('users');
     Route::get('/listdokter', [DoctorController::class, 'index'])->name('dokter.list');
     Route::get('/detaildokter/{id}', [DoctorController::class, 'show'])->name('dokter.show');
@@ -80,3 +85,10 @@ Route::get('admin/members', function () {
 //Buat list dokter di user
 Route::resource('doctors', DoctorController::class);
 
+// Routing Article
+// Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);;
+
+// Routing Service
+// Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
+Route::resource('services', ServiceController::class)->only(['index', 'show']);

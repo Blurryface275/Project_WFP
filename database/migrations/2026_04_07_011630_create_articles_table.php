@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->string('author');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users');
             $table->string('photo')->nullable();
-            $table->string('category'); 
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
