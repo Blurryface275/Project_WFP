@@ -47,8 +47,12 @@ Route::middleware(['auth'])->group(function () {
         return view('riwayat');
     })->name('menu.riwayat');
     Route::get('/artikel', function () {
-        return view('artikel');
+        return view('/artikel');
     })->name('artikel');
+    Route::get('/article/{id}', function ($id) {
+        // nanti diganti controller
+        return view('/artikel/{id}');
+    })->name('artikel.show');
 
     // Admin Section
     Route::middleware(['admin'])->prefix('admin')->group(function () {

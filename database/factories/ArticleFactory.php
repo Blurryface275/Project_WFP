@@ -18,6 +18,13 @@ class ArticleFactory extends Factory
     {
         return [
             //
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraph(),
+            'photo' => fake()->url(),
+            'category_id' => fake()->randomElement([1, 2, 3, 4]),
+            'author_id' => fake()->randomElement([1, 2, 3, 4, 5]),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }
