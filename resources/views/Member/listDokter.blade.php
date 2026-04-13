@@ -17,11 +17,6 @@
 <body>
 
 <div class="container mt-5">
-    <div class="mb-4">
-        <a href="{{ route('menu') }}" class="text-decoration-none text-muted fw-semibold">
-            &larr; Kembali ke Menu Utama
-        </a>
-    </div>
     <div class="row">
         <div class="col-md-3">
             <div class="sidebar-filter shadow-sm">

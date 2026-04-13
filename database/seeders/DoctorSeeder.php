@@ -57,7 +57,7 @@ class DoctorSeeder extends Seeder
                 'experience_years' => '30 Tahun',
                 'phone_number' => '081211112222',
                 'email' => 'terawan@gmail.com',
-                'photo' => 'doctors/DrTerawan.jpeg',
+                'photo' =>  'doctors/DrTerawan.jpeg',
             ],
         ]);
     }

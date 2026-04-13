@@ -57,7 +57,7 @@
 
                 <div class="mt-4 d-grid d-md-flex gap-2">
                     <button class="btn btn-primary px-5 py-2">Mulai Chat</button>
-                    <a href="{{ route('booking.create', $doctor->id) }}" class="btn btn-outline-primary px-5 py-2">Booking Konsultasi</a>
+                    <button class="btn btn-outline-primary px-5 py-2">Jadwal Praktik</button>
                 </div>
             </div>
         </div>
