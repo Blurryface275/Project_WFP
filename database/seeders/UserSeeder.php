@@ -20,86 +20,97 @@ class UserSeeder extends Seeder
                 'email' => 'tirta@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => 'doctors/DrTirta.jpg',
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Gia Pratama',
                 'email' => 'gia@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => 'doctors/DrGia.jpg',
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Richard Lee',
                 'email' => 'richard@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => 'doctors/DrRichard.jpg',
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. tompi',
                 'email' => 'tompi@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => 'doctors/DrTompi.jpeg',
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'dr. Terawan Agus Putranto',
                 'email' => 'terawan@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => 'doctors/DrTerawan.jpeg',
                 'role' => 'doctor',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Alexander',
                 'email' => 'alexander@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => null,
                 'role' => 'admin',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Benedictus',
                 'email' => 'benedictus@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => null,
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Dave',
                 'email' => 'dave@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => null,
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Hansen',
                 'email' => 'hansen@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => null,
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
             [
                 'name' => 'Kenny',
                 'email' => 'kenny@gmail.com',
                 'email_verified_at' => now(),
                 'password' => bcrypt('password'),
+                'photo' => null,
                 'role' => 'member',
-                'remember_token'=>'1234',
+                'remember_token' => '1234',
             ],
         ]);
     }
-    public function unverfied() : static {
-        return $this->state(fn(array $attributes) => [
-            'email_verified_at'=>null,
-        ]);
-    }
+    // public function unverfied(): static
+    // {
+    //     return $this->state(fn(array $attributes) => [
+    //         'email_verified_at' => null,
+    //     ]);
+    // }
 }

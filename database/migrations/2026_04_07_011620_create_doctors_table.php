@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('experience_years');
             $table->string('phone_number');
             $table->string('email');
-            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

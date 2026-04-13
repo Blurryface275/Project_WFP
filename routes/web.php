@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-//UNTUK KEPERLUAN TESTING VIEWS
-Route::redirect('/', '/admin/kelolauser');
+//Root utama dashboard admin
+Route::redirect('/', '/admin/dashboard');
 
 // Menampilkan halaman welcome
 Route::get('/welcome', function () {
@@ -55,11 +55,13 @@ Route::get('/dokter', function () {
 
 // ADMIN
 // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
-Route::prefix('admin')->group(function () {
-    //Menampilkan dashboard utama Admin (home for admin)
-    Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
-    //Menampilkan halaman untuk mengelola User (edit & delete)
-    Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', function (){return view('admin.dashboardAdmin');})->name('dashboard');  
+    Route::get('/manageuser', [UserController::class, 'index'])->name('users');
+    Route::get('/listdokter', [DoctorController::class, 'index'])->name('dokter.list');
+    Route::get('/detaildokter/{id}', [DoctorController::class, 'show'])->name('dokter.show');
+    // DAFTAR BELUM DIIMPLEMENTASI
+    // Route::get('/daftardokter', [DoctorController::class, 'daftarDokter'])->name('dokter.daftar');
 });
 
 //NOTES : pindah ke group function
@@ -78,4 +80,3 @@ Route::get('admin/members', function () {
 //Buat list dokter di user
 Route::resource('doctors', DoctorController::class);
 
- 

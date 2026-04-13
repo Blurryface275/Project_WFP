@@ -14,18 +14,15 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $doctors = Doctor::all();
+        $doctors = Doctor::with('user')->get();
         // Tampilan Admin
         if (request()->is('admin/*') || request()->is('admin')) {
             return view('admin.listDokter', compact('doctors'));
-        }
-        else{
+        } else {
             // Tampilan User
             return view('member.listDokter', compact('doctors'));
         }
-        
-            
-        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,8 +46,8 @@ class DoctorController extends Controller
     public function show($id)
     {
         //
-        $doctor = DB::table('doctors')->where('id', $id)->first();
-        
+        $doctor = Doctor::with('user')->find($id);
+
         if (!$doctor) {
             abort(404);
         }
