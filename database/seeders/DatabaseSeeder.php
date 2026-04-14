@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             DoctorSeeder::class,
-            ServiceSeeder::class
+            ServiceSeeder::class,
+            DoctorScheduleSeeder::class,
         ]);
 
         Article::factory(10)->create();
