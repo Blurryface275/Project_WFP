@@ -57,7 +57,7 @@ class ArticleFactory extends Factory
             //
             'title' => $picked['title'],
             'content' => $picked['content'],
-            'photo' => fake()->imageUrl(640, 480, 'health'),
+            'photo' => fake()->randomElement(["https://frisianflag.com/storage/app/media/Milkipedia/5-jenis-nutrisi-yang-harus-dipenuhi-untuk-tubuh-sehat.jpg", "https://pantirapih.or.id/rspr/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-17-at-9.40.29-AM-720x380.jpeg", "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2023/03/29042531/Ini-Kisaran-Biaya-Medical-Check-Up-Standar-Pemerintah-dan-Manfaatnya.jpg.webp"]),
             'category_id' => fake()->randomElement([1, 2, 3, 4]),
             'author_id' => fake()->randomElement([1, 2, 3, 4, 5]),
             'created_at' => now(),
