@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -85,11 +86,8 @@ Route::get('admin/members', function () {
 //Buat list dokter di user
 Route::resource('doctors', DoctorController::class);
 
-//Buat liat jadwal
-Route::get('member/jadwalDokter', function () {
-    return view('member.jadwal-dokter');
-});
-
+// Buat liat jadwal dokter
+Route::get('jadwalDokter', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
@@ -98,3 +96,7 @@ Route::resource('articles', ArticleController::class)->only(['index', 'show']);;
 // Routing Service
 // Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
 Route::resource('services', ServiceController::class)->only(['index', 'show']);
+
+// Routing Category
+// Hanya membuka route index
+Route::resource('categories', CategoryController::class)->only(['index']);

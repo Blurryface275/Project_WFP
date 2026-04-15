@@ -95,15 +95,17 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            
+
             @foreach($doctors as $doctor)
             <div class="card doctor-card shadow-sm mb-4">
                 <div class="card-body p-4">
                     <div class="row align-items-center">
                         <div class="col-md-2 text-center mb-3 mb-md-0">
                             <div class="img-container mx-auto">
-                                <img src="{{ filter_var($doctor->photo, FILTER_VALIDATE_URL) ? $doctor->photo : asset('storage/' . $doctor->photo) }}" 
-                                     class="doctor-img" alt="{{ $doctor->name }}">
+                               <img src="{{ asset('storage/' . $doctor->user->photo) }}"
+                                    class="doctor-img"
+                                    alt="{{ $doctor->name }}"
+                                    onerror="this.onerror=null; this.src='{{ asset('images/no-image.png') }}'">
                             </div>
                         </div>
 
@@ -122,7 +124,7 @@
                         <div class="col-md-5">
                             <h6 class="fw-bold mb-3"><i class="bi bi-calendar3 me-2 text-primary"></i>Jadwal Tersedia:</h6>
                             <div class="row g-2">
-                                @forelse($doctor->doctorSchedules->where('is_available', true) as $sch)
+                                @forelse($doctor->schedules->where('is_available', true) as $sch)
                                     <div class="col-6">
                                         <div class="schedule-box text-center">
                                             <div class="day-label">{{ $sch->day }}</div>
@@ -133,7 +135,7 @@
                                     <div class="col-12 text-muted small">Tidak ada jadwal aktif minggu ini.</div>
                                 @endforelse
                             </div>
-                            
+
                             <div class="mt-4 d-grid">
                                 <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-book">
                                     Buat Janji Konsultasi
