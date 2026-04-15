@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         //
         $users = User::all();
-        return view('admin.kelolaUser', compact('users'));
+        return view('admin.kelola-user', compact('users'));
     }
 
     /**

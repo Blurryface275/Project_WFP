@@ -60,7 +60,7 @@ Route::get('/dokter', function () {
 // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboardAdmin');
+        return view('admin.dashboard');
     })->name('dashboard');
     Route::get('/manageuser', [UserController::class, 'index'])->name('users');
     Route::get('/listdokter', [DoctorController::class, 'index'])->name('dokter.list');
@@ -87,7 +87,7 @@ Route::resource('doctors', DoctorController::class);
 
 //Buat liat jadwal
 Route::get('member/jadwalDokter', function () {
-    return view('jadwalDokter');
+    return view('member.jadwal-dokter');
 });
 
 
