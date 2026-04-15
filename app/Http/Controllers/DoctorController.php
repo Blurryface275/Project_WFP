@@ -14,7 +14,7 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $doctors = Doctor::with('user')->get();
+        $doctors = Doctor::with('user', 'schedules')->get();
         // Tampilan Admin
         if (request()->is('admin/*') || request()->is('admin')) {
             return view('admin.listDokter', compact('doctors'));
@@ -46,7 +46,7 @@ class DoctorController extends Controller
     public function show($id)
     {
         //
-        $doctor = Doctor::with('user')->find($id);
+        $doctor = Doctor::with('user','schedules')->find($id);
 
         if (!$doctor) {
             abort(404);

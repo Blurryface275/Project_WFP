@@ -85,6 +85,12 @@ Route::get('admin/members', function () {
 //Buat list dokter di user
 Route::resource('doctors', DoctorController::class);
 
+//Buat liat jadwal
+Route::get('member/jadwalDokter', function () {
+    return view('jadwalDokter');
+});
+
+
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
 Route::resource('articles', ArticleController::class)->only(['index', 'show']);;
