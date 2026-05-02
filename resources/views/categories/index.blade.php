@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kategori Layanan - VitaGuard</title>
+@extends('layout.app')
+@section('title','VitaGuard - Kategori Layanan')
+@section('content')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <style>
         body { background-color: #f4f6f9; }
@@ -72,14 +69,27 @@
 </head>
 <body>
 
-<div class="page-header shadow-sm">
-    <div class="container text-center">
-        <h2>Kategori Layanan Kesehatan</h2>
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+           <h1 class="color:#fff;">Kategori Layanan Kesehatan</h1>
         <p>Kelola kategori dan layanan yang tersedia di VitaGuard</p>
-    </div>
-</div>
 
-<div class="container mb-5">
+          <!-- <ul class="list-inline breadcumb-nav">
+            <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+            <li class="list-inline-item"><span class="text-white">/</span></li>
+            <li class="list-inline-item"><a href="#" class="text-white-50">Our blog</a></li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container mb-5 mt-5">
     <div class="table-card">
         <table class="table table-hover mb-0">
             <thead>
@@ -114,7 +124,4 @@
         <small class="text-muted">Total: {{ $categories->count() }} kategori</small>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection
