@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -18,8 +18,18 @@
   </style>
 </head>
 
-<body>
-
+<body> -->
+@extends('layout.app')
+@section('title','VitaGuard - Artikel')
+@push('styles')
+<style>
+    .pagination .page-link {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+</style>
+@endpush
+@section('content')
   <div class="container">
     <h2>Kelola Data User</h2>
     <p>Admin dapat melakukan pengelolaan data yaitu edit dan delete : </p>
@@ -43,7 +53,7 @@
             <td>{{ $u->id }}</td>
             <td>{{ $u->name }}</td>
             <td>{{ $u->email}}</td>
-            <td>{{ $u->password }}</td>
+            <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $u->password }}</td>
             <td>{{ $u->role }}</td>
             <td>
               @if ($u->photo)
@@ -67,7 +77,8 @@
       </tbody>
     </table>
   </div>
-
+@endsection
+<!-- 
 </body>
 
-</html>
+</html> -->

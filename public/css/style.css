@@ -21,6 +21,13 @@ body {
   overflow-x: hidden;
 }
 
+.user-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   font-family: "Exo", sans-serif;
   font-weight: 700;
