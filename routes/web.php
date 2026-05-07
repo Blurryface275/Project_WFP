@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 
 
 /*
@@ -91,6 +92,10 @@ Route::resource('doctors', DoctorController::class);
 
 // Buat liat jadwal dokter
 Route::get('jadwalDokter', [DoctorController::class, 'schedule'])->name('doctors.schedule');
+
+// Booking Konsultasi
+Route::get('/doctors/{id}/book', [DoctorController::class, 'book'])->name('doctors.book');
+Route::post('/bookings', [TransactionController::class, 'store'])->name('bookings.store');
 
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)

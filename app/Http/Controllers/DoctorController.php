@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Doctor;
+use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -90,5 +91,20 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::with('user', 'schedules')->paginate(10);
         return view('member.jadwal-dokter', compact('doctors'));
+    }
+
+    // Member — halaman form booking
+    public function book($id)
+    {
+        $doctor = Doctor::with('user', 'schedules')->find($id);
+        
+        if (!$doctor) {
+            abort(404);
+        }
+
+        // ambil layanan yang berkaitan dengan konsultasi
+        $services = Service::where('service_name', 'like', '%Konsultasi%')->get();
+
+        return view('member.booking', compact('doctor', 'services'));
     }
 }

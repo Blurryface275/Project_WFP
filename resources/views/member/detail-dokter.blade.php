@@ -121,8 +121,8 @@
                     <hr class="my-4">
 
                     <div class="mt-4 d-flex flex-wrap gap-3">
-                        <a href="#" class="btn btn-main btn-round-full mr-3">Mulai Konsultasi <i class="icofont-simple-right ml-2"></i></a>
-                        <a href="#" class="btn btn-outline-primary btn-round-full px-4" style="border-radius: 50px; font-weight: 600; padding: 12px 30px;">Lihat Jadwal Praktik</a>
+                        <a href="{{ route('doctors.book', $doctor->id) }}" class="btn btn-main btn-round-full mr-3">Mulai Konsultasi <i class="icofont-simple-right ml-2"></i></a>
+                        <a href="{{ route('doctors.schedule') }}" class="btn btn-outline-primary btn-round-full px-4" style="border-radius: 50px; font-weight: 600; padding: 12px 30px;">Lihat Jadwal Praktik</a>
                     </div>
                 </div>
             </div>
