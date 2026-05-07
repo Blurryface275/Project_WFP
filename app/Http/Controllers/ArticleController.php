@@ -16,6 +16,12 @@ class ArticleController extends Controller
         $articles = Article::paginate(5);
         return view('articles.index', compact('articles'));
     }
+    public function kelola()
+    {
+        //
+        $articles = Article::paginate(5);
+        return view('admin.kelola-artikel', compact('articles'));
+    }
 
     /**
      * Show the form for creating a new resource.

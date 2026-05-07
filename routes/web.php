@@ -24,7 +24,7 @@ use App\Http\Controllers\CategoryController;
 // });
 
 //Root utama dashboard admin
-Route::redirect('/', '/admin/dashboard');
+Route::redirect('/', '/welcome');
 
 // Menampilkan halaman welcome
 Route::get('/welcome', function () {
@@ -63,7 +63,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
-    Route::get('/manageuser', [UserController::class, 'index'])->name('users');
+    Route::get('/manageusers', [UserController::class, 'index'])->name('users');
+    Route::get('/managecategories', [CategoryController::class, 'kelola'])->name('categories');
+    Route::get('/managearticles', [ArticleController::class, 'kelola'])->name('articles');
+    Route::get('/managedoctors', [DoctorController::class, 'kelola'])->name('doctors');
     Route::get('/listdokter', [DoctorController::class, 'index'])->name('dokter.list');
     Route::get('/detaildokter/{id}', [DoctorController::class, 'show'])->name('dokter.show');
     // DAFTAR BELUM DIIMPLEMENTASI

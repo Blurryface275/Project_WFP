@@ -16,6 +16,12 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
+    public function kelola()
+    {
+        //
+        $categories = Category::all();
+        return view('admin.kelola-kategori', compact('categories'));
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -23,6 +23,12 @@ class DoctorController extends Controller
             return view('member.list-dokter', compact('doctors'));
         }
     }
+    public function kelola()
+    {
+        //
+        $doctors = Doctor::with('user', 'schedules')->paginate(10);
+        return view('admin.kelola-dokter', compact('doctors'));
+    }
 
     /**
      * Show the form for creating a new resource.

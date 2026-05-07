@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'VitaGuard - Daftar Dokter')
+@section('title', 'VitaGuard - Kelola Dokter')
 @section('content')
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -91,7 +91,7 @@
                 <div class="col-md-12">
                     <div class="block text-center">
                         <h1 class="text-white">Daftar Praktik Dokter</h1>
-                        <p class="text-white-50">Manajemen informasi dan jadwal dokter VitaGuard</p>
+                        <p class="text-white-50">Manajemen informasi dokter VitaGuard</p>
                     </div>
                 </div>
             </div>
