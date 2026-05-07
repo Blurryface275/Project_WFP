@@ -14,7 +14,7 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $doctors = Doctor::with('user', 'schedules')->get();
+        $doctors = Doctor::with('user', 'schedules')->paginate(10);
         // Tampilan Admin
         if (request()->is('admin/*') || request()->is('admin')) {
             return view('admin.list-dokter', compact('doctors'));
@@ -82,7 +82,7 @@ class DoctorController extends Controller
     // Member — halaman jadwal semua dokter
     public function schedule()
     {
-        $doctors = Doctor::with('user', 'schedules')->get();
+        $doctors = Doctor::with('user', 'schedules')->paginate(10);
         return view('member.jadwal-dokter', compact('doctors'));
     }
 }
