@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.member-app')
 @section('title', 'VitaGuard - Beranda')
 @section('content')
 <!-- Slider Start -->

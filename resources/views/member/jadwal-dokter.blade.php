@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jadwal Dokter - VitaGuard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <style>
-        :root {
+@extends('layouts.member-app')
+
+@push('styles')
+<style>
+:root {
             --primary-blue: #007bff;
             --dark-blue: #0056b3;
             --soft-blue: #e7f1ff;
@@ -81,10 +76,10 @@
         .btn-book:hover { background-color: var(--dark-blue); color: white; }
 
         .status-tag { font-size: 0.75rem; padding: 2px 8px; border-radius: 5px; }
-    </style>
-</head>
-<body>
+</style>
+@endpush
 
+@section('content')
 <div class="header-section shadow">
     <div class="container text-center">
         <h2 class="fw-bold">Jadwal Praktik Dokter</h2>
@@ -150,7 +145,4 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection

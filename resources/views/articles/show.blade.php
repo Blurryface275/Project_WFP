@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.member-app')
 
 @section('title', $article->title . ' - VitaGuard')
 

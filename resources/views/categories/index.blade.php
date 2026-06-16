@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.member-app')
 @section('title','VitaGuard - Kategori Layanan')
 @section('content')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">

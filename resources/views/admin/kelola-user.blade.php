@@ -19,7 +19,7 @@
 </head>
 
 <body> -->
-@extends('layout.app')
+@extends('layouts.admin-app')
 @section('title','VitaGuard - Artikel')
 @push('styles')
 <style>

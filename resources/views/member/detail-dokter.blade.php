@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.member-app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VitaGuard - Detail Dokter</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
+@push('styles')
+<style>
+:root {
             --vg-blue: #0d6efd;
         }
 
@@ -49,12 +44,11 @@
             color: #333;
             margin-bottom: 15px;
         }
-    </style>
-</head>
+</style>
+@endpush
 
-<body>
-
-    <div class="container mt-5">
+@section('content')
+<div class="container mt-5">
         <a href="{{ route('doctors.index') }}" class="btn-back">
             &larr; Kembali ke Daftar Dokter
         </a>
@@ -102,7 +96,4 @@
             </div>
         </div>
     </div>
-
-</body>
-
-</html>
+@endsection

@@ -53,8 +53,8 @@ Route::get('/artikel', function () {
     return view('artikel');
 });
 
-Route::get('/dokter', function () {
-    return view('dokter');
+Route::get('/doctor', function () {
+    return view('doctor.dashboard');
 });
 
 // ADMIN
@@ -64,8 +64,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.dashboard');
     })->name('dashboard');
     Route::get('/manageuser', [UserController::class, 'index'])->name('users');
-    Route::get('/listdokter', [DoctorController::class, 'index'])->name('dokter.list');
-    Route::get('/detaildokter/{id}', [DoctorController::class, 'show'])->name('dokter.show');
+    Route::get('/listdoctor', [DoctorController::class, 'index'])->name('doctor.list');
+    Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
     // DAFTAR BELUM DIIMPLEMENTASI
     // Route::get('/daftardokter', [DoctorController::class, 'daftarDokter'])->name('dokter.daftar');
 });
@@ -87,7 +87,7 @@ Route::get('admin/members', function () {
 Route::resource('doctors', DoctorController::class);
 
 // Buat liat jadwal dokter
-Route::get('jadwalDokter', [DoctorController::class, 'schedule'])->name('doctors.schedule');
+Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
@@ -100,3 +100,10 @@ Route::resource('services', ServiceController::class)->only(['index', 'show']);
 // Routing Category
 // Hanya membuka route index
 Route::resource('categories', CategoryController::class)->only(['index']);
+
+
+Route::prefix('doctor')->name('doctor.')->group(function () {
+    Route::get('/dashboard', function () { return view('doctor.dashboard'); })->name('dashboard');
+    Route::get('/profile', function () { return view('doctor.profile'); })->name('profile');
+    Route::get('/consultations', function () { return view('doctor.consultations'); })->name('consultations');
+});
