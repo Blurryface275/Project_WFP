@@ -13,8 +13,8 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles = Article::all();
-        return view('artikel.index', compact('articles'));
+        $articles = Article::paginate(5);
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -39,6 +39,8 @@ class ArticleController extends Controller
     public function show(string $id)
     {
         //
+        $article = Article::with('author', 'category')->findOrFail($id);
+        return view('articles.show', compact('article'));
     }
 
     /**

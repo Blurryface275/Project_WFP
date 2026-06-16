@@ -14,18 +14,15 @@ class DoctorController extends Controller
     public function index()
     {
         //
-        $doctors = Doctor::all();
+        $doctors = Doctor::with('user', 'schedules')->get();
         // Tampilan Admin
         if (request()->is('admin/*') || request()->is('admin')) {
-            return view('admin.listDokter', compact('doctors'));
-        }
-        else{
+            return view('admin.list-dokter', compact('doctors'));
+        } else {
             // Tampilan User
-            return view('member.listDokter', compact('doctors'));
+            return view('member.list-dokter', compact('doctors'));
         }
-        
-            
-        }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -49,13 +46,13 @@ class DoctorController extends Controller
     public function show($id)
     {
         //
-        $doctor = DB::table('doctors')->where('id', $id)->first();
-        
+        $doctor = Doctor::with('user', 'schedules')->find($id);
+
         if (!$doctor) {
             abort(404);
         }
 
-        return view('member.detailDokter', compact('doctor'));
+        return view('member.detail-dokter', compact('doctor'));
     }
 
     /**
@@ -80,5 +77,12 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
+    }
+
+    // Member — halaman jadwal semua dokter
+    public function schedule()
+    {
+        $doctors = Doctor::with('user', 'schedules')->get();
+        return view('member.jadwal-dokter', compact('doctors'));
     }
 }

@@ -6,6 +6,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\DoctorSeeder;
 use App\Models\Article;
 
 
@@ -24,13 +26,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory(10)->create();
-
-
+        // User::factory(10)->create();
         $this->call([
             CategorySeeder::class,
-            UserSeeder::class, 
+            UserSeeder::class,
             DoctorSeeder::class,
+            ServiceSeeder::class,
+            DoctorScheduleSeeder::class,
         ]);
 
         Article::factory(10)->create();
