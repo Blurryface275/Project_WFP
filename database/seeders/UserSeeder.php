@@ -12,8 +12,12 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
+
+
     public function run(): void
     {
+        $hashedPassword = bcrypt('password');
         DB::table('users')->insert([
             [
                 'name' => 'dr. Tirta Mandira Hudhi',
