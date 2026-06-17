@@ -28,12 +28,20 @@
             text-align: center;
             margin-bottom: 2rem;
         }
+        img{
+            width: 75%;
+            height: auto;
+            display: block;
+            margin: 0;
+            margin-left: 12.5%;
+            margin-right: 12.5%;
+        }
     </style>
 </head>
 <body>
 
 <div class="login-card">
-    <div class="brand">VitaGuard</div>
+    <img src="{{ asset('images/logo-vitaguard-transparent.png') }}" alt="logo-vitaguard-transparent">
     <h5 class="text-center mb-4">Masuk ke Akun Anda</h5>
     
     @if(session('success'))
