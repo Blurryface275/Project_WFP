@@ -91,7 +91,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     })->name('artikel.show');
 
     // Admin Section
-    Route::middleware(['admin'])->prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function () {
         // Unified dashboard pointing to user management
         Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
 
@@ -101,12 +101,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/kelolauser/{id}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
         Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
 
+        // Admin Placeholders
+        Route::get('/categories', function () {
+            return view('categories');
+        })->name('admin.categories');
+        Route::get('/order', function () {
+            return view('order');
+        })->name('admin.order');
+        Route::get('/members', function () {
+            return view('members');
+        })->name('admin.members');
+    }); // Tutup Middleware Admin
+
 // Buat liat jadwal dokter
 Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
-Route::resource('articles', ArticleController::class)->only(['index', 'show']);;
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
 // Routing Service
 // Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
@@ -122,15 +134,5 @@ Route::prefix('doctor')->name('doctor.')->group(function () {
     Route::get('/profile', function () { return view('doctor.profile'); })->name('profile');
     Route::get('/consultations', function () { return view('doctor.consultations'); })->name('consultations');
 });
-        // Admin Placeholders
-        Route::get('/categories', function () {
-            return view('categories');
-        })->name('admin.categories');
-        Route::get('/order', function () {
-            return view('order');
-        })->name('admin.order');
-        Route::get('/members', function () {
-            return view('members');
-        })->name('admin.members');
-    });
-});
+
+}); // Tutup Middleware Auth
