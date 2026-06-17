@@ -8,7 +8,7 @@ Berdasarkan spesifikasi **Lampiran_3309035** dan status pekerjaan saat ini, beri
 - [x] Implementasi Database Migration Dasar (Tabel User, Dokter, Kategori, Layanan, Artikel, Jadwal).
 - [/] Implementasi Database Migration Lanjutan (Perlu migrasi tabel `bookings` dan riwayat pesan `consultation_chats`).
 - [x] Implementasi Database Seeder (Membuat akun default Admin, Dokter, Layanan, dan Jadwal).
-- [ ] Membuat fitur Authentication (Registrasi Member, Login multi-role: Admin, Dokter, Member).
+- [/] Membuat fitur Authentication (Mockup antarmuka dan file Controller sudah selesai. Tersisa logika database Auth::attempt).
 - [ ] Konfigurasi Middleware / Hak Akses (Memblokir Member masuk rute Admin dengan respons _403 Forbidden Access_).
 
 ## 2. Refaktorisasi Direktori Admin & Dokter (Status: Perlu Diperbaiki Lanjut)
@@ -44,7 +44,7 @@ Kita telah merestrukturisasi layout-nya, namun penempatan rute CMS dan CRUD file
 ## 6. Modul Konsultasi Online (Chat Module)
 
 - [ ] **Member & Dokter**: Membuka obrolan (_chatting_) jika status booking valid.
-- [ ] Menyimpan percakapan ke dalam database.
+- [ ] Menyimpan percakapan ke dalam database menggunakan ConsultationController.
 - [ ] Dokter memiliki hak untuk menekan tombol **"Tutup Konsultasi / Selesai"**.
 - [ ] Mencegah konsultasi yang sudah selesai untuk ditambahkan pesan baru.
 
