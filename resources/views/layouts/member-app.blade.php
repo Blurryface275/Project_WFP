@@ -74,8 +74,38 @@
             <a class="nav-link" href="{{ route('articles.index') }}">Artikel</a>
           </li>
           <li class="nav-item {{ request()->is('categories*') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('categories.index') }}">Kategori Layanan</a>
+            <a class="nav-link" href="{{ route('categories.index') }}">Kategori Layanan</a> 
           </li>
+          <!-- divider vertical -->
+          <li class="nav-item">
+            <span class="nav-link" style="color: #adb5bd;">|</span>
+          </li>
+          <!-- Section profile dan logout -->
+           @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownAuth" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ Auth::user()->name }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownAuth">
+              <li><a class="dropdown-item" href="#">Profile Kamu</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <!-- Karena pakai route::get('logout') jadi gausah form, langsung aja pake link <a> biasa -->
+                     <a class="dropdown-item text-danger" href="{{ route('logout') }}">
+                      <i class="icofont-logout mr-2"></i>Logout
+                  </a>
+              </li>
+            </ul>
+          </li>
+          @else
+          {{-- Jika pengunjung belum punya sesi Login (Tamu) --}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('login') }}">Login</a>
+          </li> 
+          <li class="nav-item d-flex align-items-center">
+            <a class="btn btn-main-2 btn-round-full ml-2" href="{{ route('register') }}" style="padding: 8px 20px line-height: 1.5;">Register</a>
+          </li>
+          @endauth
         </ul>
       </div>
     </div>
@@ -90,7 +120,7 @@
       <div class="col-lg-4 mr-auto col-sm-6">
         <div class="widget mb-5 mb-lg-0">
           <div class="logo mb-4">
-            <img src="{{ asset('images/logo.png') }}" alt="Klinik Sehat" class="img-fluid">
+            <img src="{{ asset('images/logo-vitaguard-transparent.png') }}" alt="Klinik Sehat" class="img-fluid">
           </div>
           <p>Kami memberikan pelayanan kesehatan terbaik dengan tenaga medis profesional dan berpengalaman.</p>
           <ul class="list-inline footer-socials mt-4">
