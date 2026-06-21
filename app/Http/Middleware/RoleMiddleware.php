@@ -24,7 +24,8 @@ class RoleMiddleware
         
         // Cek apakah role user ada di dalam list role yang diizinkan
         if($userRole === 'member'){
-            return redirect()->route('welcome')->with('error', 'Anda tidak memiliki akses ke halaman ini!');
+            // return redirect()->route('welcome')->with('error', 'Anda tidak memiliki akses ke halaman ini!');
+            abort(403, 'Forbidden Access');
         }
 
         // Kalo role user ada di dalam list role yang diizinkan, lanjut ke request
