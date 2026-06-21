@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AuthController;
@@ -55,10 +56,14 @@ Route::get('menu/riwayat', function () {
 // --- PROTECTED ROUTES (Login Required) ---
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Rute untuk melihat halaman profile diri sendiri
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::get('/doctor', function () {
         return view('doctor.dashboard');
     });
+
 
     // ADMIN
     // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
