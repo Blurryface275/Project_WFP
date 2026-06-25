@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
             return view('admin.dashboard');
         })->name('dashboard');
         Route::get('/manageuser', [UserController::class, 'index'])->name('users');
-        Route::get('/listdoctor', [DoctorController::class, 'index'])->name('doctor.list');
+        Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
         // DAFTAR BELUM DIIMPLEMENTASI
         // Route::get('/daftardokter', [DoctorController::class, 'daftarDokter'])->name('dokter.daftar');
@@ -80,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Doctor Directory
     Route::resource('doctors', DoctorController::class);
+    Route::post('doctors/get-edit-form', [DoctorController::class, 'getEditFormB'])->name('doctors.getEditForm'); //edit form
 
     // Placeholder Menu Pages
     Route::get('menu/konsultasi', function () {

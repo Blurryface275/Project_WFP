@@ -16,8 +16,9 @@ class DoctorController extends Controller
         //
         $doctors = Doctor::with('user', 'schedules')->get();
         // Tampilan Admin
-        if (request()->is('admin/*') || request()->is('admin')) {
-            return view('admin.list-dokter', compact('doctors'));
+        if (auth()->user()->role === 'admin') {
+            // Diarahkan ke folder views/user/doctor_list.blade.php (misalnya)
+            return view('admin.doctors.index', compact('doctors'));
         } else {
             // Tampilan User
             return view('member.list-dokter', compact('doctors'));
@@ -30,6 +31,7 @@ class DoctorController extends Controller
     public function create()
     {
         //
+        return view('doctor.create');
     }
 
     /**
@@ -38,6 +40,22 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         //
+        // Validasi input data dokter
+        $request->validate([
+            'doctor_name' => 'required|string|max:255',
+            'specialization' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $data = new Doctor();
+        $data->doctor_name = $request->input('doctor_name'); 
+        $data->specialization = $request->input('specialization'); 
+        $data->phone = $request->input('phone'); 
+        $data->email = $request->input('email'); 
+        $data->save();
+
+        return redirect()->route('doctor.index')->with('success', 'Successfully created doctor data.');
     }
 
     /**
@@ -61,6 +79,7 @@ class DoctorController extends Controller
     public function edit(Doctor $doctor)
     {
         //
+        return view('doctor.edit', compact('doctor'));
     }
 
     /**
@@ -69,6 +88,13 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         //
+        $doctor->doctor_name = $request->doctor_name;
+        $doctor->specialization = $request->specialization;
+        $doctor->phone = $request->phone;
+        $doctor->email = $request->email;
+        $doctor->save();
+
+        return redirect()->route('doctor.index')->with('success', 'Successfully updated doctor data');
     }
 
     /**
@@ -77,6 +103,16 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
+        $id = $request->id;
+        $data = Doctor::find($id);
+        if ($data) {
+            $data->delete();
+            return response()->json(array(
+                'status' => 'oke',
+                'msg' => 'Doctor data is removed !'
+            ), 200);
+        }
+        return response()->json(array('status' => 'error', 'msg' => 'Data tidak ditemukan'), 404);
     }
 
     // Member — halaman jadwal semua dokter
@@ -84,5 +120,30 @@ class DoctorController extends Controller
     {
         $doctors = Doctor::with('user', 'schedules')->get();
         return view('member.jadwal-dokter', compact('doctors'));
+    }
+
+    public function getEditFormB(Request $request)
+    {
+        $id = $request->id;
+        $data = Doctor::find($id);
+        
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('doctor.getEditFormB', compact('data'))->render()
+        ), 200);
+    }
+    public function saveDataUpdate(Request $request)
+    {
+        $id = $request->id;
+        $data = Doctor::find($id);
+        if ($data) {
+            $data->doctor_name = $request->doctor_name; 
+            $data->specialization = $request->specialization; 
+            $data->phone = $request->phone; 
+            $data->email = $request->email; 
+            $data->save();
+            return response()->json(array('status' => 'oke', 'msg' => 'Doctor data is up-to-date !'), 200);
+        }
+        return response()->json(array('status' => 'error', 'msg' => 'Data tidak ditemukan'), 404);
     }
 }
