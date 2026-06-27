@@ -1,26 +1,5 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Kelola USer</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    .user-img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-  </style>
-</head>
-
-<body> -->
-@extends('layouts.admin-app')
-@section('title','VitaGuard - Artikel')
+@extends('layouts.admincoreui-app')
+@section('title', 'Dashboard Admin - VitaGuard')
 @push('styles')
 <style>
     .pagination .page-link {
@@ -29,7 +8,7 @@
     }
 </style>
 @endpush
-@section('content')
+@section('content-admin')
   <div class="container">
     <h2>Kelola Data User</h2>
     <p>Admin dapat melakukan pengelolaan data yaitu edit dan delete : </p>

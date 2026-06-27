@@ -72,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
             return view('admin.dashboard');
         })->name('dashboard');
         Route::get('/manageuser', [UserController::class, 'index'])->name('users');
+        Route::get('/insertuser', [UserController::class, 'insert'])->name('users.insert');
+        Route::get('/edituser', [UserController::class, 'update'])->name('users.edit');
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
         // DAFTAR BELUM DIIMPLEMENTASI

@@ -1,7 +1,6 @@
-@extends('layouts.admin-app')
-@section('title', 'Daftar Dokter - Admin VitaGuard')
-@section('page-title', 'Daftar Dokter')
-@section('content')
+@extends('layouts.admincoreui-app')
+@section('title', 'Dashboard Admin - VitaGuard')
+@section('content-admin')
 <p class="text-muted">Menampilkan {{ $doctors->count() }} dokter tersedia</p>
 <div class="table-responsive">
 <table class="table table-bordered table-striped">

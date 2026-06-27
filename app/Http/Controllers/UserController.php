@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         //
         $users = User::all();
-        return view('admin.kelola-user', compact('users'));
+        return view('admin.users.kelola-user', compact('users'));
     }
 
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user-create');
     }
 
     /**
@@ -31,7 +31,21 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6',
+        'role' => 'required|in:admin,doctor,member',
+    ]);
+
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'role' => $request->role,
+    ]);
+
+    return redirect()->route('admin.kelolaUser')->with('success', 'Data user baru berhasil ditambahkan!');
     }
 
     /**
@@ -55,7 +69,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'role' => 'required|in:admin,doctor,member',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+        ]);
+
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => bcrypt($request->password)
+            ]);
+        }
+
+        return redirect()->route('admin.users')->with('success', 'Data user berhasil diperbarui!');
     }
 
     /**
@@ -63,6 +97,12 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Data pengguna berhasil dihapus!'
+        ), 200);
     }
 }
