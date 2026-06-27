@@ -100,7 +100,7 @@ class DoctorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(Doctor $doctor, Request $request)
     {
         //
         $id = $request->id;
