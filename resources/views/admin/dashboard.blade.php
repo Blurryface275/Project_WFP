@@ -1,5 +1,6 @@
 @extends('layouts.admincoreui-app')
 @section('title', 'Dashboard Admin - VitaGuard')
+Dashboard Admin - VitaGuard
 @section('content-admin')
 <div class="container-fluid">
     <div class="row">

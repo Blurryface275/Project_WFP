@@ -16,34 +16,34 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>@yield('title', 'Admin Dashboard - VitaGuard')/title>
-    <link rel="apple-touch-icon" sizes="57x57" href="core-ui-admin/assets/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="core-ui-admin/assets/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="core-ui-admin/assets/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="core-ui-admin/assets/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="core-ui-admin/assets/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="core-ui-admin/assets/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="core-ui-admin/assets/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="core-ui-admin/assets/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="core-ui-admin/assets/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="core-ui-admin/assets/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="core-ui-admin/assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="core-ui-admin/assets/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="core-ui-admin/assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="core-ui-admin/assets/favicon/manifest.json">
+    <title>@yield('title', 'Admin Dashboard - VitaGuard')</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('core-ui-admin/assets/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('core-ui-admin/assets/favicon/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('core-ui-admin/assets/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('core-ui-admin/assets/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('core-ui-admin/assets/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('core-ui-admin/assets/favicon/manifest.json') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="core-ui-admin/assets/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <!-- Vendors styles-->
-    <link rel="stylesheet" href="core-ui-admin/vendors/simplebar/css/simplebar.css">
-    <link rel="stylesheet" href="core-ui-admin/css/vendors/simplebar.css">
+    <link rel="stylesheet" href="{{ asset('core-ui-admin/vendors/simplebar/css/simplebar.css') }}">
+    <link rel="stylesheet" href="{{ asset('core-ui-admin/css/vendors/simplebar.css') }}">
     <!-- Main styles for this application-->
-    <link href="core-ui-admin/css/style.css" rel="stylesheet">
+    <link href="{{ asset('core-ui-admin/css/style.css') }}" rel="stylesheet">
     <!-- We use those styles to show code examples, you should remove them in your application.-->
-    <link href="core-ui-admin/css/examples.css" rel="stylesheet">
-    <script src="core-ui-admin/js/config.js"></script>
-    <script src="core-ui-admin/js/color-modes.js"></script>
-    <link href="core-ui-admin/vendors/@coreui/chartjs/css/coreui-chartjs.css" rel="stylesheet">
+    <link href="{{ asset('core-ui-admin/css/examples.css') }}" rel="stylesheet">
+    <script src="{{ asset('core-ui-admin/js/config.js') }}"></script>
+    <script src="{{ asset('core-ui-admin/js/color-modes.js') }}"></script>
+    <link href="{{ asset('core-ui-admin/vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
     @stack('styles')
   </head>
   <body>
@@ -82,18 +82,27 @@
         </a>
         <ul class="nav-group-items compact">
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}" href="{{ url('admin/dashboard') }}">
+            <a class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ url('admin/users') }}">
+            <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.kelolaUser') }}">
             <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path fill="var(--ci-primary-color, currentcolor)" d="M105.361 398.32A195.891 195.891 0 0 1 343.42 91.125l23.256-23.255A227.875 227.875 0 0 0 82.733 420.948 228.03 228.03 0 0 0 366.24 452.1l-23.312-23.312c-75.028 43.98-173.271 33.829-237.567-30.468" class="ci-primary" />
               <path fill="var(--ci-primary-color, currentcolor)" d="M468.916 353.07a243.54 243.54 0 0 0 0-186.459 248 248 0 0 0-2.747-6.354 242.3 242.3 0 0 0-50.059-72.686L404.8 76.257l-11.317 11.314-172.27 172.269 172.63 172.631 10.957 10.953 11.31-11.314a242.2 242.2 0 0 0 49.452-71.358 249 249 0 0 0 3.354-7.682m-64.557-231.12a211.57 211.57 0 0 1 0 275.781L266.468 259.84Z" class="ci-primary" />
             </svg> -->
-            User
+            User List
+          </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.insertuser') }}">
+            <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="var(--ci-primary-color, currentcolor)" d="M105.361 398.32A195.891 195.891 0 0 1 343.42 91.125l23.256-23.255A227.875 227.875 0 0 0 82.733 420.948 228.03 228.03 0 0 0 366.24 452.1l-23.312-23.312c-75.028 43.98-173.271 33.829-237.567-30.468" class="ci-primary" />
+              <path fill="var(--ci-primary-color, currentcolor)" d="M468.916 353.07a243.54 243.54 0 0 0 0-186.459 248 248 0 0 0-2.747-6.354 242.3 242.3 0 0 0-50.059-72.686L404.8 76.257l-11.317 11.314-172.27 172.269 172.63 172.631 10.957 10.953 11.31-11.314a242.2 242.2 0 0 0 49.452-71.358 249 249 0 0 0 3.354-7.682m-64.557-231.12a211.57 211.57 0 0 1 0 275.781L266.468 259.84Z" class="ci-primary" />
+            </svg> -->
+            Insert New User
           </a>
           </li>
           <li class="nav-item">
@@ -106,6 +115,7 @@
           </a>
           </li>
         </ul>
+        @endif
       </li>
 
       <li class="nav-group">
@@ -128,6 +138,7 @@
           </a>
           </li>
         </ul>
+        @endif
       </li>
 
       <li class="nav-group">
@@ -153,6 +164,7 @@
           </li>
           </li>
         </ul>
+        @endif
       </li>
     <!-- END SIDEBAR -->
     <div class="wrapper d-flex flex-column min-vh-100">
@@ -343,8 +355,8 @@
       </footer>
     </div>
     <!-- CoreUI and necessary plugins-->
-    <script src="core-ui-admin/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-    <script src="core-ui-admin/vendors/simplebar/js/simplebar.min.js"></script>
+    <script src="{{ asset('') }}core-ui-admin/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
+    <script src="{{ asset('') }}core-ui-admin/vendors/simplebar/js/simplebar.min.js"></script>
     <script>
       const header = document.querySelector("header.header");
 
@@ -355,9 +367,9 @@
       });
     </script>
     <!-- Plugins and scripts required by this view-->
-    <script src="core-ui-admin/vendors/chart.js/js/chart.umd.js"></script>
-    <script src="core-ui-admin/vendors/@coreui/chartjs/js/coreui-chartjs.js"></script>
-    <script src="core-ui-admin/vendors/@coreui/utils/js/index.js"></script>
-    <script src="core-ui-admin/div>js/main.js"></script>
+    <script src="{{ asset('core-ui-admin/vendors/chart.js/js/chart.umd.js') }}"></script>
+    <script src="{{ asset('core-ui-admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
+    <script src="{{ asset('core-ui-admin/vendors/@coreui/utils/js/index.js') }}"></script>
+    <script src="{{ asset('core-ui-admin/div>js/main.js') }}"></script>
   </body>
 </html>

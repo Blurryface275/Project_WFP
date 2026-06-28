@@ -89,7 +89,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.users')->with('success', 'Data user berhasil diperbarui!');
+        return redirect()->route('admin.kelolaUser')->with('success', 'Data user berhasil diperbarui!');
     }
 
     /**

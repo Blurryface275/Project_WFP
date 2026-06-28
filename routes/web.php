@@ -56,30 +56,13 @@ Route::get('menu/riwayat', function () {
 // --- PROTECTED ROUTES (Login Required) ---
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+
     // Rute untuk melihat halaman profile diri sendiri
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
     Route::get('/doctor', function () {
         return view('doctor.dashboard');
     });
-
-
-    // ADMIN
-    // Menampilkan halaman dashboard admin (khusus hanya untuk admin)
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-        Route::get('/manageuser', [UserController::class, 'index'])->name('users');
-        Route::get('/insertuser', [UserController::class, 'insert'])->name('users.insert');
-        Route::get('/edituser', [UserController::class, 'update'])->name('users.edit');
-        Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
-        Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
-        // DAFTAR BELUM DIIMPLEMENTASI
-        // Route::get('/daftardokter', [DoctorController::class, 'daftarDokter'])->name('dokter.daftar');
-    });
-
     // Doctor Directory
     Route::resource('doctors', DoctorController::class);
     Route::post('doctors/get-edit-form', [DoctorController::class, 'getEditFormB'])->name('doctors.getEditForm'); //edit form
@@ -103,13 +86,23 @@ Route::middleware(['auth'])->group(function () {
     // tujuanya biar nanti pathnya ada prefix admin di depan. misal : /admin/dashboard
     Route::prefix('admin')->middleware('role:admin')->group(function () {
         // Unified dashboard pointing to user management
-        Route::get('/dashboard', [UserController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+
+        Route::get('/insertuser', function () {
+        return view('admin.users.insert-user'); })->name('admin.insertuser');
 
         // Kelola User CRUD
         Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
         Route::post('/kelolauser', [UserController::class, 'store'])->name('admin.kelolaUser.store');
         Route::put('/kelolauser/{id}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
         Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
+
+        Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
+        Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
+        });
+
 
         // Admin Placeholders
         Route::get('/categories', function () {
@@ -126,29 +119,27 @@ Route::middleware(['auth'])->group(function () {
     // Buat liat jadwal dokter
     Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
-    
-
-
     // Doctor Section
     // tujuanya biar nanti pathnya ada prefix doctor di depan. misal : /doctor/dashboard
     // fugnsi name supaya nanti nama rotue jadi doctor.dashboard dll -> tujuannya biar ga ketuker sm admin
     // bisa dibuka oleh doctor dan admin
     Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group(function () {
-        Route::get('/dashboard', function () { return view('doctor.dashboard'); })->name('dashboard');
-        Route::get('/profile', function () { return view('doctor.profile'); })->name('profile');
-        Route::get('/consultations', function () { return view('doctor.consultations'); })->name('consultations');
-    });
-
+        Route::get('/dashboard', function () {
+            return view('doctor.dashboard'); })->name('dashboard');
+        Route::get('/profile', function () {
+            return view('doctor.profile'); })->name('profile');
+        Route::get('/consultations', function () {
+            return view('doctor.consultations'); })->name('consultations');
 }); // Tutup Middleware Auth
 
 // Routing Article
-    // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
-    Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+// Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
 
-    // Routing Service
-    // Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
-    Route::resource('services', ServiceController::class)->only(['index', 'show']);
+// Routing Service
+// Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
+Route::resource('services', ServiceController::class)->only(['index', 'show']);
 
-    // Routing Category
-    // Hanya membuka route index
-    Route::resource('categories', CategoryController::class)->only(['index']);
+// Routing Category
+// Hanya membuka route index
+Route::resource('categories', CategoryController::class)->only(['index']);

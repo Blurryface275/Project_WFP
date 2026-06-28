@@ -8,7 +8,7 @@
             <strong>Tambah Data User Baru</strong>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.users.insert') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.kelolaUser.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label class="form-label">Name</label>
