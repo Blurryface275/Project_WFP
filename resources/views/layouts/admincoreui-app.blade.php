@@ -47,7 +47,7 @@
     @stack('styles')
   </head>
   <body>
-    <!-- SIDEBAR -->
+    <!-- NEW SIDEBAR -->
     <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
       <div class="sidebar-header border-bottom">
         <div class="sidebar-brand me-auto">
@@ -70,106 +70,116 @@
         </div>
         <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"></button>
       </div>
+      <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">
+            <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="var(--ci-primary-color, currentcolor)" d="M425.706 142.294A240 240 0 0 0 16 312v88h144v-32H48v-56c0-114.691 93.309-208 208-208s208 93.309 208 208v56H352v32h144v-88a238.43 238.43 0 0 0-70.294-169.706" class="ci-primary" />
+              <path fill="var(--ci-primary-color, currentcolor)" d="M80 264h32v32H80zm160-136h32v32h-32zm-104 40h32v32h-32zm264 96h32v32h-32zm-102.778 71.1 69.2-144.173-28.85-13.848-69.183 144.135a64.141 64.141 0 1 0 28.833 13.886M256 416a32 32 0 1 1 32-32 32.036 32.036 0 0 1-32 32" class="ci-primary" />
+            </svg>
+            Dashboard
+            <span class="badge badge-sm bg-info ms-auto">NEW</span>
+          </a>
+        </li>
+        <!-- USER MANAGEMENT SEGMENT -->
+        <li class="nav-title">User Management System</li>
+        <li class="nav-group">
+          <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="var(--ci-primary-color, currentcolor)" d="m491.693 256.705-54.957-49.461 16.407-13.406a80.5 80.5 0 0 0 18.363-21.522c18.148-31.441 12.867-70.042-13.144-96.052s-64.612-31.291-96.051-13.142a80.5 80.5 0 0 0-21.52 18.362l-13.408 16.407-49.461-54.956-.579-.611a24.03 24.03 0 0 0-33.941 0l-65.6 65.605 1.19 23.7 33.108 27.056a48.6 48.6 0 0 1 11.079 12.889c10.807 18.722 7.57 41.8-8.056 57.426s-38.7 18.862-57.426 8.058a48.7 48.7 0 0 1-12.9-11.086l-27.047-33.1-23.7-1.189-71.26 71.26a24 24 0 0 0 0 33.942l175.357 175.359a80 80 0 0 0 113.138 0L492.3 291.225a24.03 24.03 0 0 0 0-33.94ZM288.657 449.617a48 48 0 0 1-67.883 0L51.069 279.911l53.1-53.095 15.91 19.473.1.119a80.5 80.5 0 0 0 21.521 18.363c31.441 18.149 70.041 12.867 96.052-13.144s31.291-64.61 13.143-96.05a80.5 80.5 0 0 0-18.363-21.521l-19.591-16.01 47.124-47.124 56.018 62.241 24.282-.579 25.062-30.67a48.6 48.6 0 0 1 12.888-11.078c18.722-10.807 41.8-7.569 57.426 8.056s18.864 38.7 8.057 57.426a48.6 48.6 0 0 1-11.079 12.889l-30.67 25.061-.58 24.282 62.243 56.018Z" class="ci-primary" />
+            </svg>
+            User Management
+          </a>
+          <ul class="nav-group-items compact">
+            <li class="nav-item">
+              <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.kelolaUser') }}">
+                User List
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.insertuser') }}">
+                Insert New User
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->is('admin/doctors') ? 'active' : '' }}" href="{{ url('admin/doctors') }}">
+                Doctor List
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="components/breadcrumb.html">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                Insert New Doctor
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-divider"></li>
+        <li class="nav-title">Service Management System</li>
+        <li class="nav-group">
+          <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+              <path fill="var(--ci-primary-color, currentcolor)" d="M384 200v-56a128 128 0 0 0-256 0v56H88v128c0 92.635 75.364 168 168 168s168-75.365 168-168V200Zm-224-56a96 96 0 0 1 192 0v56H160Zm232 184c0 74.99-61.01 136-136 136s-136-61.01-136-136v-96h272Z" class="ci-primary" />
+            </svg>
+            Service Management
+          </a>
+          <ul class="nav-group-items compact">
+            <li class="nav-item">
+              <a class="nav-link" href="authentication/login.html" target="_top">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                Category
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="authentication/register.html" target="_top">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                Consultation
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="authentication/check-email.html" target="_top">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+              </a>
+            </li>
+            <li class="nav-group">
+              <a class="nav-link nav-group-toggle" href="#">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                Forgot password
+              </a>
+              <ul class="nav-group-items compact">
+                <li class="nav-item">
+                  <a class="nav-link" href="authentication/reset-password.html" target="_top">
+                    <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                    Reset Password
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="authentication/change-password.html" target="_top">
+                    <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                    Change Password
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="authentication/password-changed.html" target="_top">
+                    <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                    Password Changed
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-footer border-top d-none d-md-flex">
+        <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
+      </div>
+    </div>
+    <!-- NEW SIDEBAR -->
 
-      <!-- NAVIGATION -->
-      <li class="nav-group">
-        @if(auth()->check() && auth()->user()->role == 'admin')
-        <a class="nav-link nav-group-toggle" href="#">
-          <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="var(--ci-primary-color, currentcolor)" d="m491.693 256.705-54.957-49.461 16.407-13.406a80.5 80.5 0 0 0 18.363-21.522c18.148-31.441 12.867-70.042-13.144-96.052s-64.612-31.291-96.051-13.142a80.5 80.5 0 0 0-21.52 18.362l-13.408 16.407-49.461-54.956-.579-.611a24.03 24.03 0 0 0-33.941 0l-65.6 65.605 1.19 23.7 33.108 27.056a48.6 48.6 0 0 1 11.079 12.889c10.807 18.722 7.57 41.8-8.056 57.426s-38.7 18.862-57.426 8.058a48.7 48.7 0 0 1-12.9-11.086l-27.047-33.1-23.7-1.189-71.26 71.26a24 24 0 0 0 0 33.942l175.357 175.359a80 80 0 0 0 113.138 0L492.3 291.225a24.03 24.03 0 0 0 0-33.94ZM288.657 449.617a48 48 0 0 1-67.883 0L51.069 279.911l53.1-53.095 15.91 19.473.1.119a80.5 80.5 0 0 0 21.521 18.363c31.441 18.149 70.041 12.867 96.052-13.144s31.291-64.61 13.143-96.05a80.5 80.5 0 0 0-18.363-21.521l-19.591-16.01 47.124-47.124 56.018 62.241 24.282-.579 25.062-30.67a48.6 48.6 0 0 1 12.888-11.078c18.722-10.807 41.8-7.569 57.426 8.056s18.864 38.7 8.057 57.426a48.6 48.6 0 0 1-11.079 12.889l-30.67 25.061-.58 24.282 62.243 56.018Z" class="ci-primary" />
-          </svg> -->
-        User Management
-        </a>
-        <ul class="nav-group-items compact">
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
-              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.kelolaUser') }}">
-            <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path fill="var(--ci-primary-color, currentcolor)" d="M105.361 398.32A195.891 195.891 0 0 1 343.42 91.125l23.256-23.255A227.875 227.875 0 0 0 82.733 420.948 228.03 228.03 0 0 0 366.24 452.1l-23.312-23.312c-75.028 43.98-173.271 33.829-237.567-30.468" class="ci-primary" />
-              <path fill="var(--ci-primary-color, currentcolor)" d="M468.916 353.07a243.54 243.54 0 0 0 0-186.459 248 248 0 0 0-2.747-6.354 242.3 242.3 0 0 0-50.059-72.686L404.8 76.257l-11.317 11.314-172.27 172.269 172.63 172.631 10.957 10.953 11.31-11.314a242.2 242.2 0 0 0 49.452-71.358 249 249 0 0 0 3.354-7.682m-64.557-231.12a211.57 211.57 0 0 1 0 275.781L266.468 259.84Z" class="ci-primary" />
-            </svg> -->
-            User List
-          </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.insertuser') }}">
-            <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path fill="var(--ci-primary-color, currentcolor)" d="M105.361 398.32A195.891 195.891 0 0 1 343.42 91.125l23.256-23.255A227.875 227.875 0 0 0 82.733 420.948 228.03 228.03 0 0 0 366.24 452.1l-23.312-23.312c-75.028 43.98-173.271 33.829-237.567-30.468" class="ci-primary" />
-              <path fill="var(--ci-primary-color, currentcolor)" d="M468.916 353.07a243.54 243.54 0 0 0 0-186.459 248 248 0 0 0-2.747-6.354 242.3 242.3 0 0 0-50.059-72.686L404.8 76.257l-11.317 11.314-172.27 172.269 172.63 172.631 10.957 10.953 11.31-11.314a242.2 242.2 0 0 0 49.452-71.358 249 249 0 0 0 3.354-7.682m-64.557-231.12a211.57 211.57 0 0 1 0 275.781L266.468 259.84Z" class="ci-primary" />
-            </svg> -->
-            Insert New User
-          </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/doctors') ? 'active' : '' }}" href="{{ url('admin/doctors') }}">
-            <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path fill="var(--ci-primary-color, currentcolor)" d="M105.361 398.32A195.891 195.891 0 0 1 343.42 91.125l23.256-23.255A227.875 227.875 0 0 0 82.733 420.948 228.03 228.03 0 0 0 366.24 452.1l-23.312-23.312c-75.028 43.98-173.271 33.829-237.567-30.468" class="ci-primary" />
-              <path fill="var(--ci-primary-color, currentcolor)" d="M468.916 353.07a243.54 243.54 0 0 0 0-186.459 248 248 0 0 0-2.747-6.354 242.3 242.3 0 0 0-50.059-72.686L404.8 76.257l-11.317 11.314-172.27 172.269 172.63 172.631 10.957 10.953 11.31-11.314a242.2 242.2 0 0 0 49.452-71.358 249 249 0 0 0 3.354-7.682m-64.557-231.12a211.57 211.57 0 0 1 0 275.781L266.468 259.84Z" class="ci-primary" />
-            </svg> -->
-            Doctors
-          </a>
-          </li>
-        </ul>
-        @endif
-      </li>
-
-      <li class="nav-group">
-        @if(auth()->check() && auth()->user()->role == 'admin')
-        <a class="nav-link nav-group-toggle" href="#">
-          <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="var(--ci-primary-color, currentcolor)" d="m491.693 256.705-54.957-49.461 16.407-13.406a80.5 80.5 0 0 0 18.363-21.522c18.148-31.441 12.867-70.042-13.144-96.052s-64.612-31.291-96.051-13.142a80.5 80.5 0 0 0-21.52 18.362l-13.408 16.407-49.461-54.956-.579-.611a24.03 24.03 0 0 0-33.941 0l-65.6 65.605 1.19 23.7 33.108 27.056a48.6 48.6 0 0 1 11.079 12.889c10.807 18.722 7.57 41.8-8.056 57.426s-38.7 18.862-57.426 8.058a48.7 48.7 0 0 1-12.9-11.086l-27.047-33.1-23.7-1.189-71.26 71.26a24 24 0 0 0 0 33.942l175.357 175.359a80 80 0 0 0 113.138 0L492.3 291.225a24.03 24.03 0 0 0 0-33.94ZM288.657 449.617a48 48 0 0 1-67.883 0L51.069 279.911l53.1-53.095 15.91 19.473.1.119a80.5 80.5 0 0 0 21.521 18.363c31.441 18.149 70.041 12.867 96.052-13.144s31.291-64.61 13.143-96.05a80.5 80.5 0 0 0-18.363-21.521l-19.591-16.01 47.124-47.124 56.018 62.241 24.282-.579 25.062-30.67a48.6 48.6 0 0 1 12.888-11.078c18.722-10.807 41.8-7.569 57.426 8.056s18.864 38.7 8.057 57.426a48.6 48.6 0 0 1-11.079 12.889l-30.67 25.061-.58 24.282 62.243 56.018Z" class="ci-primary" />
-          </svg> -->
-        Service Management
-        </a>
-        <ul class="nav-group-items compact">
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/...*') ? 'active' : '' }}" href="{{ url('admin/...') }}">
-            Category Management
-          </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/...') ? 'active' : '' }}" href="{{ url('admin/...') }}">
-            Consultation Management
-          </a>
-          </li>
-        </ul>
-        @endif
-      </li>
-
-      <li class="nav-group">
-        @if(auth()->check() && auth()->user()->role == 'doctor')
-        <a class="nav-link nav-group-toggle" href="#">
-          <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="var(--ci-primary-color, currentcolor)" d="m491.693 256.705-54.957-49.461 16.407-13.406a80.5 80.5 0 0 0 18.363-21.522c18.148-31.441 12.867-70.042-13.144-96.052s-64.612-31.291-96.051-13.142a80.5 80.5 0 0 0-21.52 18.362l-13.408 16.407-49.461-54.956-.579-.611a24.03 24.03 0 0 0-33.941 0l-65.6 65.605 1.19 23.7 33.108 27.056a48.6 48.6 0 0 1 11.079 12.889c10.807 18.722 7.57 41.8-8.056 57.426s-38.7 18.862-57.426 8.058a48.7 48.7 0 0 1-12.9-11.086l-27.047-33.1-23.7-1.189-71.26 71.26a24 24 0 0 0 0 33.942l175.357 175.359a80 80 0 0 0 113.138 0L492.3 291.225a24.03 24.03 0 0 0 0-33.94ZM288.657 449.617a48 48 0 0 1-67.883 0L51.069 279.911l53.1-53.095 15.91 19.473.1.119a80.5 80.5 0 0 0 21.521 18.363c31.441 18.149 70.041 12.867 96.052-13.144s31.291-64.61 13.143-96.05a80.5 80.5 0 0 0-18.363-21.521l-19.591-16.01 47.124-47.124 56.018 62.241 24.282-.579 25.062-30.67a48.6 48.6 0 0 1 12.888-11.078c18.722-10.807 41.8-7.569 57.426 8.056s18.864 38.7 8.057 57.426a48.6 48.6 0 0 1-11.079 12.889l-30.67 25.061-.58 24.282 62.243 56.018Z" class="ci-primary" />
-          </svg> -->
-        Doctors
-        </a>
-        <ul class="nav-group-items compact">
-          <li class="nav-item">
-            <a href="{{ url('doctor/dashboard') }}" class="nav-link {{ request()->is('doctor/dashboard') ? 'active' : '' }}">
-              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              Dokter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('doctor/consultations') }}" class="nav-link {{ request()->is('doctor/consultations*') ? 'active' : '' }}">
-              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              Konsultasi
-            </a>
-          </li>
-          </li>
-        </ul>
-        @endif
-      </li>
-    <!-- END SIDEBAR -->
-    <div class="wrapper d-flex flex-column min-vh-100">
+    <!-- NEW CONTENT -->
+     <div class="wrapper d-flex flex-column min-vh-100">
+      <!-- HEADER -->
       <header class="header header-sticky p-0 mb-4">
-        <!-- NAV BAR ATAS -->
         <div class="container-fluid border-bottom px-4">
           <button class="header-toggler" type="button" onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()" style="margin-inline-start: -14px">
             <svg class="icon icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -241,13 +251,7 @@
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link py-0 pe-0" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <div class="avatar avatar-md">
-                @if(auth()->check() && auth()->user()->photo)
-                <img class="avatar-img" src="{{ asset('storage/' . auth()->user()->photo) }}" class="img-circle elevation-2" alt="User Image">
-                @else
-                <img class="avatar-img" src="https://ui-avatars.com/api/?name=Admin&background=e7f1ff&color=0d6efd" class="img-circle elevation-2" alt="User Image">
-                @endif
-                </div>
+                <div class="avatar avatar-md"><img class="avatar-img" src="assets/img/avatars/8.jpg" alt="user@email.com"></div>
               </a>
               <div class="dropdown-menu dropdown-menu-end pt-0">
                 <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2">Account</div>
@@ -325,7 +329,6 @@
             </li>
           </ul>
         </div>
-        <!-- END NAVBAR ATAS -->
         <div class="container-fluid px-4">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb my-0">
@@ -336,11 +339,20 @@
         </div>
       </header>
       <div class="body flex-grow-1">
-        <!-- CONTENT -->
         <div class="container-lg px-4">
-          @yield('content-admin')
+          <!-- NAV BAR ATAS -->
+          <!-- /.row-->
+           <!-- CONTENT BODY -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div>
+                  @yield('content-admin')
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- END CONTENT -->
       </div>
       <footer class="footer px-4">
         <div>
@@ -354,9 +366,10 @@
         </div>
       </footer>
     </div>
+    <!-- NEW CONTENT -->
     <!-- CoreUI and necessary plugins-->
-    <script src="{{ asset('') }}core-ui-admin/vendors/@coreui/coreui/js/coreui.bundle.min.js"></script>
-    <script src="{{ asset('') }}core-ui-admin/vendors/simplebar/js/simplebar.min.js"></script>
+    <script src="{{ asset('core-ui-admin/vendors/@coreui/coreui/js/coreui.bundle.min.js') }}"></script>
+    <script src="{{ asset('core-ui-admin/vendors/simplebar/js/simplebar.min.js') }}"></script>
     <script>
       const header = document.querySelector("header.header");
 
