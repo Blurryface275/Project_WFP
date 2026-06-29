@@ -31,20 +31,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:6',
-        'role' => 'required|in:admin,doctor,member',
-    ]);
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+            'role' => 'required|in:admin,doctor,member',
+            'photo' => 'required|image|mimes:jpg,jpeg,png',
+        ]);
 
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-        'role' => $request->role,
-    ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
+            'photo' => "",
+        ]);
 
-    return redirect()->route('admin.kelolaUser')->with('success', 'Data user baru berhasil ditambahkan!');
+        return redirect()->route('admin.kelolaUser')->with('success', 'Data user baru berhasil ditambahkan!');
     }
 
     /**
@@ -72,6 +74,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'role' => 'required|in:admin,doctor,member',
+            'photo' => 'required|string',
         ]);
 
         $user = User::findOrFail($id);
@@ -80,6 +83,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'photo' => $request->photo,
         ]);
 
         if ($request->filled('password')) {

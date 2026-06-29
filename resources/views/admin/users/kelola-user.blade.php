@@ -36,7 +36,7 @@
             <td>{{ $u->role }}</td>
             <td>
               @if ($u->photo)
-                <img src="{{ asset('storage/' . $u->photo) }}" class="user-img" class="user-img">
+                <img src="{{ asset('storage/' . $u->photo) }}" class="user-img" class="user-img" width="170px" height="170px" object style="object-fit: cover; object-position: center;">
               @else
                 <img src="https://i.pinimg.com/170x/d6/5c/fa/d65cfa8b47227df12fb97217e8f940e3.jpg" class="user-img" class="user-img">
               @endif
