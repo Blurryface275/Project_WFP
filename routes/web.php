@@ -87,11 +87,16 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->middleware('role:admin')->group(function () {
         // Unified dashboard pointing to user management
         Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
 
         Route::get('/insertuser', function () {
-        return view('admin.users.insert-user'); })->name('admin.insertuser');
+            return view('admin.users.insert-user');
+        })->name('admin.insertuser');
+        Route::get('/edituser', function () {
+            return view('admin.users.edit-user');
+        })->name('admin.edituser');
+
 
         // Kelola User CRUD
         Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
@@ -101,35 +106,38 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
-        });
+    });
 
 
-        // Admin Placeholders
-        Route::get('/categories', function () {
-            return view('categories');
-        })->name('admin.categories');
-        Route::get('/order', function () {
-            return view('order');
-        })->name('admin.order');
-        Route::get('/members', function () {
-            return view('members');
-        })->name('admin.members');
-    }); // Tutup Middleware Admin
+    // Admin Placeholders
+    Route::get('/categories', function () {
+        return view('categories');
+    })->name('admin.categories');
+    Route::get('/order', function () {
+        return view('order');
+    })->name('admin.order');
+    Route::get('/members', function () {
+        return view('members');
+    })->name('admin.members');
+}); // Tutup Middleware Admin
 
-    // Buat liat jadwal dokter
-    Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
+// Buat liat jadwal dokter
+Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
-    // Doctor Section
-    // tujuanya biar nanti pathnya ada prefix doctor di depan. misal : /doctor/dashboard
-    // fugnsi name supaya nanti nama rotue jadi doctor.dashboard dll -> tujuannya biar ga ketuker sm admin
-    // bisa dibuka oleh doctor dan admin
-    Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group(function () {
-        Route::get('/dashboard', function () {
-            return view('doctor.dashboard'); })->name('dashboard');
-        Route::get('/profile', function () {
-            return view('doctor.profile'); })->name('profile');
-        Route::get('/consultations', function () {
-            return view('doctor.consultations'); })->name('consultations');
+// Doctor Section
+// tujuanya biar nanti pathnya ada prefix doctor di depan. misal : /doctor/dashboard
+// fugnsi name supaya nanti nama rotue jadi doctor.dashboard dll -> tujuannya biar ga ketuker sm admin
+// bisa dibuka oleh doctor dan admin
+Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('doctor.dashboard');
+    })->name('dashboard');
+    Route::get('/profile', function () {
+        return view('doctor.profile');
+    })->name('profile');
+    Route::get('/consultations', function () {
+        return view('doctor.consultations');
+    })->name('consultations');
 }); // Tutup Middleware Auth
 
 // Routing Article

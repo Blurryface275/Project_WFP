@@ -42,8 +42,9 @@
               @endif
             </td>
             <td>
-              <button class="btn btn-warning btn-sm" onclick="alert('Feature Coming Soon')">
-                <span class="glyphicon glyphicon-pencil"></span> Edit
+              <button class="btn btn-warning btn-sm">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <a href="{{ route('admin.edituser') }}">Edit</a>
               </button>
             </td>
             <td>
