@@ -121,7 +121,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/users*') ? 'active' : '' }}"
-              href="{{ route('admin.insertuser') }}">
+              href="{{ route('admin.insertUserView') }}">
               Insert New User
             </a>
           </li>

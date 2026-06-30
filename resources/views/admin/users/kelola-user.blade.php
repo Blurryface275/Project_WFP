@@ -1,12 +1,12 @@
 @extends('layouts.admincoreui-app')
 @section('title', 'Dashboard Admin - VitaGuard')
 @push('styles')
-<style>
+  <style>
     .pagination .page-link {
-        font-size: 0.9rem;
-        padding: 6px 12px;
+      font-size: 0.9rem;
+      padding: 6px 12px;
     }
-</style>
+  </style>
 @endpush
 @section('content-admin')
   <div class="container">
@@ -32,25 +32,32 @@
             <td>{{ $u->id }}</td>
             <td>{{ $u->name }}</td>
             <td>{{ $u->email}}</td>
-            <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $u->password }}</td>
+            <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $u->password }}
+            </td>
             <td>{{ $u->role }}</td>
             <td>
               @if ($u->photo)
-                <img src="{{ asset('storage/' . $u->photo) }}" class="user-img" class="user-img" width="170px" height="170px" object style="object-fit: cover; object-position: center;">
+                <img src="{{ asset('storage/' . $u->photo) }}" class="user-img" class="user-img" width="170px" height="170px"
+                  object style="object-fit: cover; object-position: center;">
               @else
-                <img src="https://i.pinimg.com/170x/d6/5c/fa/d65cfa8b47227df12fb97217e8f940e3.jpg" class="user-img" class="user-img">
+                <img src="https://i.pinimg.com/170x/d6/5c/fa/d65cfa8b47227df12fb97217e8f940e3.jpg" class="user-img"
+                  class="user-img">
               @endif
             </td>
             <td>
-              <button class="btn btn-warning btn-sm">
-                <span class="glyphicon glyphicon-pencil"></span>
-                <a href="{{ route('admin.edituser') }}">Edit</a>
-              </button>
+              <a href="{{ route('admin.editUserView', $u->id) }}" class="btn btn-warning btn-sm">
+                <span class="glyphicon glyphicon-pencil"></span> Edit
+              </a>
             </td>
             <td>
-              <button class="btn btn-danger btn-sm" onclick="alert('Feature Coming Soon')">
-                <span class="glyphicon glyphicon-trash"></span> Delete
-              </button>
+              <form action="{{ route('admin.kelolaUser.destroy', $u->id) }}" method="POST"
+                onsubmit="return confirm('Konfirmasi : hapus user ini?');" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">
+                  <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
+              </form>
             </td>
           </tr>
         @endforeach

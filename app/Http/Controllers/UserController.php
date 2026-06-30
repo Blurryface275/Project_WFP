@@ -84,7 +84,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'role'  => 'required|in:admin,doctor,member',
+            'role' => 'required|in:admin,doctor,member',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
@@ -106,8 +106,15 @@ class UserController extends Controller
             $photoPath = "{$folder}/{$filename}";
 
             $request->file('photo')->storeAs($folder, $filename, 'public');
-
             $updateData['photo'] = $photoPath;
+        } elseif ($user->role !== $request->role && $user->photo) {
+            $newFolder = $request->role;
+            if (Storage::disk('public')->exists($user->photo)) {
+                $extension = pathinfo($user->photo, PATHINFO_EXTENSION);
+                $newPhotoPath = "{$newFolder}/{$user->id}.{$extension}";
+                Storage::disk('public')->move($user->photo, $newPhotoPath);
+                $updateData['photo'] = $newPhotoPath;
+            }
         }
 
         $user->update($updateData);
@@ -116,6 +123,12 @@ class UserController extends Controller
             $user->update([
                 'password' => bcrypt($request->password)
             ]);
+        }
+
+        if ($request->role === 'doctor') { //JIKA role diganti dokter, perlu mengisi/update data dokter
+            return redirect()
+                ->route('admin.doctors.edit', $user->id)
+                ->with('info', 'Silakan lengkapi data dokter.');
         }
 
         return redirect()->route('admin.kelolaUser')->with('success', 'Data user berhasil diperbarui!');
