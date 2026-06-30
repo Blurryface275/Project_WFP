@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
         return view('doctor.dashboard');
     });
     // Doctor Directory
-    
+
     Route::post('/ajax/doctor/saveDataUpdate', [DoctorController::class, 'saveDataUpdate']);
     Route::post('doctors/get-edit-form', [DoctorController::class, 'getEditFormB'])->name('admin.doctors.getEditForm'); //edit form
     Route::post('/ajax/doctor/deleteData', [DoctorController::class, 'deleteData'])->name('doctors.deleteData');
@@ -106,6 +106,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/kelolauser', [UserController::class, 'store'])->name('admin.kelolaUser.store');
         Route::put('/kelolauser/{id}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
         Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
+
+        // update doctors dari user
+        Route::get('/doctors/{user}/edit', [DoctorController::class, 'edit'])->name('admin.doctors.edit');
+        Route::put('/doctors/{user}', [DoctorController::class, 'update'])->name('admin.doctors.update');
 
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
