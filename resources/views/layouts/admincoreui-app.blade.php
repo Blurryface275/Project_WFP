@@ -131,11 +131,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="components/breadcrumb.html">
-              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              Insert New Doctor
+            <a class="nav-link {{ request()->is('doctors/create') ? 'active' : '' }}" href="{{ url('/doctors/create') }}">
+                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+                Insert New Doctor
             </a>
-          </li>
+        </li>
         </ul>
       </li>
       <li class="nav-divider"></li>

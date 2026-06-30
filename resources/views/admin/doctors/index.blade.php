@@ -1,22 +1,21 @@
-@extends('layouts.admin-app')
+@extends('layouts.admincoreui-app')
 
 @section('title', 'Data Dokter - VitaGuard')
 
 @section('page-title', 'Kelola Data Dokter')
 
-@section('content')
+@section('content-admin')
 <div class="container-fluid">
     
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
 
     <div class="mb-3 text-right">
         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#btnFormModal">
-            <i class="fas fa-plus"></i> + New Doctor (with Modals)
+            <i class="fas fa-plus"></i> New Doctor (with Modals)
         </button>
     </div>
 
@@ -45,16 +44,11 @@
                             Edit
                         </button>
 
-                        <a href="#" class="btn btn-danger btn-sm" 
+                        <button type="button" class="btn btn-danger btn-sm" 
                             onclick="if(confirm('Are you sure to delete {{ $doctor->id }} - {{ $doctor->name }} ?')) deleteDataRemove({{ $doctor->id }})">
-                            Delete without Reload
-                        </a>
+                            Delete
+                        </button>
 
-                        <form method="POST" action="{{ route('doctors.destroy', $doctor->id) }}" style="display: inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
-                        </form>
                     </td>
                 </tr>
                 @empty
@@ -92,6 +86,10 @@
                         <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Enter specialization" required>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="experience_years">Experience (Years)</label>
+                        <input type="number" name="experience_years" class="form-control" id="experience_years" placeholder="Enter years of experience" min="0" required>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="phone_number">Phone</label>
                         <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="Enter phone number" required>
                     </div>
@@ -124,12 +122,13 @@
     function getEditForm(id) {
         $.ajax({
             type: 'POST',
-            url: '{{ route("doctors.getEditForm") }}',
+            url: '{{ route("admin.doctors.getEditForm") }}',
             data: {
                 '_token': '{{ csrf_token() }}',
                 'id': id
             },
             success: function(data) {
+                alert(data);
                 $('#modalContent').html(data.msg);
             },
             error: function() {
@@ -142,20 +141,23 @@
     function deleteDataRemove(id) {
         $.ajax({
             type: 'POST',
-            url: '/doctors/' + id, 
+            url: '{{ route("doctors.deleteData") }}',
             data: {
                 '_token': '{{ csrf_token() }}',
-                '_method': 'DELETE'
+                'id': id
             },
             success: function(data) {
-                if (data.status == "oke") {
+                if (data.status === "oke") {
                     $('#tr_' + id).remove();
+                    alert(data.msg);
                 } else {
                     alert(data.msg);
                 }
             },
-            error: function() {
-                alert('Terjadi kesalahan saat menghapus data.');
+            // Tambahkan 'xhr' di dalam kurung parameter fungsi di bawah ini
+            error: function(xhr) { 
+                console.error(xhr.responseText);
+                alert('Terjadi kesalahan pada server (Error 500).');
             }
         });
     }

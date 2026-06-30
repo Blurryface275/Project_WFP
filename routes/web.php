@@ -64,8 +64,11 @@ Route::middleware(['auth'])->group(function () {
         return view('doctor.dashboard');
     });
     // Doctor Directory
+    
+    Route::post('/ajax/doctor/saveDataUpdate', [DoctorController::class, 'saveDataUpdate']);
+    Route::post('doctors/get-edit-form', [DoctorController::class, 'getEditFormB'])->name('admin.doctors.getEditForm'); //edit form
+    Route::post('/ajax/doctor/deleteData', [DoctorController::class, 'deleteData'])->name('doctors.deleteData');
     Route::resource('doctors', DoctorController::class);
-    Route::post('doctors/get-edit-form', [DoctorController::class, 'getEditFormB'])->name('doctors.getEditForm'); //edit form
 
     // Placeholder Menu Pages
     Route::get('menu/konsultasi', function () {
@@ -106,6 +109,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
+        Route::get('/doctors/create', [DoctorController::class, 'create'])->name('admin.doctors.insertDoctors');
     });
 
 

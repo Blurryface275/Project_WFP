@@ -31,7 +31,7 @@ class DoctorController extends Controller
     public function create()
     {
         //
-        return view('doctor.create');
+        return view('admin.doctors.insertDoctors');
     }
 
     /**
@@ -39,23 +39,26 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // Validasi input data dokter
+        
+        //Validasi input data dokter
         $request->validate([
-            'doctor_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
-            'phone' => 'required|string|max:20',
+            'experience_years' => 'required|integer|min:0',
+            'phone_number' => 'required|string|max:20',
             'email' => 'required|email|max:255',
         ]);
 
         $data = new Doctor();
-        $data->doctor_name = $request->input('doctor_name'); 
-        $data->specialization = $request->input('specialization'); 
-        $data->phone = $request->input('phone'); 
+        $data->user_id = auth()->user()->id;
+        $data->name = $request->input('name'); 
+        $data->specialization = $request->input('specialization');
+        $data->experience_years = $request->input('experience_years');
+        $data->phone_number = $request->input('phone_number'); 
         $data->email = $request->input('email'); 
         $data->save();
 
-        return redirect()->route('doctor.index')->with('success', 'Successfully created doctor data.');
+        return redirect()->route('doctors.index')->with('success', 'Successfully created doctor data.');
     }
 
     /**
@@ -88,13 +91,13 @@ class DoctorController extends Controller
     public function update(Request $request, Doctor $doctor)
     {
         //
-        $doctor->doctor_name = $request->doctor_name;
+        $doctor->name = $request->name;
         $doctor->specialization = $request->specialization;
-        $doctor->phone = $request->phone;
+        $doctor->phone_number = $request->phone;
         $doctor->email = $request->email;
         $doctor->save();
 
-        return redirect()->route('doctor.index')->with('success', 'Successfully updated doctor data');
+        return redirect()->route('doctors.index')->with('success', 'Successfully updated doctor data');
     }
 
     /**
@@ -103,16 +106,6 @@ class DoctorController extends Controller
     public function destroy(Doctor $doctor)
     {
         //
-        $id = $request->id;
-        $data = Doctor::find($id);
-        if ($data) {
-            $data->delete();
-            return response()->json(array(
-                'status' => 'oke',
-                'msg' => 'Doctor data is removed !'
-            ), 200);
-        }
-        return response()->json(array('status' => 'error', 'msg' => 'Data tidak ditemukan'), 404);
     }
 
     // Member — halaman jadwal semua dokter
@@ -126,24 +119,28 @@ class DoctorController extends Controller
     {
         $id = $request->id;
         $data = Doctor::find($id);
-        
         return response()->json(array(
             'status' => 'oke',
-            'msg' => view('doctor.getEditFormB', compact('data'))->render()
+            'msg' => view('admin.doctors.getEditForm', compact('data'))->render()
         ), 200);
     }
-    public function saveDataUpdate(Request $request)
+
+    public function deleteData(Request $request)
     {
         $id = $request->id;
-        $data = Doctor::find($id);
+        $data = Doctor::find($id); // Pastikan nama model 'Doctor' diawali huruf kapital sesuai nama file model kamu
+        
         if ($data) {
-            $data->doctor_name = $request->doctor_name; 
-            $data->specialization = $request->specialization; 
-            $data->phone = $request->phone; 
-            $data->email = $request->email; 
-            $data->save();
-            return response()->json(array('status' => 'oke', 'msg' => 'Doctor data is up-to-date !'), 200);
+            $data->delete();
+            return response()->json([
+                'status' => 'oke',
+                'msg' => 'Doctor data is removed !'
+            ], 200);
         }
-        return response()->json(array('status' => 'error', 'msg' => 'Data tidak ditemukan'), 404);
+        
+        return response()->json([
+            'status' => 'error', 
+            'msg' => 'Data tidak ditemukan'
+        ], 404);
     }
 }
