@@ -116,6 +116,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
         Route::get('/doctors/create', [DoctorController::class, 'create'])->name('admin.doctors.insertDoctors');
+
+        // Routing Article
+        Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'adminIndex'])->name('admin.articles.index');
+        Route::resource('articles', App\Http\Controllers\ArticleController::class)
+            ->except(['index', 'show']) // karena ini memang public dan bisa dikunjungi tanpa login
+            ->names('admin.articles');
     });
 
 
