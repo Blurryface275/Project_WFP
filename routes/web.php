@@ -9,6 +9,7 @@ use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -89,9 +90,10 @@ Route::middleware(['auth'])->group(function () {
     // tujuanya biar nanti pathnya ada prefix admin di depan. misal : /admin/dashboard
     Route::prefix('admin')->middleware('role:admin')->group(function () {
         // Unified dashboard pointing to user management
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        // Route::get('/dashboard', function () {
+        //     return view('admin.dashboard');
+        // })->name('admin.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         Route::get('/insertuser', function () {
             return view('admin.users.insert-user');
