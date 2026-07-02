@@ -8,7 +8,7 @@
             <strong>Edit Data User</strong>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.users.edit', $user->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.kelolaUser.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

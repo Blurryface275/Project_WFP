@@ -98,9 +98,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/insertuser', function () {
             return view('admin.users.insert-user');
         })->name('admin.insertUserView');
-        Route::get('/edituser', function () {
-            return view('admin.users.edit-user');
-        })->name('admin.editUserView');
+        Route::get('/edituser/{id}', [UserController::class, 'edit'])->name('admin.editUserView');
 
 
         // Kelola User CRUD

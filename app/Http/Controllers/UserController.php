@@ -73,7 +73,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.users.edit-user', compact('user'));
     }
 
     /**
@@ -90,17 +91,19 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        $user->update([
+        $updateData = [
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-        ]);
+        ];
 
-        if ($request->hasFile('photo')) { //JIKA edit data ada file foto
-            if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto lama, delete
+
+        if ($request->hasFile('photo')) {
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) {
                 Storage::disk('public')->delete($user->photo);
             }
             $folder = $request->role;
+
             $extension = $request->file('photo')->getClientOriginalExtension();
             $filename = "{$user->id}.{$extension}";
             $photoPath = "{$folder}/{$filename}";
@@ -109,6 +112,7 @@ class UserController extends Controller
             $updateData['photo'] = $photoPath;
         } elseif ($user->role !== $request->role && $user->photo) {
             $newFolder = $request->role;
+
             if (Storage::disk('public')->exists($user->photo)) {
                 $extension = pathinfo($user->photo, PATHINFO_EXTENSION);
                 $newPhotoPath = "{$newFolder}/{$user->id}.{$extension}";
@@ -140,11 +144,20 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+
+        if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
+            Storage::disk('public')->delete($user->photo);
+        }
+
         $user->delete();
 
-        return response()->json(array(
-            'status' => 'oke',
-            'msg' => 'Data pengguna berhasil dihapus!'
-        ), 200);
+        return redirect()
+            ->route('admin.kelolaUser')
+            ->with('success', 'Data pengguna berhasil dihapus!');
+        // return response()->json(array(
+        //     'status' => 'oke',
+        //     'msg' => 'Data pengguna berhasil dihapus!'
+        // ), 200);
+
     }
 }

@@ -18,7 +18,6 @@
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
-          <th>Password</th>
           <th>Role</th>
           <th>Image</th>
           <th>Edit</th>
@@ -32,8 +31,6 @@
             <td>{{ $u->id }}</td>
             <td>{{ $u->name }}</td>
             <td>{{ $u->email}}</td>
-            <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $u->password }}
-            </td>
             <td>{{ $u->role }}</td>
             <td>
               @if ($u->photo)
