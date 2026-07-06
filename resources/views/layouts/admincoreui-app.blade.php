@@ -132,7 +132,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link {{ request()->is('doctors/create') ? 'active' : '' }}" href="{{ url('/doctors/create') }}">
-                <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
                 Insert New Doctor
             </a>
         </li>
