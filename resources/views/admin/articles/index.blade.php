@@ -1,6 +1,6 @@
-@extends('layouts.admin-app')
+@extends('layouts.admincoreui-app')
 
-@section('content')
+@section('content-admin')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -12,7 +12,7 @@
             @endif
 
             <div class="card shadow">
-                <div class="card-body">
+                
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -61,7 +61,6 @@
                     <div class="mt-3">
                         {{ $articles->links('pagination::bootstrap-5') }}
                     </div>
-                </div>
             </div>
         </div>
     </div>

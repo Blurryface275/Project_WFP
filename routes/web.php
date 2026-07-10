@@ -120,6 +120,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('articles', App\Http\Controllers\ArticleController::class)
             ->except(['index', 'show']) // karena ini memang public dan bisa dikunjungi tanpa login
             ->names('admin.articles');
+
+        // Routing Category
+        Route::resource('categories', App\Http\Controllers\AdminCategoryController::class)
+            ->names('admin.categories');
+
+        Route::resource('services', App\Http\Controllers\AdminServiceController::class)->names('admin.services');
     });
 
 

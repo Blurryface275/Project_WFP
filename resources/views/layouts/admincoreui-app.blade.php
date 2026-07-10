@@ -150,47 +150,51 @@
         </a>
         <ul class="nav-group-items compact">
           <li class="nav-item">
-            <a class="nav-link" href="authentication/login.html" target="_top">
+            <a class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Category
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="authentication/register.html" target="_top">
+            <a class="nav-link {{ request()->is('menu/konsultasi*') ? 'active' : '' }}" href="{{ route('menu.konsultasi') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Consultation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="authentication/check-email.html" target="_top">
+            <a class="nav-link {{ request()->is('admin/services*') ? 'active' : '' }}" href="{{ route('admin.services.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+              Service
             </a>
           </li>
-          <li class="nav-group">
-            <a class="nav-link nav-group-toggle" href="#">
+        </ul>
+      </li>
+      <li class="nav-divider"></li>
+      <li class="nav-title">Article Management</li>
+      <li class="nav-group">
+        <a class="nav-link nav-group-toggle" href="#">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="var(--ci-primary-color, currentcolor)"
+              d="M368 16H144a64.072 64.072 0 0 0-64 64v352a64.072 64.072 0 0 0 64 64h224a64.072 64.072 0 0 0 64-64V80a64.072 64.072 0 0 0-64-64m32 416a32.036 32.036 0 0 1-32 32H144a32.036 32.036 0 0 1-32-32V80a32.036 32.036 0 0 1 32-32h224a32.036 32.036 0 0 1 32 32Z"
+              class="ci-primary" />
+            <path fill="var(--ci-primary-color, currentcolor)"
+              d="M176 112h160v32H176zm0 80h160v32H176zm0 80h160v32H176zm0 80h96v32h-96z"
+              class="ci-primary" />
+          </svg>
+          Article Management
+        </a>
+        <ul class="nav-group-items compact">
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('admin/articles') ? 'active' : '' }}" href="{{ route('admin.articles.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              Forgot password
+              Article List
             </a>
-            <ul class="nav-group-items compact">
-              <li class="nav-item">
-                <a class="nav-link" href="authentication/reset-password.html" target="_top">
-                  <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-                  Reset Password
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="authentication/change-password.html" target="_top">
-                  <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-                  Change Password
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="authentication/password-changed.html" target="_top">
-                  <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-                  Password Changed
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('admin/articles/create') ? 'active' : '' }}" href="{{ route('admin.articles.create') }}">
+              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+              Insert New Article
+            </a>
           </li>
         </ul>
       </li>
@@ -424,11 +428,7 @@
         <!-- CONTENT BODY -->
         <div class="card mb-4">
           <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <div>
-                @yield('content-admin')
-              </div>
-            </div>
+            @yield('content-admin')
           </div>
         </div>
       </div>

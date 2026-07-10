@@ -87,6 +87,12 @@
                 <p>Kelola Dokter</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ url('admin/articles') }}" class="nav-link {{ request()->is('admin/articles*') ? 'active' : '' }}">
+                <i class="nav-link-icon fas fa-newspaper"></i>
+                <p>Kelola Artikel</p>
+                </a>
+            </li>
             @endif
 
             @if(auth()->check() && auth()->user()->role == 'doctor')
