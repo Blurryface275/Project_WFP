@@ -17,6 +17,13 @@
         <small class="form-text text-muted">Please write down Doctor Specialization here.</small>
     </div>
 
+     <div class="form-group mb-3">
+        <label for="experience_years">Experience (Years)</label>
+        <input type="text" name="experience_years" id="experience_years" class="form-control" 
+               placeholder="Enter years of experience" min="0" value="{{ $data->experience_years }}" required>
+        <small class="form-text text-muted">Please write down Doctor's years of experience here.</small>
+    </div>
+
     <div class="form-group mb-3">
         <label for="phone">Phone Number</label>
         <input type="text" name="phone" id="phone" class="form-control" 

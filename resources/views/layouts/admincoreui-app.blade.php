@@ -53,7 +53,6 @@
   <link href="{{ asset('core-ui-admin/vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
   @stack('styles')
 </head>
-
 <body>
   <!-- NEW SIDEBAR -->
   <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
@@ -218,35 +217,6 @@
               class="ci-primary" />
           </svg>
         </button>
-        <ul class="header-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg class="icon icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path fill="var(--ci-primary-color, currentcolor)"
-                  d="m450.27 348.569-43.67-80.624V184c0-83.813-68.187-152-152-152s-152 68.187-152 152v83.945l-43.672 80.623A24 24 0 0 0 80.031 384h86.935a89 89 0 0 0-.367 8 88 88 0 0 0 176 0c0-2.7-.129-5.364-.367-8h86.935a24 24 0 0 0 21.1-35.431ZM310.6 392a56 56 0 1 1-111.419-8h110.837a56 56 0 0 1 .582 8M93.462 352l41.138-75.945V184a120 120 0 0 1 240 0v92.055L415.736 352Z"
-                  class="ci-primary" />
-              </svg>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg class="icon icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path fill="var(--ci-primary-color, currentcolor)"
-                  d="M136 24H16v120h120Zm-32 88H48V56h56Zm32 88H16v120h120Zm-32 88H48v-56h56Zm32 88H16v120h120Zm-32 88H48v-56h56Zm72-440.002h320v32H176zm0 88h256v32H176zm0 88h320v32H176zm0 88h256v32H176zm0 176h256v32H176zm0-88h320v32H176z"
-                  class="ci-primary" />
-              </svg>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <svg class="icon icon-lg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path fill="var(--ci-primary-color, currentcolor)"
-                  d="M274.6 25.623a32.01 32.01 0 0 0-37.2 0L16 183.766V496h480V183.766ZM464 402.693 339.97 322.96 464 226.492ZM256 51.662 454.429 193.4 311.434 304.615 256 268.979l-55.434 35.636L57.571 193.4ZM48 226.492l124.03 96.468L48 402.693ZM464 464H48v-23.265l208-133.714 208 133.714Z"
-                  class="ci-primary" />
-              </svg>
-            </a>
-          </li>
-        </ul>
         <ul class="header-nav">
           <li class="nav-item py-1">
             <div class="vr h-100 mx-2 text-body text-opacity-75"></div>
@@ -313,91 +283,6 @@
             <div class="dropdown-menu dropdown-menu-end pt-0">
               <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2">Account
               </div>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="m450.27 348.569-43.67-80.624V184c0-83.813-68.187-152-152-152s-152 68.187-152 152v83.945l-43.672 80.623A24 24 0 0 0 80.031 384h86.935a89 89 0 0 0-.367 8 88 88 0 0 0 176 0c0-2.7-.129-5.364-.367-8h86.935a24 24 0 0 0 21.1-35.431ZM310.6 392a56 56 0 1 1-111.419-8h110.837a56 56 0 0 1 .582 8M93.462 352l41.138-75.945V184a120 120 0 0 1 240 0v92.055L415.736 352Z"
-                    class="ci-primary" />
-                </svg>
-                Updates
-                <span class="badge badge-sm bg-info ms-2">8</span>
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M274.6 25.623a32.01 32.01 0 0 0-37.2 0L16 183.766V496h480V183.766ZM464 402.693 339.97 322.96 464 226.492ZM256 51.662 454.429 193.4 311.434 304.615 256 268.979l-55.434 35.636L57.571 193.4ZM48 226.492l124.03 96.468L48 402.693ZM464 464H48v-23.265l208-133.714 208 133.714Z"
-                    class="ci-primary" />
-                </svg>
-                Messages
-                <span class="badge badge-sm bg-success ms-2">42</span>
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="m222.085 235.644-62.01-62.01L81.8 251.905l62.009 62.01-.04.04 66.958 66.957 11.354 11.275.04.039 66.957-66.957 11.273-11.354 202.277-202.271-78.272-78.271Zm44.33 66.958-11.274 11.353-33.057 33.056-.04-.039-33.017-33.017.04-.04-62.009-62.01 33.016-33.016 62.01 62.009L424.356 78.627l33.017 33.017Z"
-                    class="ci-primary" />
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M448 464H48V64h300.22l32-32H16v464h464V179.095l-32 32z" class="ci-primary" />
-                </svg>
-                Tasks
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M496 496h-47.229l-69.522-128H40a24.03 24.03 0 0 1-24-24V40a24.03 24.03 0 0 1 24-24h432a24.03 24.03 0 0 1 24 24ZM48 336h350.284L464 456.993V48H48Z"
-                    class="ci-primary" />
-                </svg>
-                Comments
-              </a>
-              <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold my-2">
-                <div class="fw-semibold">Settings</div>
-              </div>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="m411.6 343.656-72.823-47.334 27.455-50.334A80.2 80.2 0 0 0 376 207.681V128a112 112 0 0 0-224 0v79.681a80.24 80.24 0 0 0 9.768 38.308l27.455 50.333-72.823 47.334A79.72 79.72 0 0 0 80 410.732V496h368v-85.268a79.73 79.73 0 0 0-36.4-67.076M416 464H112v-53.268a47.84 47.84 0 0 1 21.841-40.246l97.66-63.479-41.64-76.341A48.15 48.15 0 0 1 184 207.681V128a80 80 0 0 1 160 0v79.681a48.15 48.15 0 0 1-5.861 22.985L296.5 307.007l97.662 63.479A47.84 47.84 0 0 1 416 410.732Z"
-                    class="ci-primary" />
-                </svg>
-                Profile
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M245.151 168a88 88 0 1 0 88 88 88.1 88.1 0 0 0-88-88m0 144a56 56 0 1 1 56-56 56.063 56.063 0 0 1-56 56"
-                    class="ci-primary" />
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="m464.7 322.319-31.77-26.153a193.1 193.1 0 0 0 0-80.332l31.77-26.153a19.94 19.94 0 0 0 4.606-25.439l-32.612-56.483a19.936 19.936 0 0 0-24.337-8.73l-38.561 14.447a192 192 0 0 0-69.54-40.192l-6.766-40.571A19.936 19.936 0 0 0 277.762 16H212.54a19.94 19.94 0 0 0-19.728 16.712l-6.762 40.572a192 192 0 0 0-69.54 40.192L77.945 99.027a19.94 19.94 0 0 0-24.334 8.731L21 164.245a19.94 19.94 0 0 0 4.61 25.438l31.767 26.151a193.1 193.1 0 0 0 0 80.332l-31.77 26.153A19.94 19.94 0 0 0 21 347.758l32.612 56.483a19.94 19.94 0 0 0 24.337 8.73l38.562-14.447a192 192 0 0 0 69.54 40.192l6.762 40.571A19.94 19.94 0 0 0 212.54 496h65.222a19.936 19.936 0 0 0 19.728-16.712l6.763-40.572a192 192 0 0 0 69.54-40.192l38.564 14.449a19.94 19.94 0 0 0 24.334-8.731l32.609-56.487a19.94 19.94 0 0 0-4.6-25.436m-50.636 57.12-48.109-18.024-7.285 7.334a159.96 159.96 0 0 1-72.625 41.973l-10 2.636L267.6 464h-44.89l-8.442-50.642-10-2.636a159.96 159.96 0 0 1-72.625-41.973l-7.285-7.334-48.117 18.024L53.8 340.562l39.629-32.624-2.7-9.973a160.9 160.9 0 0 1 0-83.93l2.7-9.972L53.8 171.439l22.446-38.878 48.109 18.024 7.285-7.334a159.96 159.96 0 0 1 72.625-41.973l10-2.636L222.706 48H267.6l8.442 50.642 10 2.636a159.96 159.96 0 0 1 72.625 41.973l7.285 7.334 48.109-18.024 22.447 38.877-39.629 32.625 2.7 9.972a160.9 160.9 0 0 1 0 83.93l-2.7 9.973 39.629 32.623Z"
-                    class="ci-primary" />
-                </svg>
-                Settings
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M472 72H40a24.03 24.03 0 0 0-24 24v320a24.03 24.03 0 0 0 24 24h432a24.03 24.03 0 0 0 24-24V96a24.03 24.03 0 0 0-24-24m-8 32v64H48v-64ZM48 408V232h416v176Z"
-                    class="ci-primary" />
-                  <path fill="var(--ci-primary-color, currentcolor)" d="M88 312h64v32H88zm96 0h64v32h-64z"
-                    class="ci-primary" />
-                </svg>
-                Payments
-              </a>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M334.627 16H48v480h424V153.373ZM440 166.627V168H320V48h1.373ZM80 464V48h208v152h152v264Z"
-                    class="ci-primary" />
-                </svg>
-                Projects
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path fill="var(--ci-primary-color, currentcolor)"
-                    d="M384 200v-56a128 128 0 0 0-256 0v56H88v128c0 92.635 75.364 168 168 168s168-75.365 168-168V200Zm-224-56a96 96 0 0 1 192 0v56H160Zm232 184c0 74.99-61.01 136-136 136s-136-61.01-136-136v-96h272Z"
-                    class="ci-primary" />
-                </svg>
-                Lock Account
-              </a>
               <a class="dropdown-item" href="/authentication/login.html">
                 <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path fill="var(--ci-primary-color, currentcolor)"
@@ -415,7 +300,7 @@
       <div class="container-fluid px-4">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb my-0">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
             <li class="breadcrumb-item active"><span>Dashboard</span></li>
           </ol>
         </nav>
@@ -459,10 +344,12 @@
     });
   </script>
   <!-- Plugins and scripts required by this view-->
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="{{ asset('core-ui-admin/vendors/chart.js/js/chart.umd.js') }}"></script>
   <script src="{{ asset('core-ui-admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
   <script src="{{ asset('core-ui-admin/vendors/@coreui/utils/js/index.js') }}"></script>
   <script src="{{ asset('core-ui-admin/div>js/main.js') }}"></script>
+  @stack('scripts')
 </body>
 
 </html>

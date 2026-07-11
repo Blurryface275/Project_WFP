@@ -131,7 +131,7 @@ class UserController extends Controller
 
         if ($request->role === 'doctor') { //JIKA role diganti dokter, perlu mengisi/update data dokter
             return redirect()
-                ->route('admin.doctors.edit', $user->id)
+                ->route('admin.doctors.editFromUser', $user->id)
                 ->with('info', 'Silakan lengkapi data dokter.');
         }
 

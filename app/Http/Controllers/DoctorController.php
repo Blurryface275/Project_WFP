@@ -91,14 +91,30 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'specialization' => 'required|string|max:255',
+            'experience_years' => 'required|integer|min:0',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+        ]);
+
         $doctor->name = $request->name;
         $doctor->specialization = $request->specialization;
+        $doctor->experience_years = $request->experience_years;
         $doctor->phone_number = $request->phone;
         $doctor->email = $request->email;
         $doctor->save();
 
-        return redirect()->route('doctors.index')->with('success', 'Successfully updated doctor data');
+        return redirect()->route('doctor.list')->with('success', 'Successfully updated doctor data');
+        // //
+        // $doctor->name = $request->name;
+        // $doctor->specialization = $request->specialization;
+        // $doctor->phone_number = $request->phone;
+        // $doctor->email = $request->email;
+        // $doctor->save();
+
+        // return redirect()->route('doctors.index')->with('success', 'Successfully updated doctor data');
     }
 
     /**

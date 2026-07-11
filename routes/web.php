@@ -108,8 +108,8 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
 
         // update doctors dari user
-        Route::get('/doctors/{user}/edit', [DoctorController::class, 'edit'])->name('admin.doctors.edit');
-        Route::put('/doctors/{user}', [DoctorController::class, 'update'])->name('admin.doctors.update');
+        Route::get('/doctors/{user}/edit', [DoctorController::class, 'editFromUser'])->name('admin.doctors.editFromUser');
+        Route::put('/doctors/{user}', [DoctorController::class, 'updateFromUser'])->name('admin.doctors.updateFromUser');
 
         Route::get('/doctors', [DoctorController::class, 'index'])->name('doctor.list');
         Route::get('/detaildoctor/{id}', [DoctorController::class, 'show'])->name('doctor.show');
