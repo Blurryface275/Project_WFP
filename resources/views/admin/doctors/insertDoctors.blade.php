@@ -7,7 +7,6 @@
 @section('content-admin')
 <div class="container-fluid">
     <div class="fade-in">
-        {{-- Di sini kita hilangkan max-width, jadinya card akan melebar penuh 100% mengikuti kontainer --}}
         <div class="card w-100">
             <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <span class="font-weight-bold" style="font-size: 1.1rem;">Tambah Dokter Baru</span>
@@ -16,7 +15,7 @@
                 </a>
             </div>
             
-            <form method="POST" action="{{ route('doctors.store') }}">
+            <form method="POST" action="{{ route('doctors.store') }}"  enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     
@@ -41,18 +40,37 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="specialization" class="form-label font-weight-bold">Spesialisasi</label>
+                        <label for="name" class="form-label font-weight-bold">Password</label>
+                        <input type="password" name="password" id="password" 
+                            class="form-control @error('password') is-invalid @enderror" 
+                            value="{{ old('name') }}" placeholder="Masukkan password (min. 6 karakter)" required>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                     <div class="form-group mb-3">
+                        <label for="name" class="form-label font-weight-bold">Spesialisasi</label>
                         <input type="text" name="specialization" id="specialization" 
                             class="form-control @error('specialization') is-invalid @enderror" 
-                            value="{{ old('specialization') }}" placeholder="Contoh: Spesialis Anak, Kandungan, Umum" required>
+                            value="{{ old('specialization') }}" placeholder="Masukkan spesialisasi dokter" required>
                         @error('specialization')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group mb-3">
+    <label for="photo" class="form-label font-weight-bold">Photo Profile</label>
+    <input type="file" name="photo" id="photo" 
+        class="form-control @error('photo') is-invalid @enderror" accept="image/*">
+    @error('photo')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+                    <div class="form-group mb-3">
                         <label for="experience_years" class="form-label font-weight-bold">Pengalaman Kerja (Tahun)</label>
-                        <input type="number" name="experience_years" id="experience_years" 
+                        <input type="text" name="experience_years" id="experience_years" 
                             class="form-control @error('experience_years') is-invalid @enderror" 
                             value="{{ old('experience_years') }}" min="0" placeholder="Contoh: 5" required>
                         @error('experience_years')

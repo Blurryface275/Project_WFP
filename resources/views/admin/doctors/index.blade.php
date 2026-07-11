@@ -75,7 +75,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{ route('doctors.store') }}">
+                <form method="POST" action="{{ route('doctors.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group mb-3">
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="experience_years">Experience (Years)</label>
-                            <input type="number" name="experience_years" class="form-control" id="experience_years"
+                            <input type="text" name="experience_years" class="form-control" id="experience_years"
                                 placeholder="Enter years of experience" min="0" required>
                         </div>
                         <div class="form-group mb-3">
@@ -102,6 +102,23 @@
                             <label for="email">Email</label>
                             <input type="email" name="email" class="form-control" id="email"
                                 placeholder="Enter email address" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" name="password"
+                                class="form-control @error('password') is-invalid @enderror" id="password"
+                                placeholder="Enter password" required minlength="6">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="photo">Photo Profile</label>
+                            <input type="file" name="photo" class="form-control @error('photo') is-invalid @enderror"
+                                id="photo" accept="image/*">
+                            @error('photo')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">

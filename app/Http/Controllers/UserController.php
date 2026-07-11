@@ -31,35 +31,45 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
-            'role' => 'required|in:admin,doctor,member',
-            'photo' => 'required|image|mimes:jpg,jpeg,png',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6',
+                'role' => 'required|in:admin,doctor,member',
+                'photo' => 'required|image|mimes:jpg,jpeg,png',
+            ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,
-            'photo' => "",
-        ]);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'role' => $request->role,
+                'photo' => "",
+            ]);
 
-        //proses utk menyimpan foto ke folder storage
-        $folder = $user->role; //nama folder = nama role, dipisahkan dgn role
-        $extension = $request->file('photo')->getClientOriginalExtension(); //get extension supaya direname tetap extension sama
-        $filename = "{$user->id}.{$extension}"; //file name menggunakan user id+extension
-        $photoPath = "{$folder}/{$filename}"; //photopath adalah path lengkap "nama_folder/nama_file.extension"
+            //proses utk menyimpan foto ke folder storage
+            $folder = $user->role;
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $filename = "{$user->id}.{$extension}";
+            $photoPath = "{$folder}/{$filename}";
 
-        $request->file('photo')->storeAs($folder, $filename, 'public'); //disimpan di folder public/storage
+            $request->file('photo')->storeAs($folder, $filename, 'public');
 
-        $user->update(['photo' => $photoPath]); //photopath disimpan di database
+            $user->update(['photo' => $photoPath]);
 
-        return redirect()->route('admin.kelolaUser')->with('success', 'Data user baru berhasil ditambahkan!');
+            if ($request->role === 'doctor') {
+                return redirect()
+                    ->route('admin.doctors.editFromUser', $user->id)
+                    ->with('info', 'Silakan lengkapi data dokter.');
+            }
+
+            return redirect()->route('admin.kelolaUser')->with('success', 'Data user baru berhasil ditambahkan!');
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error: ' . $e->getMessage())->withInput();
+        }
     }
-
     /**
      * Display the specified resource.
      */
@@ -141,7 +151,27 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    // public function destroy(string $id)
+    // {
+    //     $user = User::findOrFail($id);
+
+    //     if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
+    //         Storage::disk('public')->delete($user->photo);
+    //     }
+
+    //     $user->delete();
+
+    //     return redirect()
+    //         ->route('admin.kelolaUser')
+    //         ->with('success', 'Data pengguna berhasil dihapus!');
+    //     // return response()->json(array(
+    //     //     'status' => 'oke',
+    //     //     'msg' => 'Data pengguna berhasil dihapus!'
+    //     // ), 200);
+
+    // }
+
+    public function destroy($id)
     {
         $user = User::findOrFail($id);
 
@@ -149,15 +179,15 @@ class UserController extends Controller
             Storage::disk('public')->delete($user->photo);
         }
 
-        $user->delete();
 
-        return redirect()
-            ->route('admin.kelolaUser')
-            ->with('success', 'Data pengguna berhasil dihapus!');
-        // return response()->json(array(
-        //     'status' => 'oke',
-        //     'msg' => 'Data pengguna berhasil dihapus!'
-        // ), 200);
+        if ($user->role === 'doctor') { //untuk menghapus data dokter jika user merupakan role dokter
+            if ($user->doctor) {
+                $user->doctor()->delete();
+            }
+        }
 
+        $user->delete(); //soft delete
+
+        return redirect()->route('admin.kelolaUser')->with('success', 'User berhasil dihapus!');
     }
 }

@@ -165,3 +165,6 @@ Dashboard Admin - VitaGuard
         </div>
     </div> -->
 @endsection
+@push('scripts')
+<script src="{{ asset('core-ui-admin/js/main.js') }}"></script>
+@endpush

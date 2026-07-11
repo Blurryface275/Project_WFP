@@ -6,6 +6,7 @@ use App\Models\Doctor;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Storage;
 
 class DoctorController extends Controller
 {
@@ -48,10 +49,29 @@ class DoctorController extends Controller
             'experience_years' => 'required|string|min:0',
             'phone_number' => 'required|string|max:20',
             'email' => 'required|email|max:255',
+            'password' => 'required|string|min:6',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => 'doctor',
+            'photo' => '',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $folder = 'doctor';
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $filename = "{$user->id}.{$extension}";
+            $photoPath = "{$folder}/{$filename}";
+
+            $request->file('photo')->storeAs($folder, $filename, 'public');
+            $user->update(['photo' => $photoPath]);
+        }
         $data = new Doctor();
-        $data->user_id = auth()->user()->id;
+        $data->user_id = $user->id;
         $data->name = $request->input('name');
         $data->specialization = $request->input('specialization');
         $data->experience_years = $request->input('experience_years');
@@ -61,7 +81,6 @@ class DoctorController extends Controller
 
         return redirect()->route('doctors.index')->with('success', 'Successfully created doctor data.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -145,9 +164,19 @@ class DoctorController extends Controller
     public function deleteData(Request $request)
     {
         $id = $request->id;
-        $data = Doctor::find($id); // Pastikan nama model 'Doctor' diawali huruf kapital sesuai nama file model kamu
+        $data = Doctor::find($id);
 
         if ($data) {
+            if ($data->user_id) {
+                $user = User::find($data->user_id);
+                if ($user) {
+                    // JIKA ada foto user, dihapus
+                    if ($user->photo && Storage::disk('public')->exists($user->photo)) {
+                        Storage::disk('public')->delete($user->photo);
+                    }
+                    $user->delete(); // Soft delete user
+                }
+            }
             $data->delete();
             return response()->json([
                 'status' => 'oke',
