@@ -28,6 +28,8 @@
                                 <td>{{ $service->price }}</td>
                                 <td>{{ $service->category->category_name }}</td>
                                 <td>
+                                    <!-- Buat admin liat semua detail teks service ini dengan jelas -->
+                                    <a href="{{ route('admin.services.show', $service->id) }}" class="btn btn-info btn-sm text-white">Lihat</a>
                                     <a href="{{ route('admin.services.edit', $service->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                     <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" class="d-inline">
                                         @csrf

@@ -25,6 +25,8 @@
                 <td>{{ $category->category_name }}</td>
                 <td>{{ $category->services->count() }}</td>
                 <td>
+                    <!-- Tombol lihat pake yg public punya karena detail kategori cukup diliat dari view pengunjung -->
+                    <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-info text-white" target="_blank">Lihat</a>
                     <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
                     <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">

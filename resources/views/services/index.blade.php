@@ -44,6 +44,8 @@
                             @endif
                         </div>
                         <p>Jam layanan : {{ $service->availability }}</p>
+                        <!-- Tombol untuk melihat halaman public detail dari layanan ini -->
+                        <a href="{{ route('services.show', $service->id) }}" class="btn btn-main btn-sm btn-round-full mt-2 w-100">Lihat Detail Layanan</a>
 					</div>
 				</div>
 			</div>

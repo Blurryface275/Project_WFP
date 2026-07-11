@@ -40,6 +40,8 @@
                                     <td>{{ $article->category->category_name ?? 'Tanpa Kategori' }}</td>
                                     <td>{{ $article->author->nama_lengkap ?? 'Tidak ada penulis' }}</td>
                                     <td>
+                                        <!-- Biar admin bisa ngintip dulu tampilan artikelnya -->
+                                        <a href="{{ route('admin.articles.show', $article->id) }}" class="btn btn-sm btn-info text-white">Lihat</a>
                                         <a href="{{ route('admin.articles.edit', $article->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                         
                                         <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus artikel ini?');">

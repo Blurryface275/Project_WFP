@@ -152,5 +152,10 @@ class ArticleController extends Controller
         $articles = Article::with(['author', 'category'])->latest()->paginate(10); 
         return view('admin.articles.index', compact('articles'));
     }
+
+    public function adminShow(string $id){
+        $article = Article::with(['author', 'category'])->findOrFail($id);
+        return view('admin.articles.show', compact('article'));
+    }
     
 }

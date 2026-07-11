@@ -51,7 +51,8 @@ class AdminServiceController extends Controller
      */
     public function show(string $id)
     {
-        // Kosongkan aja karena  ga dipake
+        $service = Service::with('category')->findOrFail($id);
+        return view('admin.services.show', compact('service'));
     }
 
     /**

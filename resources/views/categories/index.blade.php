@@ -91,6 +91,7 @@
                     <th class="text-center">#</th>
                     <th>Nama Kategori</th>
                     <th>Layanan Tersedia</th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,6 +109,9 @@
                             <span class="badge-empty">Belum ada layanan</span>
                         @endforelse
                     </td>
+                     <td class="text-center align-middle">
+                        <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
+                    </td> 
                 </tr>
                 @endforeach
             </tbody>

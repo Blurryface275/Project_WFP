@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PasswordResetController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 /*
@@ -79,13 +82,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('menu/riwayat', function () {
         return view('riwayat');
     })->name('menu.riwayat');
-    Route::get('/artikel', function () {
-        return view('/artikel');
-    })->name('artikel');
-    Route::get('/article/{id}', function ($id) {
-        // nanti diganti controller
-        return view('/artikel/{id}');
-    })->name('artikel.show');
 
     // Admin Section
     // tujuanya biar nanti pathnya ada prefix admin di depan. misal : /admin/dashboard
@@ -117,8 +113,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/doctors/create', [DoctorController::class, 'create'])->name('admin.doctors.insertDoctors');
 
         // Routing Article
-        Route::get('/articles', [App\Http\Controllers\ArticleController::class, 'adminIndex'])->name('admin.articles.index');
-        Route::resource('articles', App\Http\Controllers\ArticleController::class)
+        Route::get('/articles', [ArticleController::class, 'adminIndex'])->name('admin.articles.index');
+        Route::get('/articles/{id}/show', [ArticleController::class, 'adminShow'])->name('admin.articles.show');
+        Route::resource('articles', ArticleController::class)
             ->except(['index', 'show']) // karena ini memang public dan bisa dikunjungi tanpa login
             ->names('admin.articles');
 
@@ -150,7 +147,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('consultations/{id}/messages', [ConsultationController::class, 'getMessages'])->name('consultations.getMessages');
     Route::post('consultations/{id}/end', [ConsultationController::class, 'endConsultation'])->name('consultations.end');
     // ==========================================
+    
+    // Route ini akan ditrigger ketika user belum verifikasi email
+    Route::get('/email/verify', function () {
+        return view('auth.verify-email');
+    })->name('verification.notice');
 
+    // Route sg ini bakalan ditrigger semisal user mengklik link verifikasi email yang dikirim ke emailnya
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill(); // fullfill artinya menyelesaikan verifikasi email
+        return redirect('/dashboard')->with('success', 'Email berhasil diverifikasi!'); // klo berhasil verifikasi email maka akan diarahkan ke dashboard
+    })->name('verification.verify');
+
+    // Route ini akan ditrigger ketika user menekan tombol "Kirim Ulang Email Verifikasi"
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification(); // mengirim email verifikasi
+        return back()->with('success', 'Link verifikasi baru telah dikirim!'); // klo berhasil verifikasi email maka akan diarahkan ke dashboard
+    })->middleware(['throttle:3,1'])->name('verification.send');
 }); // Tutup Middleware Admin
 
 // Buat liat jadwal dokter
@@ -173,14 +186,20 @@ Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group
     Route::get('/consultations/{id}', [ConsultationController::class, 'show'])->name('consultations.show');
 }); // Tutup Doctor Prefix
 
-// Routing Article
-// Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
-Route::resource('articles', ArticleController::class)->only(['index', 'show']);
-
-// Routing Service
-// Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
-Route::resource('services', ServiceController::class)->only(['index', 'show']);
-
-// Routing Category
-// Hanya membuka route index
-Route::resource('categories', CategoryController::class)->only(['index']);
+Route::middleware('guest')->group(function () {
+    Route::get('/forgot-password', [PasswordResetController::class, 'showRequestForm'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+    // Routing Article
+    // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
+    Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+    
+    // Routing Service
+    // Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
+    Route::resource('services', ServiceController::class)->only(['index', 'show']);
+    
+    // Routing Category
+    // Hanya membuka route index dan show
+    Route::resource('categories', CategoryController::class)->only(['index', 'show']);
+});
