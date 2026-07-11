@@ -105,9 +105,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('doctor/consultations') }}" class="nav-link {{ request()->is('doctor/consultations*') ? 'active' : '' }}">
-                <i class="nav-link-icon fas fa-stethoscope"></i>
-                <p>Konsultasi</p>
+                <a href="{{ url('doctor/consultations') }}" class="nav-link {{ request()->is('doctor/consultations') ? 'active' : '' }}">
+                <i class="nav-link-icon fas fa-comments"></i>
+                <p>Konsultasi Aktif</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('consultations.history') }}" class="nav-link {{ request()->is('consultations/history') ? 'active' : '' }}">
+                <i class="nav-link-icon fas fa-history"></i>
+                <p>Riwayat Konsultasi</p>
                 </a>
             </li>
             @endif

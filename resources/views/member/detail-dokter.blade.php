@@ -89,8 +89,24 @@
                     </div>
 
                     <div class="mt-4 d-grid d-md-flex gap-2">
-                        <button class="btn btn-primary px-5 py-2">Mulai Chat</button>
-                        <button class="btn btn-outline-primary px-5 py-2">Jadwal Praktik</button>
+                        @auth
+                            @if(Auth::user()->role === 'member')
+                                <form action="{{ route('consultations.store') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+                                    <button type="submit" class="btn btn-primary px-5 py-2">
+                                        <i class="icofont-chat"></i> Mulai Chat
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('consultations.index') }}" class="btn btn-primary px-5 py-2">
+                                    <i class="icofont-chat"></i> Lihat Konsultasi
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-primary px-5 py-2">Login untuk Mulai Chat</a>
+                        @endauth
+                        <a href="{{ route('doctors.schedule') }}" class="btn btn-outline-primary px-5 py-2">Jadwal Praktik</a>
                     </div>
                 </div>
             </div>

@@ -88,6 +88,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownAuth">
               <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile Kamu</a></li>
+              <li><a class="dropdown-item" href="{{ route('consultations.index') }}"><i class="icofont-chat mr-1"></i> Konsultasi Saya</a></li>
+              <li><a class="dropdown-item" href="{{ route('consultations.history') }}"><i class="icofont-history mr-1"></i> Riwayat Konsultasi</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <!-- Karena pakai route::get('logout') jadi gausah form, langsung aja pake link <a> biasa -->

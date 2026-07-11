@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ConsultationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CategoryController;
@@ -139,14 +140,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/members', function () {
         return view('members');
     })->name('admin.members');
+
+    // ===== FITUR CHAT / KONSULTASI ONLINE =====
+    Route::get('consultations/history', [ConsultationController::class, 'history'])->name('consultations.history');
+    Route::get('consultations', [ConsultationController::class, 'index'])->name('consultations.index');
+    Route::post('consultations', [ConsultationController::class, 'store'])->name('consultations.store');
+    Route::get('consultations/{id}', [ConsultationController::class, 'show'])->name('consultations.show');
+    Route::post('consultations/{id}/message', [ConsultationController::class, 'sendMessage'])->name('consultations.sendMessage');
+    Route::get('consultations/{id}/messages', [ConsultationController::class, 'getMessages'])->name('consultations.getMessages');
+    Route::post('consultations/{id}/end', [ConsultationController::class, 'endConsultation'])->name('consultations.end');
+    // ==========================================
+
 }); // Tutup Middleware Admin
 
 // Buat liat jadwal dokter
 Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors.schedule');
 
 // Doctor Section
-// tujuanya biar nanti pathnya ada prefix doctor di depan. misal : /doctor/dashboard
-// fugnsi name supaya nanti nama rotue jadi doctor.dashboard dll -> tujuannya biar ga ketuker sm admin
 // bisa dibuka oleh doctor dan admin
 Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group(function () {
     Route::get('/dashboard', function () {
@@ -155,10 +165,13 @@ Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group
     Route::get('/profile', function () {
         return view('doctor.profile');
     })->name('profile');
-    Route::get('/consultations', function () {
-        return view('doctor.consultations');
-    })->name('consultations');
-}); // Tutup Middleware Auth
+
+    // Konsultasi: daftar aktif & selesai (data nyata dari DB)
+    Route::get('/consultations', [ConsultationController::class, 'doctorIndex'])->name('consultations');
+
+    // Dokter masuk ke halaman chat (reuse show yang sama dengan member)
+    Route::get('/consultations/{id}', [ConsultationController::class, 'show'])->name('consultations.show');
+}); // Tutup Doctor Prefix
 
 // Routing Article
 // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
