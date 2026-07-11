@@ -45,7 +45,7 @@ class DoctorController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
-            'experience_years' => 'required|integer|min:0',
+            'experience_years' => 'required|string|min:0',
             'phone_number' => 'required|string|max:20',
             'email' => 'required|email|max:255',
         ]);
@@ -94,7 +94,7 @@ class DoctorController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'specialization' => 'required|string|max:255',
-            'experience_years' => 'required|integer|min:0',
+            'experience_years' => 'required|string|min:0',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
         ]);

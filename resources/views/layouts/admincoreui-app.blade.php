@@ -37,7 +37,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('core-ui-admin/assets/favicon/favicon-32x32.png') }}">
   <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('core-ui-admin/assets/favicon/favicon-96x96.png') }}">
   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('core-ui-admin/assets/favicon/favicon-16x16.png') }}">
-  <link rel="manifest" href="{{ asset('core-ui-admin/assets/favicon/manifest.json') }}">
+  <!-- <link rel="manifest" href="{{ asset('core-ui-admin/assets/favicon/manifest.json') }}"> -->
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="msapplication-TileImage" content="core-ui-admin/assets/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
@@ -53,6 +53,7 @@
   <link href="{{ asset('core-ui-admin/vendors/@coreui/chartjs/css/coreui-chartjs.css') }}" rel="stylesheet">
   @stack('styles')
 </head>
+
 <body>
   <!-- NEW SIDEBAR -->
   <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
@@ -104,10 +105,19 @@
       <li class="nav-title">User Management System</li>
       <li class="nav-group">
         <a class="nav-link nav-group-toggle" href="#">
-          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <!-- <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="var(--ci-primary-color, currentcolor)"
               d="m491.693 256.705-54.957-49.461 16.407-13.406a80.5 80.5 0 0 0 18.363-21.522c18.148-31.441 12.867-70.042-13.144-96.052s-64.612-31.291-96.051-13.142a80.5 80.5 0 0 0-21.52 18.362l-13.408 16.407-49.461-54.956-.579-.611a24.03 24.03 0 0 0-33.941 0l-65.6 65.605 1.19 23.7 33.108 27.056a48.6 48.6 0 0 1 11.079 12.889c10.807 18.722 7.57 41.8-8.056 57.426s-38.7 18.862-57.426 8.058a48.7 48.7 0 0 1-12.9-11.086l-27.047-33.1-23.7-1.189-71.26 71.26a24 24 0 0 0 0 33.942l175.357 175.359a80 80 0 0 0 113.138 0L492.3 291.225a24.03 24.03 0 0 0 0-33.94ZM288.657 449.617a48 48 0 0 1-67.883 0L51.069 279.911l53.1-53.095 15.91 19.473.1.119a80.5 80.5 0 0 0 21.521 18.363c31.441 18.149 70.041 12.867 96.052-13.144s31.291-64.61 13.143-96.05a80.5 80.5 0 0 0-18.363-21.521l-19.591-16.01 47.124-47.124 56.018 62.241 24.282-.579 25.062-30.67a48.6 48.6 0 0 1 12.888-11.078c18.722-10.807 41.8-7.569 57.426 8.056s18.864 38.7 8.057 57.426a48.6 48.6 0 0 1-11.079 12.889l-30.67 25.061-.58 24.282 62.243 56.018Z"
               class="ci-primary" />
+          </svg> -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-users">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
           </svg>
           User Management
         </a>
@@ -130,10 +140,11 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('doctors/create') ? 'active' : '' }}" href="{{ url('/doctors/create') }}">
-                Insert New Doctor
+            <a class="nav-link {{ request()->is('doctors/create') ? 'active' : '' }}"
+              href="{{ url('/doctors/create') }}">
+              Insert New Doctor
             </a>
-        </li>
+          </li>
         </ul>
       </li>
       <li class="nav-divider"></li>
@@ -149,19 +160,22 @@
         </a>
         <ul class="nav-group-items compact">
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
+            <a class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}"
+              href="{{ route('admin.categories.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Category
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('menu/konsultasi*') ? 'active' : '' }}" href="{{ route('menu.konsultasi') }}">
+            <a class="nav-link {{ request()->is('menu/konsultasi*') ? 'active' : '' }}"
+              href="{{ route('menu.konsultasi') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Consultation
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/services*') ? 'active' : '' }}" href="{{ route('admin.services.index') }}">
+            <a class="nav-link {{ request()->is('admin/services*') ? 'active' : '' }}"
+              href="{{ route('admin.services.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Service
             </a>
@@ -177,20 +191,21 @@
               d="M368 16H144a64.072 64.072 0 0 0-64 64v352a64.072 64.072 0 0 0 64 64h224a64.072 64.072 0 0 0 64-64V80a64.072 64.072 0 0 0-64-64m32 416a32.036 32.036 0 0 1-32 32H144a32.036 32.036 0 0 1-32-32V80a32.036 32.036 0 0 1 32-32h224a32.036 32.036 0 0 1 32 32Z"
               class="ci-primary" />
             <path fill="var(--ci-primary-color, currentcolor)"
-              d="M176 112h160v32H176zm0 80h160v32H176zm0 80h160v32H176zm0 80h96v32h-96z"
-              class="ci-primary" />
+              d="M176 112h160v32H176zm0 80h160v32H176zm0 80h160v32H176zm0 80h96v32h-96z" class="ci-primary" />
           </svg>
           Article Management
         </a>
         <ul class="nav-group-items compact">
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/articles') ? 'active' : '' }}" href="{{ route('admin.articles.index') }}">
+            <a class="nav-link {{ request()->is('admin/articles') ? 'active' : '' }}"
+              href="{{ route('admin.articles.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Article List
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('admin/articles/create') ? 'active' : '' }}" href="{{ route('admin.articles.create') }}">
+            <a class="nav-link {{ request()->is('admin/articles/create') ? 'active' : '' }}"
+              href="{{ route('admin.articles.create') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Insert New Article
             </a>
@@ -283,7 +298,7 @@
             <div class="dropdown-menu dropdown-menu-end pt-0">
               <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2">Account
               </div>
-              <a class="dropdown-item" href="/authentication/login.html">
+              <a class="dropdown-item" href="{{ route('logout') }}">
                 <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path fill="var(--ci-primary-color, currentcolor)"
                     d="M77.155 272.034H351.75v-32.001H77.155l75.053-75.053v-.001l-22.628-22.626-113.681 113.68.001.001h-.001L129.58 369.715l22.628-22.627v-.001z"
@@ -344,11 +359,11 @@
     });
   </script>
   <!-- Plugins and scripts required by this view-->
-   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="{{ asset('core-ui-admin/vendors/chart.js/js/chart.umd.js') }}"></script>
   <script src="{{ asset('core-ui-admin/vendors/@coreui/chartjs/js/coreui-chartjs.js') }}"></script>
   <script src="{{ asset('core-ui-admin/vendors/@coreui/utils/js/index.js') }}"></script>
-  <script src="{{ asset('core-ui-admin/div>js/main.js') }}"></script>
+  <script src="{{ asset('core-ui-admin/js/main.js') }}"></script>
   @stack('scripts')
 </body>
 
