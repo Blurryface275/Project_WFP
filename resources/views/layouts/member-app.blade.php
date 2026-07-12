@@ -74,6 +74,7 @@
             <a class="nav-link" href="{{ route('articles.index') }}">Artikel</a>
           </li>
           <li class="nav-item {{ request()->is('categories*') ? 'active' : '' }}">
+            <!-- ngarahin ke category index punya member -->
             <a class="nav-link" href="{{ route('categories.index') }}">Kategori Layanan</a> 
           </li>
           <!-- divider vertical -->

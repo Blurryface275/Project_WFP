@@ -69,77 +69,50 @@
       </div>
       <div class="col-lg-4">
         <div class="sidebar-wrap pl-lg-4 mt-5 mt-lg-0">
-	<div class="sidebar-widget search  mb-3 ">
-		<h5>Search Here</h5>
-		<form action="#" class="search-form">
-			<input type="text" class="form-control" placeholder="search">
-			<i class="ti-search"></i>
-		</form>
-	</div>
+            <!-- Fitur Kotak Pencarian -->
+          <div class="sidebar-widget search mb-3">
+              <h5>Cari Artikel</h5>
+              <form action="{{ route('articles.index') }}" method="GET" class="search-form">
+                  <input type="text" name="search" class="form-control" placeholder="Cari..." value="{{ request('search') }}">
+                  <i class="ti-search"></i>
+              </form>
+          </div>
 
 
-	<div class="sidebar-widget latest-post mb-3">
-		<h5>Popular Posts</h5>
+	<!-- Fitur Artikel Viral / Populer (Diambil 3 Terbaru) -->
+          <div class="sidebar-widget latest-post mb-3">
+              <h5>Artikel Terpopuler</h5>
+              @foreach($recent_articles as $recent)
+              <div class="py-2">
+                  <span class="text-sm text-muted">{{ $recent->created_at->format('d M Y') }}</span>
+                  <h6 class="my-2"><a href="{{ route('articles.show', $recent->id) }}">{{ $recent->title }}</a></h6>
+              </div>
+              @endforeach
+          </div>
 
-        <div class="py-2">
-        	<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
+	  <!-- Fitur Penyaringan Berdasarkan Tags -->
+          <div class="sidebar-widget tags mb-3">
+              <h5 class="mb-4">Kategori / Tag</h5>
+              <a href="{{ route('articles.index') }}">Semua</a>
+              @foreach($tags as $tag)
+                  <a href="{{ route('articles.index', ['tag' => $tag->id]) }}">{{ $tag->category_name }}</a>
+              @endforeach
+          </div>
+          <!-- Footer Jam Operasional -->
+          <div class="sidebar-widget schedule-widget mb-3">
+              <h5 class="mb-4">Jam Operasional Layanan</h5>
+              <ul class="list-unstyled">
+                <li class="d-flex justify-content-between align-items-center">
+                  <span>Senin - Jumat</span><span>9:00 - 17:00</span>
+                </li>
+                <li class="d-flex justify-content-between align-items-center">
+                  <span>Sabtu</span><span>9:00 - 16:00</span>
+                </li>
+              </ul>
+          </div>
+          
         </div>
-
-        <div class="py-2">
-       		<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-        </div>
-
-        <div class="py-2">
-        	<span class="text-sm text-muted">03 Mar 2018</span>
-            <h6 class="my-2"><a href="#">Fusce lobortis lorem at ipsum semper sagittis</a></h6>
-        </div>
-	</div>
-
-	<div class="sidebar-widget tags mb-3">
-		<h5 class="mb-4">Tags</h5>
-
-		<a href="#">Doctors</a>
-		<a href="#">agency</a>
-		<a href="#">company</a>
-		<a href="#">medicine</a>
-		<a href="#">surgery</a>
-		<a href="#">Marketing</a>
-		<a href="#">Social Media</a>
-		<a href="#">Branding</a>
-		<a href="#">Laboratory</a>
-	</div>
-
-
-	<div class="sidebar-widget schedule-widget mb-3">
-		<h5 class="mb-4">Time Schedule</h5>
-
-		<ul class="list-unstyled">
-		  <li class="d-flex justify-content-between align-items-center">
-		    <span>Monday - Friday</span>
-		    <span>9:00 - 17:00</span>
-		  </li>
-		  <li class="d-flex justify-content-between align-items-center">
-		    <span>Saturday</span>
-		    <span>9:00 - 16:00</span>
-		  </li>
-		  <li class="d-flex justify-content-between align-items-center">
-		    <span>Sunday</span>
-		    <span>Closed</span>
-		  </li>
-		</ul>
-
-		<div class="sidebar-contatct-info mt-4">
-			<p class="mb-0">Need Urgent Help?</p>
-			<h3>+23-4565-65768</h3>
-		</div>
-	</div>
-
-</div>
       </div>
-    </div>
-  </div>
 </section>
 @endsection
 {{-- <!DOCTYPE html>

@@ -40,34 +40,12 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 
 
-// MENU
-// Menampilkan halaman menu
-Route::get('/menu', function () {
-    return view('menu');
-});
-// Menampilkan halaman konsultasi online
-Route::get('menu/konsultasi', function () {
-    return view('konsultasi');
-});
-// Menampilkan halaman booking konsultasi
-Route::get('menu/janji', function () {
-    return view('janji');
-});
-// Menampilkan halaman riwayat konsultasi
-Route::get('menu/riwayat', function () {
-    return view('riwayat');
-});
-
 // --- PROTECTED ROUTES (Login Required) ---
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Rute untuk melihat halaman profile diri sendiri
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
-    Route::get('/doctor', function () {
-        return view('doctor.dashboard');
-    });
     // Doctor Directory
 
     Route::post('/ajax/doctor/saveDataUpdate', [DoctorController::class, 'saveDataUpdate']);
@@ -127,16 +105,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-    // Admin Placeholders
-    Route::get('/categories', function () {
-        return view('categories');
-    })->name('admin.categories');
-    Route::get('/order', function () {
-        return view('order');
-    })->name('admin.order');
-    Route::get('/members', function () {
-        return view('members');
-    })->name('admin.members');
+    // (Rute hantu order dan member sudah dihapus)
 
     // ===== FITUR CHAT / KONSULTASI ONLINE =====
     Route::get('consultations/history', [ConsultationController::class, 'history'])->name('consultations.history');
@@ -191,15 +160,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
     Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
-    // Routing Article
-    // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
-    Route::resource('articles', ArticleController::class)->only(['index', 'show']);
-    
-    // Routing Service
-    // Hanya membuka route index dan show (tampilkan keseluruhan service dan detailnya)
-    Route::resource('services', ServiceController::class)->only(['index', 'show']);
-    
-    // Routing Category
-    // Hanya membuka route index dan show
-    Route::resource('categories', CategoryController::class)->only(['index', 'show']);
 });
+
+// ROUTING PUBLIK (Bisa diakses tanpa harus login ataupun saat sudah login)
+// Routing Article
+Route::resource('articles', ArticleController::class)->only(['index', 'show']);
+
+// Routing Service
+Route::resource('services', ServiceController::class)->only(['index', 'show']);
+
+// Routing Category
+Route::resource('categories', CategoryController::class)->only(['index', 'show']);

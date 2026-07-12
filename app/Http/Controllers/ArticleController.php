@@ -14,11 +14,28 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $articles = Article::paginate(5);
-        return view('articles.index', compact('articles'));
+        $query = Article::with(['author', 'category']);
+
+        // Filter dri tag (kategori)
+        if ($request->has('tag') && $request->tag != '') {
+            $query->where('category_id', $request->tag);
+        }
+
+        // Filter dri pencarian (pake teks)
+        if ($request->has('search') && $request->search != '') {
+            $query->where('title','like','%'.$request->search.'%');
+        }
+        
+        // Ambil 5 article dulu (pagination)
+        $articles = $query->latest()->paginate(5);
+
+        // Masukin data buat ngisi Sidebar Widget (Popular Posts & Tags)
+        $recent_articles = Article::latest()->take(3)->get();
+        $tags = Category::all();
+        return view('articles.index', compact('articles', 'recent_articles', 'tags'));
     }
 
     /**
@@ -69,7 +86,13 @@ class ArticleController extends Controller
     {
         //
         $article = Article::with('author', 'category')->findOrFail($id);
-        return view('articles.show', compact('article'));
+
+        // Ambil data sidebar biar widget sidebar si show ikutan nyala
+        $recent_articles = Article::latest()->take(3)->get();
+        $tags = Category::all();
+
+        // tunjukin halaman detail article
+        return view('articles.show', compact('article', 'recent_articles', 'tags'));
     }
 
     /**
