@@ -190,7 +190,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/forgot-password', [PasswordResetController::class, 'showRequestForm'])->name('password.request');
     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
     Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+    Route::post('/reset-password', [PasswordResetController::class, 'reset'])->name('password.update');
     // Routing Article
     // Hanya membuka route index (tampilkan keseluruhan artikel) dan show (tampilkan detail artikel)
     Route::resource('articles', ArticleController::class)->only(['index', 'show']);

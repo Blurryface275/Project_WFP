@@ -36,10 +36,14 @@ class PasswordResetController extends Controller
     }
 
     // Nampilin form buat masukin sandi baru sesudah user mengklik link di dalem emailnya
-    public function showResetForm($token)
+    public function showResetForm(Request $request, $token = null)
     {
         // Kita tangkep token sakti dari url link emailnya trus lempar ke view biar gampang disubmit bareng form
-        return view('auth.reset-password', ['token' => $token]); 
+        // Jangan lupa ambil parameter email dari URL request juga biar ke-isi otomatis di formnya!
+        return view('auth.reset-password', [
+            'token' => $token, 
+            'email' => $request->email
+        ]); 
     }
 
     // Nah ini eksekusi pamungkas ngganti datanya pas user mencet tombol "Simpan Password Baru"
