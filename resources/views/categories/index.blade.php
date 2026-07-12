@@ -110,7 +110,7 @@
                         @endforelse
                     </td>
                      <td class="text-center align-middle">
-                        <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-primary">Lihat Detail</a>
+                        <a href="{{ route('categories.show', $category->id) }}" class="btn btn-sm btn-primary text-white rounded-pill">Lihat Detail</a>
                     </td> 
                 </tr>
                 @endforeach

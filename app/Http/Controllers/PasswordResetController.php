@@ -36,27 +36,32 @@ class PasswordResetController extends Controller
     }
 
     // Nampilin form buat masukin sandi baru sesudah user mengklik link di dalem emailnya
-    public function showResetForm($token)
+    // $token harus null dulu karena nanti pas user klik link di email, tokennya bakal diisi
+    public function showResetForm(Request $request, $token = null)
     {
         // Kita tangkep token sakti dari url link emailnya trus lempar ke view biar gampang disubmit bareng form
-        return view('auth.reset-password', ['token' => $token]); 
+        // Jangan lupa ambil parameter email dari URL request juga biar ke-isi otomatis di formnya!
+        return view('auth.reset-password', [
+            'token' => $token, 
+            'email' => $request->email
+        ]); 
     }
 
     // Nah ini eksekusi pamungkas ngganti datanya pas user mencet tombol "Simpan Password Baru"
     public function reset(Request $request)
     {
-        // Validasi ketat dulu bro! Pastiin tokennya ada, email sesuai format, sama sandinya minimal 8 huruf & klop sama ulangan sandinya
+        // Validasi dulu, pastiin tokennya ada, email sesuai format, sama password minimal 8 huruf & cocok sama password barunya
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed|min:8',
         ]);
 
-        // Minta tolong laravel nyocokkin form sama token di database biar dikroscek bener/enggaknya
+        // Minta laravel nyocokkin form sama token di database biar dikroscek bener/enggaknya
         // Trus kalo pas, otomatis baris kode di dalem function ini bakal update password lamanya digusur sama password baru
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
+            $request->only('email', 'password', 'password_confirmation', 'token'), // email, password, password_confirmation, token diambil dari form
+            function ($user, $password) { // $user adalah user yang login, $password adalah password baru
                 $user->forceFill([
                     'password' => Hash::make($password)
                 ])->setRememberToken(Str::random(60));
