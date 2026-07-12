@@ -43,7 +43,17 @@ class ConsultationController extends Controller
 
         $user = Auth::user();
 
-        // Validasi: pastikan member punya booking aktif (pending) dengan dokter ini
+        // 1. Cek apakah sudah ada konsultasi aktif dengan dokter ini
+        $consultation = Consultation::where('user_id', $user->id)
+            ->where('doctor_id', $request->doctor_id)
+            ->where('status', 'active')
+            ->first();
+
+        if ($consultation) {
+            return redirect()->route('consultations.show', $consultation->id);
+        }
+
+        // 2. Jika tidak ada, validasi: pastikan member punya booking aktif (pending) dengan dokter ini
         $hasValidBooking = Transaction::where('user_id', $user->id)
             ->where('doctor_id', $request->doctor_id)
             ->where('transaction_type', 'consultation')
@@ -56,28 +66,20 @@ class ConsultationController extends Controller
             );
         }
 
-        // Cek apakah sudah ada konsultasi aktif dengan dokter ini
-        $consultation = Consultation::where('user_id', $user->id)
-            ->where('doctor_id', $request->doctor_id)
-            ->where('status', 'active')
-            ->first();
+        // Buat sesi konsultasi baru
+        $consultation = Consultation::create([
+            'user_id'   => $user->id,
+            'doctor_id' => $request->doctor_id,
+            'status'    => 'active'
+        ]);
 
-        if (!$consultation) {
-            // Buat sesi konsultasi baru
-            $consultation = Consultation::create([
-                'user_id'   => $user->id,
-                'doctor_id' => $request->doctor_id,
-                'status'    => 'active'
-            ]);
-
-            // Pesan sistem pembuka sesi
-            Message::create([
-                'consultation_id' => $consultation->id,
-                'sender_id'       => null,
-                'message'         => '--- Sesi Konsultasi Dimulai ---',
-                'is_system_message' => true
-            ]);
-        }
+        // Pesan sistem pembuka sesi
+        Message::create([
+            'consultation_id' => $consultation->id,
+            'sender_id'       => null,
+            'message'         => '--- Sesi Konsultasi Dimulai ---',
+            'is_system_message' => true
+        ]);
 
         return redirect()->route('consultations.show', $consultation->id);
     }
@@ -191,6 +193,13 @@ class ConsultationController extends Controller
 
         if ($consultation->status === 'active') {
             $consultation->update(['status' => 'completed']);
+
+            // Update status transaksi booking yang berkaitan menjadi completed
+            Transaction::where('user_id', $consultation->user_id)
+                ->where('doctor_id', $consultation->doctor_id)
+                ->where('transaction_type', 'consultation')
+                ->where('status', 'pending')
+                ->update(['status' => 'completed']);
 
             Message::create([
                 'consultation_id'  => $consultation->id,

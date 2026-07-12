@@ -1,5 +1,6 @@
-@extends('layouts.member-app')
+@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admin-app' : 'layouts.member-app')
 @section('title', 'Chat Konsultasi')
+@section('page-title', 'Sesi Chat dengan Pasien: ' . ($consultation->user->name ?? 'Pasien'))
 
 @push('styles')
 <style>
@@ -119,6 +120,7 @@
 @endpush
 
 @section('content')
+@if(!in_array(Auth::user()->role, ['admin', 'doctor']))
 <section class="page-title bg-1">
   <div class="overlay"></div>
   <div class="container">
@@ -127,17 +129,14 @@
         <div class="block text-center">
           <span class="text-white">Konsultasi</span>
           <h1 class="text-capitalize mb-5 text-lg">
-            @if(Auth::user()->role === 'doctor')
-                Sesi Chat dengan Pasien: {{ $consultation->user->name ?? 'Pasien' }}
-            @else
-                Sesi Chat dengan Dokter: {{ $consultation->doctor->name ?? 'Dokter' }}
-            @endif
+            Sesi Chat dengan Dokter: {{ $consultation->doctor->name ?? 'Dokter' }}
           </h1>
         </div>
       </div>
     </div>
   </div>
 </section>
+@endif
 
 <section class="section">
     <div class="container">
@@ -149,6 +148,10 @@
                     @if(Auth::user()->role === 'doctor')
                         <a href="{{ route('doctor.consultations') }}" class="btn btn-outline-secondary btn-sm">
                             <i class="icofont-arrow-left"></i> Kembali ke Daftar Konsultasi
+                        </a>
+                    @elseif(Auth::user()->role === 'admin')
+                        <a href="{{ route('admin.bookings.index') }}" class="btn btn-outline-secondary btn-sm">
+                            <i class="icofont-arrow-left"></i> Kembali ke Daftar Booking
                         </a>
                     @else
                         <a href="{{ route('consultations.index') }}" class="btn btn-outline-secondary btn-sm">

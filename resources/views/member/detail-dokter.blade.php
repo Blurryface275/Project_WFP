@@ -91,20 +91,19 @@
                     <div class="mt-4 d-grid d-md-flex gap-2">
                         @auth
                             @if(Auth::user()->role === 'member')
-                                <form action="{{ route('consultations.store') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
-                                    <button type="submit" class="btn btn-primary px-5 py-2">
-                                        <i class="icofont-chat"></i> Mulai Chat
-                                    </button>
-                                </form>
+                                <a href="{{ route('bookings.create', $doctor->id) }}" class="btn btn-primary px-5 py-2">
+                                    <i class="icofont-calendar"></i> Booking Konsultasi
+                                </a>
+                                <a href="{{ route('bookings.index') }}" class="btn btn-outline-secondary px-4 py-2">
+                                    <i class="icofont-list"></i> Booking Saya
+                                </a>
                             @else
                                 <a href="{{ route('consultations.index') }}" class="btn btn-primary px-5 py-2">
                                     <i class="icofont-chat"></i> Lihat Konsultasi
                                 </a>
                             @endif
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-primary px-5 py-2">Login untuk Mulai Chat</a>
+                            <a href="{{ route('login') }}" class="btn btn-primary px-5 py-2">Login untuk Booking</a>
                         @endauth
                         <a href="{{ route('doctors.schedule') }}" class="btn btn-outline-primary px-5 py-2">Jadwal Praktik</a>
                     </div>

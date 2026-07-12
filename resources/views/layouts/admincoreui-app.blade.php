@@ -212,6 +212,18 @@
           </li>
         </ul>
       </li>
+      <li class="nav-divider"></li>
+      <li class="nav-title">Booking Management</li>
+      <li class="nav-item">
+        <a class="nav-link {{ request()->is('admin/bookings*') ? 'active' : '' }}" href="{{ route('admin.bookings.index') }}">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="var(--ci-primary-color, currentcolor)"
+              d="M472 48h-48V16h-32v32H120V16H88v32H40a24.028 24.028 0 0 0-24 24v400a24.028 24.028 0 0 0 24 24h432a24.028 24.028 0 0 0 24-24V72a24.028 24.028 0 0 0-24-24m-8 416H48V224h416Zm0-272H48V80h40v32h32V80h272v32h32V80h40Z"
+              class="ci-primary" />
+          </svg>
+          Booking List
+        </a>
+      </li>
     </ul>
     <div class="sidebar-footer border-top d-none d-md-flex">
       <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>

@@ -93,6 +93,12 @@
                 <p>Kelola Artikel</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ url('admin/bookings') }}" class="nav-link {{ request()->is('admin/bookings*') ? 'active' : '' }}">
+                <i class="nav-link-icon fas fa-calendar-check"></i>
+                <p>Kelola Booking</p>
+                </a>
+            </li>
             @endif
 
             @if(auth()->check() && auth()->user()->role == 'doctor')

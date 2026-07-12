@@ -132,9 +132,21 @@
                             </div>
 
                             <div class="mt-4 d-grid">
-                                <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-book">
-                                    Buat Janji Konsultasi
-                                </a>
+                                @auth
+                                    @if(Auth::user()->role === 'member')
+                                    <a href="{{ route('bookings.create', $doctor->id) }}" class="btn btn-book">
+                                        Buat Janji Konsultasi
+                                    </a>
+                                    @else
+                                    <a href="{{ route('doctors.show', $doctor->id) }}" class="btn btn-book">
+                                        Lihat Detail
+                                    </a>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="btn btn-book">
+                                        Login untuk Booking
+                                    </a>
+                                @endauth
                             </div>
                         </div>
                     </div>

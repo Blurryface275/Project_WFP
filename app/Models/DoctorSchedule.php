@@ -9,6 +9,14 @@ class DoctorSchedule extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'doctor_id',
+        'day',
+        'start_time',
+        'end_time',
+        'is_available',
+    ];
+
     public function doctor()
     {
         return $this->belongsTo(Doctor::class, 'doctor_id');

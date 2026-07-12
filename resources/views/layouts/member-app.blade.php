@@ -89,6 +89,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownAuth">
               <li><a class="dropdown-item" href="{{ route('profile.index') }}">Profile Kamu</a></li>
+              <li><a class="dropdown-item" href="{{ route('bookings.index') }}"><i class="icofont-calendar mr-1"></i> Booking Saya</a></li>
               <li><a class="dropdown-item" href="{{ route('consultations.index') }}"><i class="icofont-chat mr-1"></i> Konsultasi Saya</a></li>
               <li><a class="dropdown-item" href="{{ route('consultations.history') }}"><i class="icofont-history mr-1"></i> Riwayat Konsultasi</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -214,6 +215,30 @@
 <script src="{{ asset('plugins/slick-carousel/slick/slick.min.js') }}"></script>
 <script src="{{ asset('plugins/shuffle/shuffle.min.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    // Universal Flash Alert Handler using SweetAlert2
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#007bff'
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Peringatan!',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#dc3545'
+            });
+        @endif
+    });
+</script>
 
 @stack('scripts')
 

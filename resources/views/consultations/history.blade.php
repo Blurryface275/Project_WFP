@@ -1,7 +1,9 @@
-@extends('layouts.member-app')
+@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admin-app' : 'layouts.member-app')
 @section('title', 'Riwayat Konsultasi')
+@section('page-title', 'Riwayat Konsultasi Pasien')
 
 @section('content')
+@if(!in_array(Auth::user()->role, ['admin', 'doctor']))
 <section class="page-title bg-1">
   <div class="overlay"></div>
   <div class="container">
@@ -15,15 +17,26 @@
     </div>
   </div>
 </section>
+@endif
 
 <section class="section service-2">
     <div class="container">
 
         {{-- Back button --}}
         <div class="mb-4">
-            <a href="{{ route('consultations.index') }}" class="btn btn-outline-secondary btn-sm">
-                <i class="icofont-arrow-left"></i> Kembali ke Konsultasi Aktif
-            </a>
+            @if(Auth::user()->role === 'doctor')
+                <a href="{{ route('doctor.consultations') }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="icofont-arrow-left"></i> Kembali ke Konsultasi Aktif
+                </a>
+            @elseif(Auth::user()->role === 'admin')
+                <a href="{{ route('admin.bookings.index') }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="icofont-arrow-left"></i> Kembali ke Daftar Booking
+                </a>
+            @else
+                <a href="{{ route('consultations.index') }}" class="btn btn-outline-secondary btn-sm">
+                    <i class="icofont-arrow-left"></i> Kembali ke Konsultasi Aktif
+                </a>
+            @endif
         </div>
 
         <div class="row">

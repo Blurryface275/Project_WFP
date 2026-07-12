@@ -46,6 +46,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Rute untuk melihat halaman profile diri sendiri
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+    // ===== BOOKING KONSULTASI (Member) =====
+    Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('bookings/create/{doctor}', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('bookings/{id}', [BookingController::class, 'show'])->name('bookings.show');
+    Route::delete('bookings/{id}', [BookingController::class, 'destroy'])->name('bookings.destroy');
+    // ========================================
     // Doctor Directory
 
     Route::post('/ajax/doctor/saveDataUpdate', [DoctorController::class, 'saveDataUpdate']);
@@ -102,6 +110,10 @@ Route::middleware(['auth'])->group(function () {
             ->names('admin.categories');
 
         Route::resource('services', App\Http\Controllers\AdminServiceController::class)->names('admin.services');
+
+        // Kelola Booking Konsultasi
+        Route::get('/bookings', [BookingController::class, 'adminIndex'])->name('admin.bookings.index');
+        Route::delete('/bookings/{id}', [BookingController::class, 'adminDestroy'])->name('admin.bookings.destroy');
     });
 
 
