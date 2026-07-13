@@ -78,14 +78,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/insertuser', function () {
             return view('admin.users.insert-user');
         })->name('admin.insertUserView');
-        Route::get('/edituser/{id}', [UserController::class, 'edit'])->name('admin.editUserView');
+        Route::get('/edituser/{user}', [UserController::class, 'edit'])->name('admin.editUserView');
 
 
         // Kelola User CRUD
         Route::get('/kelolauser', [UserController::class, 'index'])->name('admin.kelolaUser');
         Route::post('/kelolauser', [UserController::class, 'store'])->name('admin.kelolaUser.store');
-        Route::put('/kelolauser/{id}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
-        Route::delete('/kelolauser/{id}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
+        Route::put('/kelolauser/{user}', [UserController::class, 'update'])->name('admin.kelolaUser.update');
+        Route::delete('/kelolauser/{user}', [UserController::class, 'destroy'])->name('admin.kelolaUser.destroy');
 
         // update doctors dari user
         Route::get('/doctors/{user}/edit', [DoctorController::class, 'editFromUser'])->name('admin.doctors.editFromUser');
@@ -112,11 +112,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/bookings', [BookingController::class, 'adminIndex'])->name('admin.bookings.index');
         Route::delete('/bookings/{id}', [BookingController::class, 'adminDestroy'])->name('admin.bookings.destroy');
     });
-
-
-    // (Rute hantu order dan member sudah dihapus)
-
-    // ===== FITUR CHAT / KONSULTASI ONLINE =====
+    // KONSULTASI ONLINE dan CHAT
     Route::get('consultations/history', [ConsultationController::class, 'history'])->name('consultations.history');
     Route::get('consultations', [ConsultationController::class, 'index'])->name('consultations.index');
     Route::post('consultations', [ConsultationController::class, 'store'])->name('consultations.store');
@@ -124,7 +120,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('consultations/{id}/message', [ConsultationController::class, 'sendMessage'])->name('consultations.sendMessage');
     Route::get('consultations/{id}/messages', [ConsultationController::class, 'getMessages'])->name('consultations.getMessages');
     Route::post('consultations/{id}/end', [ConsultationController::class, 'endConsultation'])->name('consultations.end');
-    // ==========================================
     
     // Route ini akan ditrigger ketika user belum verifikasi email
     Route::get('/email/verify', function () {

@@ -84,11 +84,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
         $doctors = Doctor::with('user', 'schedules')->get();
-        // Tampilan Admin
         if (auth()->user()->role === 'admin') {
-            // Diarahkan ke folder views/user/doctor_list.blade.php (misalnya)
+            // Diarahkan ke folder views/user/doctor_list.blade.
             return view('admin.doctors.index', compact('doctors'));
         } else {
             // Tampilan User

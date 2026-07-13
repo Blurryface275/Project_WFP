@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -70,6 +71,7 @@ class UserController extends Controller
             return back()->with('error', 'Error: ' . $e->getMessage())->withInput();
         }
     }
+
     /**
      * Display the specified resource.
      */
@@ -80,33 +82,37 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
+     * Route Model Binding: Laravel otomatis meng-inject instance User
+     * berdasarkan {user} pada URL, sesuai contoh "edit(Category $category)"
+     * di slide 12 (Route Model Binding).
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         return view('admin.users.edit-user', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
+     *
+     * Route Model Binding: parameter update() langsung berupa objek User,
+     * bukan $id + findOrFail() manual, mengikuti pola "update(Request $request,
+     * Category $category)" pada slide 12.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $user)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'role' => 'required|in:admin,doctor,member',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png',
         ]);
-
-        $user = User::findOrFail($id);
 
         $updateData = [
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
         ];
-
 
         if ($request->hasFile('photo')) {
             if ($user->photo && Storage::disk('public')->exists($user->photo)) {
@@ -131,6 +137,13 @@ class UserController extends Controller
             }
         }
 
+        //pengecekan kalau role lama dokter diganti menjadi member atau admin, data di tabel dokter dihapus.
+        if ($user->role === 'doctor' && $request->role !== 'doctor') {
+            if ($user->doctor) {
+                $user->doctor()->delete();
+            }
+        }
+
         $user->update($updateData);
 
         if ($request->filled('password')) {
@@ -150,44 +163,32 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * Mengikuti pola slide 29 & 31: proses delete dibungkus try-catch agar
+     * error (mis. foreign key constraint jika relasi belum bisa dihapus)
+     * ditangani dengan handler sukses/gagal, bukan meledak jadi 500 error.
+     * Parameter juga memakai Route Model Binding, sama seperti edit()/update().
      */
-    // public function destroy(string $id)
-    // {
-    //     $user = User::findOrFail($id);
-
-    //     if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
-    //         Storage::disk('public')->delete($user->photo);
-    //     }
-
-    //     $user->delete();
-
-    //     return redirect()
-    //         ->route('admin.kelolaUser')
-    //         ->with('success', 'Data pengguna berhasil dihapus!');
-    //     // return response()->json(array(
-    //     //     'status' => 'oke',
-    //     //     'msg' => 'Data pengguna berhasil dihapus!'
-    //     // ), 200);
-
-    // }
-
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user = User::findOrFail($id);
-
-        if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
-            Storage::disk('public')->delete($user->photo);
-        }
-
-
-        if ($user->role === 'doctor') { //untuk menghapus data dokter jika user merupakan role dokter
-            if ($user->doctor) {
-                $user->doctor()->delete();
+        $this->authorize('delete-permission', Auth::user());
+        try {
+            if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
+                Storage::disk('public')->delete($user->photo);
             }
+
+            if ($user->role === 'doctor') { //untuk menghapus data dokter jika user merupakan role dokter
+                if ($user->doctor) {
+                    $user->doctor()->delete();
+                }
+            }
+
+            $user->delete(); //soft delete
+
+            return redirect()->route('admin.kelolaUser')->with('success', 'User berhasil dihapus!');
+
+        } catch (\Exception $e) {
+            return redirect()->route('admin.kelolaUser')->with('error', 'Gagal menghapus user: ' . $e->getMessage());
         }
-
-        $user->delete(); //soft delete
-
-        return redirect()->route('admin.kelolaUser')->with('success', 'User berhasil dihapus!');
     }
 }
