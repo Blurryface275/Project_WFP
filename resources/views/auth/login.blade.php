@@ -65,10 +65,7 @@
         <div class="text-center">
             <small>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></small>
         </div>
-        <!-- forgot password redirect ditaruh di kanan bawah -->
-         <div class="text-center">
-            <small>Lupa password? <a href="{{ route('password.request') }}">Reset password</a></small>
-         </div>
+        <!-- forgot password redirect removed -->
     </form>
 </div>
 
