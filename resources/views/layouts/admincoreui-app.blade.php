@@ -59,7 +59,10 @@
   <div class="sidebar sidebar-dark sidebar-fixed border-end" id="sidebar">
     <div class="sidebar-header border-bottom">
       <div class="sidebar-brand me-auto">
-        <svg role="img" aria-label="CoreUI Logo Full" class="sidebar-brand-full" width="88" height="32"
+        <div class="logo mb-4">
+            <img src="{{ asset('images/logo-vitaguard-transparent.png') }}" alt="Klinik Sehat" class="img-fluid">
+          </div>
+        <!-- <svg role="img" aria-label="CoreUI Logo Full" class="sidebar-brand-full" width="88" height="32"
           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 312 115">
           <g style="fill: currentColor">
             <path
@@ -81,7 +84,7 @@
             <path
               d="M74.022 70.071h-2.866a4 4 0 0 0-1.925.494L51.95 80.05 32 68.531V45.554l19.95-11.519 17.29 9.455a4 4 0 0 0 1.919.49h2.863a2 2 0 0 0 2-2v-2.71a2 2 0 0 0-1.04-1.756L55.793 27.02a8.04 8.04 0 0 0-7.843.09L28 38.626a8.025 8.025 0 0 0-4 6.929V68.53a8 8 0 0 0 4 6.928l19.95 11.519a8.043 8.043 0 0 0 7.843.088l19.19-10.532a2 2 0 0 0 1.038-1.753v-2.71a2 2 0 0 0-2-2Z" />
           </g>
-        </svg>
+        </svg> -->
       </div>
       <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" aria-label="Close"
         onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"></button>
@@ -172,13 +175,6 @@
               href="{{ route('menu.konsultasi') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
               Consultation
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link {{ request()->is('menu/riwayat*') ? 'active' : '' }}"
-              href="{{ route('menu.riwayat') }}">
-              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
-              History
             </a>
           </li>
           <li class="nav-item">

@@ -9,6 +9,7 @@ use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Models\Service;
 use App\Models\Transaction;
+use App\Models\Consultation;
 use App\Models\User;
 
 class DashboardController extends Controller
@@ -23,14 +24,13 @@ class DashboardController extends Controller
             'total_doctors' => User::where('role', 'doctor')->count(),
             'total_members' => User::where('role', 'member')->count(),
 
-            // Jumlah artikel — sesuaikan model/tabel jika berbeda
+            // Jumlah artikel 
             'total_articles' => Article::count(),
 
             // Jumlah booking berdasarkan status
             'total_bookings' => Transaction::count(),
-            'ongoing_bookings' => Transaction::where('status', 'pending')->count(),
-            'finished_bookings' => Transaction::where('status', 'completed')->count(),
-            'cancelled_bookings' => Transaction::where('status', 'cancelled')->count(),
+            'ongoing_bookings' => Consultation::where('status', 'active')->count(),
+            'finished_bookings' => Consultation::where('status', 'completed')->count(),
         ];
 
         $chartData = $this->getBookingChartData();
