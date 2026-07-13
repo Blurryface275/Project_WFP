@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        // auth-> attempt -> credentials artinya mencoba login dengan credentials yang diberikan 
+        // auth-> attempt -> credentials artine nyoba login pake credentials yang diberikan 
         // -> klo berhasil maka akan diarahkan ke intended, klo nggak maka akan diarahkan ke back
         if (auth()->attempt($credentials)) {
             // ini pokoe wajib soale biar nanti pas logout trus login lagi nggak error
@@ -72,7 +72,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Buat user baru (set otomatis role as a member sampai nanti admin ubah manual ke doctor/ tetap member)
+        // Buat user baru (set otomatis role as a member sampe  nanti admin ubah manual ke doctor/ tetap member)
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
