@@ -60,10 +60,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Placeholder Menu Pages
     Route::get('menu/konsultasi', function () {
-        return view('konsultasi');
+        return redirect()->route('consultations.index');
     })->name('menu.konsultasi');
     Route::get('menu/riwayat', function () {
-        return view('riwayat');
+        return redirect()->route('consultations.history');
     })->name('menu.riwayat');
 
     // Admin Section

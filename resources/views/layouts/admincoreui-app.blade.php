@@ -175,6 +175,13 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {{ request()->is('menu/riwayat*') ? 'active' : '' }}"
+              href="{{ route('menu.riwayat') }}">
+              <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
+              History
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {{ request()->is('admin/services*') ? 'active' : '' }}"
               href="{{ route('admin.services.index') }}">
               <span class="nav-icon"><span class="nav-icon-bullet"></span></span>
