@@ -180,9 +180,9 @@ class ConsultationController extends Controller
         $consultation = Consultation::findOrFail($id);
         $user = Auth::user();
 
-        // Otorisasi: hanya member pemilik atau dokter yang bersangkutan
-        if ($user->role === 'member' && $consultation->user_id !== $user->id) {
-            abort(403, 'Unauthorized');
+        // Otorisasi: hanya dokter yang boleh menutup chat
+        if ($user->role === 'member') {
+            abort(403, 'Akses Ditolak: Hanya Dokter yang diizinkan untuk mengakhiri sesi konsultasi.');
         }
         if ($user->role === 'doctor') {
             $doctor = Doctor::where('user_id', $user->id)->first();

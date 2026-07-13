@@ -42,7 +42,7 @@
 
   <nav class="navbar navbar-expand-lg navigation" id="navbar">
     <div class="container">
-      <a class="navbar-brand" href="{{ url('/welcome') }}">
+      <a class="navbar-brand" href="{{ url('/') }}">
         <span style="font-size: 1.5rem; font-weight: bold; color: #1a1a2e;">VitaGuard</span>
     </a>
 
@@ -54,8 +54,8 @@
 
       <div class="collapse navbar-collapse" id="navbarmain">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item {{ request()->is('welcome') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/welcome') }}">Home</a>
+          <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/') }}">Home</a>
           </li>
           <li class="nav-item {{ request()->is('services*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('services.index') }}">Layanan</a>

@@ -26,11 +26,8 @@ use Illuminate\Http\Request;
 //     return view('index');
 // });
 
-//Root utama dashboard admin
-Route::redirect('/', '/admin/dashboard');
-
-// Menampilkan halaman welcome
-Route::get('/welcome', function () {
+// Menampilkan halaman welcome (Root)
+Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
@@ -46,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Rute untuk melihat halaman profile diri sendiri
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // ===== BOOKING KONSULTASI (Member) =====
     Route::get('bookings', [BookingController::class, 'index'])->name('bookings.index');
@@ -153,12 +151,9 @@ Route::get('jadwalDoctor', [DoctorController::class, 'schedule'])->name('doctors
 // Doctor Section
 // bisa dibuka oleh doctor dan admin
 Route::prefix('doctor')->name('doctor.')->middleware('role:doctor,admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('doctor.dashboard');
-    })->name('dashboard');
-    Route::get('/profile', function () {
-        return view('doctor.profile');
-    })->name('profile');
+    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profile', [DoctorController::class, 'profile'])->name('profile');
+    Route::post('/profile', [DoctorController::class, 'updateProfile'])->name('profile.update');
 
     // Konsultasi: daftar aktif & selesai (data nyata dari DB)
     Route::get('/consultations', [ConsultationController::class, 'doctorIndex'])->name('consultations');

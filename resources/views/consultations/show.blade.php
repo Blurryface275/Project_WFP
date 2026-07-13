@@ -1,4 +1,4 @@
-@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admin-app' : 'layouts.member-app')
+@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admincoreui-app' : 'layouts.member-app')
 @section('title', 'Chat Konsultasi')
 @section('page-title', 'Sesi Chat dengan Pasien: ' . ($consultation->user->name ?? 'Pasien'))
 
@@ -119,7 +119,7 @@
 </style>
 @endpush
 
-@section('content')
+@section(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'content-admin' : 'content')
 @if(!in_array(Auth::user()->role, ['admin', 'doctor']))
 <section class="page-title bg-1">
   <div class="overlay"></div>
@@ -180,18 +180,13 @@
                             </span>
                         </div>
 
-                        {{-- Tombol Tutup Konsultasi --}}
-                        @if($consultation->status === 'active')
+                        {{-- Tombol Tutup Konsultasi (Hanya untuk Dokter) --}}
+                        @if($consultation->status === 'active' && Auth::user()->role === 'doctor')
                             <form action="{{ route('consultations.end', $consultation->id) }}" method="POST"
                                 onsubmit="return confirm('Apakah Anda yakin ingin mengakhiri sesi konsultasi ini?');">
                                 @csrf
                                 <button type="submit" class="btn btn-sm" style="background:rgba(255,255,255,0.2); color:white; border:1px solid rgba(255,255,255,0.5);">
-                                    <i class="icofont-power"></i>
-                                    @if(Auth::user()->role === 'doctor')
-                                        Tutup Konsultasi
-                                    @else
-                                        Akhiri Konsultasi
-                                    @endif
+                                    <i class="icofont-power"></i> Tutup Konsultasi
                                 </button>
                             </form>
                         @endif

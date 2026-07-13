@@ -4,12 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Models\User;
+use App\Models\Consultation;
+use App\Models\DoctorSchedule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Storage;
 
 class DoctorController extends Controller
 {
+    public function dashboard()
+    {
+        $doctor = Doctor::where('user_id', auth()->id())->first();
+        if (!$doctor) {
+            return redirect('/')->with('error', 'Data dokter tidak ditemukan.');
+        }
+
+        // Jumlah pasien unik untuk dokter ini
+        $totalPasien = Consultation::where('doctor_id', $doctor->id)->distinct('user_id')->count('user_id');
+
+        $daysIndo = [
+            'Sunday' => 'Minggu', 'Monday' => 'Senin', 'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu', 'Thursday' => 'Kamis', 'Friday' => 'Jumat', 'Saturday' => 'Sabtu'
+        ];
+        $today = $daysIndo[now()->format('l')] ?? now()->format('l');
+
+        // Jadwal hari ini
+        $jadwalHariIni = DoctorSchedule::where('doctor_id', $doctor->id)
+            ->where(function($query) use ($today) {
+                $query->where('day', $today)->orWhere('day', now()->format('l'));
+            })
+            ->count();
+
+        return view('doctor.dashboard', compact('totalPasien', 'jadwalHariIni'));
+    }
+
+    public function profile()
+    {
+        $doctor = Doctor::with('user')->where('user_id', auth()->id())->first();
+        if (!$doctor) {
+            return redirect('/')->with('error', 'Data dokter tidak ditemukan.');
+        }
+        return view('doctor.profile', compact('doctor'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        $doctor = Doctor::where('user_id', $user->id)->first();
+        if (!$doctor) {
+            return redirect('/')->with('error', 'Data dokter tidak ditemukan.');
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, // user id ini fungsinya untuk mengecualikan user yang sedang login
+            'specialization' => 'required|string|max:255',
+            'experience_years' => 'required|numeric',
+            'phone_number' => 'required|string|max:25',
+        ]);
+
+        // Update User
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        // Update Doctor
+        $doctor->name = $request->name;
+        $doctor->email = $request->email;
+        $doctor->specialization = $request->specialization;
+        $doctor->experience_years = $request->experience_years;
+        $doctor->phone_number = $request->phone_number;
+        $doctor->save();
+
+        return redirect()->route('doctor.profile')->with('success', 'Profil berhasil diperbarui!');
+    }
+
     /**
      * Display a listing of the resource.
      */

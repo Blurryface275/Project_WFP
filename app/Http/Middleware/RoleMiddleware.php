@@ -22,13 +22,12 @@ class RoleMiddleware
         // Ambil role user yang sedang akses
         $userRole = auth()->user()->role;
         
-        // Cek apakah role user ada di dalam list role yang diizinkan
-        if($userRole === 'member'){
-            // return redirect()->route('welcome')->with('error', 'Anda tidak memiliki akses ke halaman ini!');
+        // Cek apakah role user ada di dalam array $roles yang diizinkan (yang didapat dari parameter route)
+        if (!in_array($userRole, $roles)) {
             abort(403, 'Forbidden Access');
         }
 
-        // Kalo role user ada di dalam list role yang diizinkan, lanjut ke request
+        // Kalo role user sesuai dengan rules di rute, lanjut ke request
         return $next($request);
     }
 }

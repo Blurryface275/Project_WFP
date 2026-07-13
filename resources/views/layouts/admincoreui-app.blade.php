@@ -87,8 +87,10 @@
         onclick="coreui.Sidebar.getInstance(document.querySelector('#sidebar')).toggle()"></button>
     </div>
     <ul class="sidebar-nav" data-coreui="navigation" data-simplebar>
+      <!-- ADMIN MENUS -->
+      @if(auth()->check() && auth()->user()->role === 'admin')
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
           <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path fill="var(--ci-primary-color, currentcolor)"
               d="M425.706 142.294A240 240 0 0 0 16 312v88h144v-32H48v-56c0-114.691 93.309-208 208-208s208 93.309 208 208v56H352v32h144v-88a238.43 238.43 0 0 0-70.294-169.706"
@@ -98,7 +100,6 @@
               class="ci-primary" />
           </svg>
           Dashboard
-          <span class="badge badge-sm bg-info ms-auto">NEW</span>
         </a>
       </li>
       <!-- USER MANAGEMENT SEGMENT -->
@@ -224,6 +225,39 @@
           Booking List
         </a>
       </li>
+      @endif
+
+      <!-- DOCTOR MENUS -->
+      @if(auth()->check() && auth()->user()->role === 'doctor')
+      <li class="nav-title">DOKTER</li>
+      <li class="nav-item">
+        <a class="nav-link {{ request()->is('doctor/dashboard') ? 'active' : '' }}" href="{{ route('doctor.dashboard') }}">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="var(--ci-primary-color, currentcolor)" d="M425.706 142.294A240 240 0 0 0 16 312v88h144v-32H48v-56c0-114.691 93.309-208 208-208s208 93.309 208 208v56H352v32h144v-88a238.43 238.43 0 0 0-70.294-169.706" class="ci-primary" />
+            <path fill="var(--ci-primary-color, currentcolor)" d="M80 264h32v32H80zm160-136h32v32h-32zm-104 40h32v32h-32zm264 96h32v32h-32zm-102.778 71.1 69.2-144.173-28.85-13.848-69.183 144.135a64.141 64.141 0 1 0 28.833 13.886M256 416a32 32 0 1 1 32-32 32.036 32.036 0 0 1-32 32" class="ci-primary" />
+          </svg>
+          Dashboard Dokter
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ request()->is('doctor/consultations*') ? 'active' : '' }}" href="{{ route('doctor.consultations') }}#aktif">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="var(--ci-primary-color, currentcolor)" d="M368 16H144a64.072 64.072 0 0 0-64 64v352a64.072 64.072 0 0 0 64 64h224a64.072 64.072 0 0 0 64-64V80a64.072 64.072 0 0 0-64-64m32 416a32.036 32.036 0 0 1-32 32H144a32.036 32.036 0 0 1-32-32V80a32.036 32.036 0 0 1 32-32h224a32.036 32.036 0 0 1 32 32Z" class="ci-primary" />
+            <path fill="var(--ci-primary-color, currentcolor)" d="M176 112h160v32H176zm0 80h160v32H176zm0 80h160v32H176zm0 80h96v32h-96z" class="ci-primary" />
+          </svg>
+          Konsultasi Aktif
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ request()->is('consultations/history*') ? 'active' : '' }}" href="{{ route('consultations.history') }}">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="var(--ci-primary-color, currentcolor)" d="M256 16C123.453 16 16 123.453 16 256s107.453 240 240 240 240-107.453 240-240S388.547 16 256 16ZM256 464c-114.691 0-208-93.309-208-208S141.309 48 256 48s208 93.309 208 208-93.309 208-208 208Z" class="ci-primary" />
+            <path fill="var(--ci-primary-color, currentcolor)" d="M256 96a16 16 0 0 0-16 16v129.585l-71.185 71.185 22.627 22.628 80.558-80.56V112a16 16 0 0 0-16-16Z" class="ci-primary" />
+          </svg>
+          Riwayat Konsultasi
+        </a>
+      </li>
+      @endif
     </ul>
     <div class="sidebar-footer border-top d-none d-md-flex">
       <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
@@ -310,6 +344,15 @@
             <div class="dropdown-menu dropdown-menu-end pt-0">
               <div class="dropdown-header bg-body-tertiary text-body-secondary fw-semibold rounded-top mb-2">Account
               </div>
+              @if(auth()->check() && auth()->user()->role === 'doctor')
+                <a class="dropdown-item" href="{{ route('doctor.profile') }}">
+                  <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile
+                </a>
+              @elseif(auth()->check() && auth()->user()->role === 'admin')
+                <a class="dropdown-item" href="{{ route('profile.index') }}">
+                  <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile
+                </a>
+              @endif
               <a class="dropdown-item" href="{{ route('logout') }}">
                 <svg class="icon me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path fill="var(--ci-primary-color, currentcolor)"
@@ -327,7 +370,14 @@
       <div class="container-fluid px-4">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb my-0">
+            <!-- kalau yg login admin, ini redirect ke dashboard punyae admin -->
+            @if(auth()->check() && auth()->user()->role === 'admin')
             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+            @endif
+            <!-- kalau yg login doctor, yawes arahin ke punyae doctor -->
+            @if(auth()->check() && auth()->user()->role === 'doctor')
+            <li class="breadcrumb-item"><a href="{{ route('doctor.dashboard') }}">Home</a></li>
+            @endif
             <li class="breadcrumb-item active"><span>Dashboard</span></li>
           </ol>
         </nav>
@@ -338,11 +388,7 @@
         <!-- NAV BAR ATAS -->
         <!-- /.row-->
         <!-- CONTENT BODY -->
-        <div class="card mb-4">
-          <div class="card-body">
-            @yield('content-admin')
-          </div>
-        </div>
+        @yield('content-admin')
       </div>
     </div>
     <footer class="footer px-4">

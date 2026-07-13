@@ -24,11 +24,15 @@
     <div class="row justify-content-center">
       <div class="col-lg-10">
         <div class="blog-item mb-5 shadow-sm p-4 rounded bg-white">
-          <img src="{{ $article->photo ? asset($article->photo) : asset('images/no-image.png') }}"
+          <img src="{{ $article->photo ? asset('storage/' . $article->photo) : asset('images/no-image.png') }}"
                alt="{{ $article->title }}" class="img-fluid mb-4">
-          <p class="text-muted">Ditulis oleh: {{ $article->author->name }} &nbsp;|&nbsp; {{ $article->created_at->format('d M Y') }}</p>
+          <p class="text-muted">
+            Kategori: {{ $article->category->category_name ?? 'Uncategorized' }} &nbsp;|&nbsp; 
+            Ditulis oleh: {{ $article->author->name }} &nbsp;|&nbsp; 
+            {{ $article->created_at->format('d M Y') }}
+          </p>
           <div class="blog-item-content">
-            <p>{{ $article->content }}</p>
+            <p>{!! $article->content !!}</p>
             <a href="{{ route('articles.index') }}" class="btn btn-main btn-round-full mt-4">← Kembali</a>
           </div>
         </div>

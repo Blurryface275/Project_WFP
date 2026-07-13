@@ -1,8 +1,8 @@
-@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admin-app' : 'layouts.member-app')
+@extends(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'layouts.admincoreui-app' : 'layouts.member-app')
 @section('title', 'Riwayat Konsultasi')
 @section('page-title', 'Riwayat Konsultasi Pasien')
 
-@section('content')
+@section(in_array(Auth::user()->role, ['admin', 'doctor']) ? 'content-admin' : 'content')
 @if(!in_array(Auth::user()->role, ['admin', 'doctor']))
 <section class="page-title bg-1">
   <div class="overlay"></div>
@@ -42,16 +42,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow-sm">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">
+                    <div class="card-header bg-white d-flex align-items-center">
+                        <h4 class="mb-0 text-dark">
                             <i class="icofont-history mr-2"></i>
                             @if(Auth::user()->role === 'doctor')
                                 Riwayat Konsultasi Pasien Saya
                             @else
                                 Riwayat Konsultasi Saya
                             @endif
+                            
+                            @if($consultations->count() > 0)
+                                <span class="badge bg-secondary ms-2" style="font-size: 0.9rem;">{{ $consultations->count() }}</span>
+                            @endif
                         </h4>
-                        <span class="badge badge-secondary">{{ $consultations->count() }} total</span>
                     </div>
                     <div class="card-body p-0">
                         @if($consultations->isEmpty())
@@ -86,7 +89,8 @@
                                                 </td>
                                                 <td>
                                                     <span>{{ $consultation->created_at->format('d M Y') }}</span><br>
-                                                    <small class="text-muted">{{ $consultation->created_at->format('H:i') }} WIB</small>
+                                                    <!-- format jam adalah H untuk jam dan i untuk menit -->
+                                                    <small class="text-muted">{{ $consultation->created_at->format('H:i') }} WIB</small> 
                                                 </td>
                                                 <td>
                                                     @if($consultation->status === 'active')

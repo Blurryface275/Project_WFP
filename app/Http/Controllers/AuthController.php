@@ -43,14 +43,14 @@ class AuthController extends Controller
                     return redirect('/doctor/dashboard');
                 }
                 elseif (auth()->user()->role==="member"){
-                    return redirect('/welcome');
+                    return redirect('/');
                 }
             }
 
             // jika user login tapi url tujuan bukan welcome, login, atau dashboard, 
             // maka akan diarahkan ke url asal sebelum login 
             // klo memang gaada url tujuan sebelum login, maka akan diarahkan ke welcome
-            return redirect()->intended('/welcome'); 
+            return redirect()->intended('/'); 
 
 
         }
@@ -85,7 +85,7 @@ class AuthController extends Controller
         $request->session()->regenerate(); // regenerate session untuk keamanan
     
         // Redirect ke welcome page karena default adalah member
-        return redirect()->intended('/welcome'); // intended artinya jika user sebelumnya mau akses page tertentu sebelum login, maka setelah login akan diarahkan ke page tersebut, jika tidak ada maka ke dashboard
+        return redirect()->intended('/'); // intended artinya jika user sebelumnya mau akses page tertentu sebelum login, maka setelah login akan diarahkan ke page tersebut, jika tidak ada maka ke dashboard
     }
 
     public function logout(Request $request)

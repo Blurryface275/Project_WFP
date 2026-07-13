@@ -1,9 +1,11 @@
-@extends('layouts.admin-app')
+@extends('layouts.admincoreui-app')
 
 @section('title', 'Kelola Booking - VitaGuard')
 @section('page-title', 'Kelola Booking Konsultasi')
 
-@section('content')
+@section('content-admin')
+<div class="card shadow-sm">
+    <div class="card-body">
 
 
 
@@ -66,6 +68,8 @@
     <div class="d-flex justify-content-center mt-3">
         {{ $bookings->links() }}
     </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')

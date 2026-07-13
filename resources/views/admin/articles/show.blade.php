@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <div class="text-center mb-4">
-            <img src="{{ $article->photo ? asset($article->photo) : asset('images/no-image.png') }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;" alt="{{ $article->title }}">
+            <img src="{{ $article->photo ? asset('storage/' . $article->photo) : asset('images/no-image.png') }}" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;" alt="{{ $article->title }}">
         </div>
         <div class="d-flex text-muted mb-4 border-bottom pb-3">
             <!-- Pake nama_lengkap sesuai kolom di database -->

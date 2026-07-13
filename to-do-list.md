@@ -21,9 +21,9 @@ Kita telah merestrukturisasi layout-nya, namun penempatan rute CMS dan CRUD file
     - [ ] `admin/articles/*` (Create, Edit, Index, Delete form)
     - [ ] `admin/categories/*` (Create, Edit, Index, Delete form)
 - [ ] **Dokter**: Hubungkan file placeholder yang sudah ada dengan _database logika (Controller)_.
-    - [ ] `doctor/dashboard.blade.php` (Tampilkan statistik riwayat hari ini)
+    - [x] `doctor/dashboard.blade.php` (Tampilkan statistik riwayat hari ini)
     - [ ] `doctor/profile.blade.php` (Fungsi agar dokter bisa update email/nama/foto sendiri)
-    - [ ] `doctor/consultations.blade.php` (Ambil daftar pasien yang valid)
+    - [x] `doctor/consultations.blade.php` (Ambil daftar pasien yang valid)
 
 ## 3. Modul Artikel Kesehatan
 
@@ -43,16 +43,16 @@ Kita telah merestrukturisasi layout-nya, namun penempatan rute CMS dan CRUD file
 
 ## 6. Modul Konsultasi Online (Chat Module)
 
-- [ ] **Member & Dokter**: Membuka obrolan (_chatting_) jika status booking valid.
-- [ ] Menyimpan percakapan ke dalam database menggunakan ConsultationController.
-- [ ] Dokter memiliki hak untuk menekan tombol **"Tutup Konsultasi / Selesai"**.
-- [ ] Mencegah konsultasi yang sudah selesai untuk ditambahkan pesan baru.
+- [x] **Member & Dokter**: Membuka obrolan (_chatting_) jika status booking valid.
+- [x] Menyimpan percakapan ke dalam database menggunakan ConsultationController.
+- [x] Dokter memiliki hak untuk menekan tombol **"Tutup Konsultasi / Selesai"**.
+- [x] Mencegah konsultasi yang sudah selesai untuk ditambahkan pesan baru.
 
 ## 7. Modul Riwayat Konsultasi & Dashboard
 
-- [ ] **Member**: Melihat riwayat rekam medis dan histori percakapan yang pernah dilakukan.
-- [ ] **Dokter**: Melihat riwayat yang sama untuk pasien yang pernah ditangani.
-- [ ] **Admin Dashboard**: Menampilkan bagan & jumlah statistik total (Jumlah Dokter, Member, Konsultasi Berlangsung, dll) sesuai perintah halaman 4.
+- [x] **Member**: Melihat riwayat rekam medis dan histori percakapan yang pernah dilakukan.
+- [x] **Dokter**: Melihat riwayat yang sama untuk pasien yang pernah ditangani.
+- [x] **Admin Dashboard**: Menampilkan bagan & jumlah statistik total (Jumlah Dokter, Member, Konsultasi Berlangsung, dll) sesuai perintah halaman 4.
 
 ---
 

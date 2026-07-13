@@ -37,7 +37,7 @@
                 <div class="col-lg-12 col-md-12 mb-5">
                 <div class="blog-item">
                     <div class="blog-thumb">
-                        <img src="{{ $article->photo ? asset($article->photo) : asset('images/blog/blog-1.jpg') }}"
+                        <img class="card-img-top" src="{{ $article->photo ? asset('storage/' . $article->photo) : asset('images/blog/blog-1.jpg') }}"
                             alt="{{ $article->title }}"
                             class="img-fluid"
                             onerror="this.src='{{ asset('images/blog/blog-1.jpg') }}'">
