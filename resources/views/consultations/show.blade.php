@@ -254,7 +254,7 @@
                     @else
                         <div class="chat-ended-notice">
                             <i class="icofont-check-circled mr-2" style="color: #28a745;"></i>
-                            Sesi konsultasi ini telah berakhir. Riwayat percakapan tersimpan secara permanen.
+                            Sesi konsultasi ini telah berakhir. Riwayat percakapan telah tersimpan.
                         </div>
                     @endif
 
