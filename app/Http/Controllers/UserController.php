@@ -171,7 +171,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('delete-permission', Auth::user());
         try {
             if ($user->photo && Storage::disk('public')->exists($user->photo)) { //JIKA ada foto THEN delete foto di local
                 Storage::disk('public')->delete($user->photo);
