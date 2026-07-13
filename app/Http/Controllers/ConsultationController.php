@@ -17,9 +17,8 @@ class ConsultationController extends Controller
         $this->middleware('auth');
     }
 
-    // =========================================================
     // MEMBER: Daftar konsultasi member (aktif & selesai)
-    // =========================================================
+
     public function index()
     {
         $user = Auth::user();
@@ -32,9 +31,8 @@ class ConsultationController extends Controller
         return view('consultations.index', compact('consultations'));
     }
 
-    // =========================================================
     // MEMBER: Mulai konsultasi (validasi booking aktif)
-    // =========================================================
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -84,9 +82,7 @@ class ConsultationController extends Controller
         return redirect()->route('consultations.show', $consultation->id);
     }
 
-    // =========================================================
     // SHARED: Tampilkan halaman chat (member & dokter)
-    // =========================================================
     public function show($id)
     {
         $consultation = Consultation::with(['user', 'doctor.user', 'messages.sender'])->findOrFail($id);
@@ -108,9 +104,8 @@ class ConsultationController extends Controller
         return view('consultations.show', compact('consultation'));
     }
 
-    // =========================================================
+   
     // SHARED: Kirim pesan (member & dokter)
-    // =========================================================
     public function sendMessage(Request $request, $id)
     {
         $request->validate([
@@ -151,9 +146,7 @@ class ConsultationController extends Controller
         ]);
     }
 
-    // =========================================================
     // SHARED: Polling pesan baru (AJAX)
-    // =========================================================
     public function getMessages($id, Request $request)
     {
         $consultation = Consultation::findOrFail($id);
@@ -172,9 +165,7 @@ class ConsultationController extends Controller
         ]);
     }
 
-    // =========================================================
-    // SHARED: Akhiri konsultasi (member atau dokter)
-    // =========================================================
+    // SHARED: Akhiri konsultasi (dokter)
     public function endConsultation($id)
     {
         $consultation = Consultation::findOrFail($id);
@@ -219,9 +210,7 @@ class ConsultationController extends Controller
             ->with('success', 'Konsultasi telah diakhiri.');
     }
 
-    // =========================================================
     // DOCTOR: Daftar konsultasi aktif & selesai untuk dokter
-    // =========================================================
     public function doctorIndex()
     {
         $user   = Auth::user();
@@ -247,9 +236,7 @@ class ConsultationController extends Controller
         return view('doctor.consultations', compact('activeConsultations', 'completedConsultations', 'doctor'));
     }
 
-    // =========================================================
     // MEMBER: Riwayat konsultasi lengkap
-    // =========================================================
     public function history()
     {
         $user = Auth::user();
